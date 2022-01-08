@@ -1,0 +1,50 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+
+{% for search in search_options %}
+    <!-- <li> -->
+        <a class="block" href="{% url 'home:specific-search' search.id %}"><li>{{ search }}</li></a>
+    <!-- </li> -->
+{% endfor %}
+
+
+<div class="form-container">
+    <form action="" method="">
+        <input name="specific_search" type="text" id="dynamic" placeholder="Input "/>    
+    </form>
+</div>
+
+<strong id="flag" style="visibility: hidden; color:red; font-size: 1.8rem;">For location search, please add just a specific input <br> </strong>
+
+
+
+{% if search %}
+{% for tree in search_tree %}
+    <a href="{% url 'home:tree-details' tree.id %}" ><li>{{ tree }}</li></a>
+{% endfor %}
+
+
+{% if search_place %}
+{% for tree in search_place %}
+    <a href="{% url 'home:tree-location-details' tree.id%}" ><li>{{ tree }}</li></a>
+{% endfor %}
+{% endif %}
+
+
+{% if search_error %}
+    <b style="color: red;">{{ search_error }}</b>
+{% endif %}
+
+{% endif %}
+
+<script>
+     var dynamic_input = document.getElementById("dynamic")
+     var result = 'Search by {{ search_item.name }}'
+     dynamic_input.placeholder = result
+     if (result == 'Search by Location Name') {
+        document.getElementById("flag").style.visibility = 'visible'
+     }
+</script>
+{% endblock  %}

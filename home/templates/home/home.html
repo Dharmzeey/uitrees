@@ -1,0 +1,26 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<div class="form-container">
+        <form action="" method="">
+        <input name="search" type="text" placeholder="Input Your Search"/>
+    </form>
+</div>
+
+    <p class="font">Or do you want to <b><a href="{% url 'home:specific-search' 1 %}">Specify Search</a> </b> ? </p>
+
+    {% if search %}
+{% for tree in search_tree %}
+    <a href="{% url 'home:tree-details' tree.id %}" ><li>{{ tree }}</li></a>
+{% endfor %}
+
+{% if search_place %}
+{% for tree in search_place %}
+    <a href="{% url 'home:tree-location-details' tree.id%}" ><li>{{ tree }}</li></a>
+{% endfor %}
+{% endif %}
+
+{% endif %}
+
+{% endblock  %}

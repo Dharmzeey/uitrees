@@ -1,0 +1,53 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<div class="flex-container">
+    <div>
+        <h1 class="heading">{{ result }}</h1>
+    <div class="font">
+        <h2 class="heading">Location Information</h2>
+    
+        <p><img src="{{ result.tree_picture.url }}" height="300" alt="Tree"></p>
+        <p>The Tree Name:  {{ result.tree_name }}</p>
+        <p>The Tree could be found at:  {{ result.location_name }}</p>
+        <p>Detailed description of the location:  {{ result.location_description }}</p>
+    </div>
+    <br>
+    <hr>
+    <h1 class="heading">Tree Information</h1>
+    <div class="font">
+    <p> Common Name: {{ tree_info.common_name }}</p>
+    
+    <p> Local Name: {{ tree_info.local_name }}</p>
+    
+    <p> Authority: {{ tree_info.authority }}</p>
+    
+    <p> Order: {{ tree_info.tree_order }}</p>
+    
+    <p> Family: {{ tree_info.tree_family }}</p>
+    
+    <p> Conservation Status: {{ tree_info.conservation_status }}</p>
+    
+    <p> Specie Status: {{ tree_info.specie_status }}</p>
+    </div>
+    
+    <p class="font"> Pharmacological Details:
+        <span>
+            <a href="{% url 'home:pharmacology' tree_info.id%}" >Read Up</a>
+    <!--        {{ tree_info.pharmacological_details }}-->
+        </span>
+    </p>
+    </div>
+
+    <footer style="position: relative">
+        <div style="position: absolute; right: 10px">
+            <p>This page was created on: {{ tree_info.created }}</p>
+            <p style="text-align:center;"> and last updated on: {{ tree_info.last_updated }}</p>
+        </div>
+    </footer>
+</div>
+
+
+
+{% endblock  %}
