@@ -4,3 +4,4 @@ from .models import Upload
 # Register your models here.
 
 admin.site.register(Upload)
+

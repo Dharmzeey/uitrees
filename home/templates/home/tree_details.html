@@ -7,7 +7,7 @@
         <div>
             <div id="pic_cont" style="display: none;">
                 <p id="picture_title" style="font-size: 2rem;"></p>
-                <iframe width="700" height="400" name="my_frame" id="my_frame" frameborder="0"></iframe>
+                <iframe width="450" height="550" name="my_frame" id="my_frame" frameborder="0"></iframe>
             </div>
             
             
@@ -32,8 +32,10 @@
             
                 <p> Pharmacological Details: 
                     <span>
+                        {% if tree_info.pharmacological_details %}
                         <a href="{% url 'home:pharmacology' tree_info.id%}" >Read Up</a>
     <!--                    {{ tree_info.pharmacological_details }}-->
+                        {% endif %}
                     </span>
                 </p>
             </div>

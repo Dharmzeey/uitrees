@@ -46,6 +46,13 @@ class Tree(models.Model):
         validators=[MinLengthValidator(3, 'Must be greater than 3')],
         null=False
     )
+    genus_specie = models.CharField(
+        max_length=100,
+        default='',
+        help_text='Enter Generic and Specific name',
+        validators=[MinLengthValidator(3, 'Must be greater than 3')],
+        null=False
+    )
     authority = models.CharField(max_length=80, default='------')
     common_name = models.CharField(max_length=50, default='------')
     local_name = models.CharField(max_length=50, default='------')
@@ -57,7 +64,7 @@ class Tree(models.Model):
     tree_order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     tree_family = models.ForeignKey(Family, on_delete=models.SET_NULL, null=True)
     tree_description = models.TextField()
-    pharmacological_details = models.TextField(default=' ')
+    pharmacological_details = models.TextField(blank=True, null=True)
     last_updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 

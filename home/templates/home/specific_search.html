@@ -28,7 +28,16 @@
 
 {% if search_place %}
 {% for tree in search_place %}
-    <a href="{% url 'home:tree-location-details' tree.id%}" ><li>{{ tree }}</li></a>
+    <a href="{% url 'home:tree-location-details' tree.id %}" ><li>{{ tree }}</li></a>
+{% endfor %}
+{% endif %}
+
+{% if search_coord %}
+<p>
+    Here are the trees that are likely to be around your vicinity
+</p>
+{% for tree in search_coord %}
+    <a href="{% url 'home:tree-location-details' tree.id %}"><li>{{ tree }}</li></a>
 {% endfor %}
 {% endif %}
 
@@ -45,6 +54,9 @@
      dynamic_input.placeholder = result
      if (result == 'Search by Location Name') {
         document.getElementById("flag").style.visibility = 'visible'
+     }
+     if (result == 'Search by Coordinates') {
+        document.getElementById("dynamic").readonly = 'readonly'
      }
 </script>
 {% endblock  %}

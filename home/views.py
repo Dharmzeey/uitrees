@@ -3,19 +3,46 @@ from django.views import View
 from django.db.models import Q
 from django.views.decorators.clickjacking import xframe_options_sameorigin
 
+import datetime
+
 from django.views.generic import CreateView
 
 from trees.models import Tree
-from .models import Search, Steal
+from .models import Search
 from upload.models import Upload
 
 # Create your views here.
+
+
+# class BaseView(View):
+#     template_name = 'base/base.html'
+#
+#     def get(self, request):
+#
+#         time_update = Upload.objects.all().order_by('-time_now')[0].time_now
+#         request.session['time'] = str(time_update)
+#         time_session = request.session.get('time')
+#
+#         context = {'time': time_update, 'time_session': time_session}
+#         return render(request, self.template_name, context)
 
 
 class HomeView(View):
     template_name = 'home/home.html'
 
     def get(self, request):
+        # THIS FIRST UPDATE THE SESSION
+        time_update = Upload.objects.all().order_by('-time_now')[0].time_now
+        print(type(time_update))
+        count_update = Upload.objects.values()
+        cont = []
+        for val in count_update:
+            cont.append(val['tree_count'])
+        total = sum(cont)
+        request.session['time'] = str(time_update)
+        request.session['counter'] = str(total)
+        # THEN AFTER IT PROCESS THE NORMAL VIEWS FOR THE SEARCH AND ALL
+
         # tree_list = Tree.objects.all()
         search = request.GET.get('search') if request.GET.get('search') is not None else ''
         search_tree = Tree.objects.filter(
@@ -29,7 +56,11 @@ class HomeView(View):
             Q(location_name__icontains=search)
         )
 
-        context = {'search_tree': search_tree, 'search': search, 'search_place': search_place}
+        context = {
+            'search_tree': search_tree,
+            'search': search,
+            'search_place': search_place
+        }
 
         return render(request, self.template_name, context)
 
@@ -56,6 +87,7 @@ class SpecificSearch(View):
                 # THIS WILL SET TO NULL FIRST THEN RE-ASSIGN THEN LATER IF THE "IF CONDITION" IS MET
                 search_tree = None
                 search_place = None
+                search_cont = None
 
                 # THIS WILL CHECK THE PK VALUE WHICH TALLIES WITH WHAT THE USER CLICKED AND THEN USE CONDITIONAL
                 # STATEMENT TO KNOW THE SEARCH-BY VALUES SO AS TO KNOW WHERE TO QUERY IN THE TREE DATABASE
@@ -84,15 +116,28 @@ class SpecificSearch(View):
                     )
 
                 elif search_key == 'coordinates':
-                    # search_tree = Tree.objects.filter(
-                    #     Q(coordinates__icontains=search)
-                    # )
-                    search_tree = None
-
+                    try:
+                        if type(float(search[0:4])) == float:
+                            long_lat = search.split(",")
+                            lat = float(long_lat[0])
+                            long = float(long_lat[1])
+                            upload_db = Upload.objects.all()
+                            search_cont = []
+                            for item in upload_db:
+                                try:
+                                    item_lat = float(item.latitude)
+                                    item_long = float(item.longitude)
+                                    if abs(lat - item_lat) <= 0.025 and abs(long - item_long) <= 0.015:
+                                        search_cont.append(item)
+                                    context.update({'search_coord': search_cont})
+                                except:
+                                    pass
+                    except:
+                        pass
                 context.update({'search_item': search_item})
 
                 # THIS CHECKS IF THE QUERYSET OF THE TREES IS EMPTY OR NOT SO AS TO KNOW WHAT TO TEMPLATE OUT
-                if not search_tree and not search_place:
+                if not search_tree and not search_place and not search_cont:
                     context.update({'search_error': 'There are no suggestions'})
                 else:
                     context.update({'search_tree': search_tree})
@@ -125,8 +170,20 @@ class TreeLocationPicture(View):
     def get(self, request, pk):
         result = Upload.objects.get(id=pk)
         picture = result.tree_picture
+        picture2 = result.tree_picture2
+        picture3 = result.tree_picture3
+        coord = result.coordinates
+        desc = result.location_description
 
-        context = {'picture': picture}
+        context = {
+            'pictures': [picture, picture2, picture3],
+            'description': desc
+        }
+        try:
+            if type(float(coord[0:4])) == float:
+                context.update({'coordinate': coord})
+        except:
+            pass
 
         return render(request, self.template_name, context)
 
@@ -151,14 +208,6 @@ class Pharmacological(View):
         tree_pharm_info = Tree.objects.get(id=pk).pharmacological_details
 
         context = {'tree_pharm_info': tree_pharm_info}
-
         return render(request, self.template_name, context)
 
 
-from django.urls import reverse_lazy
-
-
-class Steal(CreateView):
-    model = Steal
-    fields = '__all__'
-    success_url = reverse_lazy('home:home')

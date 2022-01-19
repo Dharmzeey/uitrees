@@ -10,6 +10,20 @@
     <title>TREES IN UI</title>
 </head>
 <body>
+    <section id="section-count">
+        <!-- <span>Family</span>
+        <span>Specie</span> -->
+        <div>
+            <small>
+            <span>Total Inventory as at: </span>
+            <strong id="inventory">{{ request.session.time }} GMT</strong>
+            <span>are:</span>
+            <strong>{{ request.session.counter }}</strong>
+            <span>Trees</span>
+            </small>
+
+        </div>
+    </section>
     <nav>
         <div>
             <!-- Trees Documentation in UI -->
@@ -23,11 +37,32 @@
     </nav>
 
    
-
+<!-- {{ time_session }} -->
 
 {% block content %}
 
 {% endblock %}
+
+<script>
+  /*  const invent = document.getElementById('inventory');
+    if (window.sessionStorage.getItem('time') == '' || window.sessionStorage.getItem('time') == null) {
+        window.sessionStorage.setItem("time", '{{ time }}');    
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+    invent.innerText = window.sessionStorage.getItem("time");
+    console.log(window.location.href)
+    })
+
+    */
+    
+    /*
+    if (window.location.href == "http://localhost:8000/"){
+        window.location.replace("http://localhost:8000/search/");
+    }
+    */
+    
+
+</script>
 
 </body>
 </html>

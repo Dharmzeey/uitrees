@@ -1,15 +1,33 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}" />
+    <link rel="shortcut icon" href="{% static 'images/icons/icon.jpg' %}" type="image/jpg"/>
+    <title>TREES IN UI</title>
 </head>
 <body>
 <h1 style="text-align: center;">
 
 </h1>
-<!--<h1>{{ picture }}</h1>-->
-<li><img height="350" src="{{ picture.url }}" alt="Tree"></li>
+
+{% if coordinate %}
+<p>
+    <!-- Coord: {{ coordinate }} -->
+<span>Check Location on <a href="http://maps.google.com?q={{ coordinate }}" target="_blank">Google Maps</a> </span>
+</p>
+{% endif %}
+
+<div id="img-pic-container">
+    {% for picture in pictures %}
+    {% if picture %}
+    <div> <img height="400" src="{{ picture.url }}" alt="Tree"> </div>
+    {% endif %}
+    {% endfor %}
+</div>
+<small>Location Description: {{ description }}</small>
 
 </body>
 </html>
+
