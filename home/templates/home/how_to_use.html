@@ -1,0 +1,64 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<h1 class="center">
+  How to use
+</h1>
+
+<div class="card">
+  <b>General Search</b>
+<p>
+  This search returns any and all specie that matches the keyword being searched.
+</p>
+</div>
+
+<div class="card">
+  <b>Local Name</b>
+<p>
+  This search checks for the local name being searched only and returns the specie 
+  and specie loacation for which contains the local name being searched.
+  The local name is the name indigenous name amongst the yoruba people, but some might 
+  accomodate other ethnic languages
+</p>
+</div>
+
+<div class="card">
+  <b>Scientific Name</b>
+<p>
+  This search checks for the scietific name being searched only and returns the specie 
+  and specie loacation for which contains the Scientific name being searched
+</p>
+</div>
+
+<div class="card">
+  <b>Coordinate</b>
+<p>
+  This requires and works well with gps enabled sevices, mostly mobile devices. 
+  You will need to accept location request then the Coordinate of your location will 
+  be displayed in the input column. This will display only the trees arround your location.
+  This can be helpful if you want to check a tree name where you are currently.
+
+</p>
+</div>
+
+<div class="card">
+  <b>Common Name</b>
+<p>
+  This search checks for the common name being searched only and returns the specie 
+  and specie loacation for which contains the common name being searched
+</p>
+</div>
+
+<div class="card">
+  <b>Location Name</b>
+<p>
+  This search checks for the Location name being searched only and returns the specie 
+  and specie loacation for which contains the Location name being searched.
+  It is adviseable to search for a single keyword and a popular place around where you
+  are trying to get the tree name.
+</p>
+</div>
+
+
+{% endblock  %}

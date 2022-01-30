@@ -6,63 +6,72 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'styles/style.css' %}" />
-    <link rel="shortcut icon" href="{% static 'images/icons/icon.jpg' %}" type="image/jpg"/>
+    <link rel="stylesheet" href="{% static 'styles/hamburger.css' %}" media="only screen and (max-width: 800px)"/>
+    <link rel="shortcut icon" href="{% static 'images/icons/icon_tree.png' %}" type="image/jpg"/>
     <title>TREES IN UI</title>
 </head>
 <body>
-    <section id="section-count">
-        <!-- <span>Family</span>
-        <span>Specie</span> -->
+    <aside id="aside">
+        <ul>
+            <li><a href="{% url 'home:acknowledgement' %}">Acknowledgement</a></li>
+            <li><a href="{% url 'home:how-to-use' %}">How to use</a></li>
+            <li><a href="">Request</a></li>
+            <li><a href="{% url 'home:about' %}">About</a></li>
+        </ul>
+    </aside>
+    <div>
+        <section id="section-count">
+            <!-- <span>Family</span>
+            <span>Specie</span> -->
+            <div>
+                <small>
+                <span>Total Inventory as at: </span>
+                <strong id="inventory">{{ request.session.time }}</strong>
+                <span>are:</span>
+                <strong>{{ request.session.counter }}</strong>
+                <span>Trees</span>
+                </small>
+            </div>
+            <div></div>
+        </section>
+        <nav>
+            <div id="doc-ham">
+                <!-- Trees Documentation in UI -->
+                <span>TREES DOCUMENTATION IN UI</span>
+                <!-- THIS RIGHT HERE WILL BE REDERED AS A HAMBURGER MENU ON MOBILE(MAX-WIDTH:800PX) -->
+                <div id="ham-container">
+                    <input type="checkbox" class="transist" name="" id="toggle">
+                    <span class="button button-toggle"></span>
+                    <ul id="ham-item">
+                        <li><a href="{% url 'home:acknowledgement' %}">Acknowledgement</a></li>
+                        <li><a href="{% url 'home:how-to-use' %}">How to use</a></li>
+                        <li><a href="">Request</a></li>
+                        <li><a href="{% url 'home:about' %}">About</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <a href="{{ request.META.HTTP_REFERER }}">BACK</a>
+                <a href="{% url 'home:home' %}">HOME</a>
+            </div>
+        </nav>
+
+
+
+    {% block content %}
+
+    {% endblock %}
+    </div>
+
+
+
+    <footer id="base-footer">
         <div>
-            <small>
-            <span>Total Inventory as at: </span>
-            <strong id="inventory">{{ request.session.time }} GMT</strong>
-            <span>are:</span>
-            <strong>{{ request.session.counter }}</strong>
-            <span>Trees</span>
-            </small>
-
+            <span class="center"> UNIVERSITY OF IBADAN</span>
+            <span class="center">RENEWABLE NATURAL RESOURCES</span>
+            <span class="center">TREE CLUB</span>
         </div>
-    </section>
-    <nav>
-        <div>
-            <!-- Trees Documentation in UI -->
-            TREES DOCUMENTATION IN UI
-        </div>
-        <div>
-            <a href="{{ request.META.HTTP_REFERER }}">BACK</a>
-            <a href="{% url 'home:home' %}">HOME</a>
-            
-        </div>
-    </nav>
-
-   
-<!-- {{ time_session }} -->
-
-{% block content %}
-
-{% endblock %}
-
-<script>
-  /*  const invent = document.getElementById('inventory');
-    if (window.sessionStorage.getItem('time') == '' || window.sessionStorage.getItem('time') == null) {
-        window.sessionStorage.setItem("time", '{{ time }}');    
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-    invent.innerText = window.sessionStorage.getItem("time");
-    console.log(window.location.href)
-    })
-
-    */
-    
-    /*
-    if (window.location.href == "http://localhost:8000/"){
-        window.location.replace("http://localhost:8000/search/");
-    }
-    */
-    
-
-</script>
+    </footer>
 
 </body>
 </html>

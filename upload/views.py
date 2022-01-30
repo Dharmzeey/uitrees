@@ -1,26 +1,15 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.views.generic import CreateView
 from django.views import View
-from .models import Upload
-
-from django.http  import HttpResponse
-from .forms import CreateModelForm
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+from .models import Upload
 
 # Create your views here.
 
 
-class ListTree(View):
-    template_name = 'upload/upload_page.html'
-
-    def get(self, request):
-        all_trees = Upload.objects.all()
-        context = {'all_trees': all_trees}
-
-        return render(request, self.template_name, context)
-
-
-class CreateTree(CreateView):
+class CreateTree(LoginRequiredMixin, CreateView):
     model = Upload
     fields = '__all__'
     success_url = reverse_lazy('upload:upload')
@@ -55,4 +44,3 @@ class Success(View):
     def get(self, request):
 
         return render(request, self.template_name)
-

@@ -1,4 +1,5 @@
 {% extends 'base/base.html' %}
+{% load static %}
 
 {% block content %}
 
@@ -12,7 +13,8 @@
 
 <div class="form-container">
     <form action="" method="">
-        <input name="specific_search" type="text" id="dynamic" placeholder="Input "/>    
+        <input name="specific_search" type="text" id="dynamic" placeholder="Input "/>   
+        <input style="display: none;" id="inp_cord" type="submit" value="Search"> 
     </form>
 </div>
 
@@ -49,14 +51,11 @@
 {% endif %}
 
 <script>
-     var dynamic_input = document.getElementById("dynamic")
-     var result = 'Search by {{ search_item.name }}'
-     dynamic_input.placeholder = result
-     if (result == 'Search by Location Name') {
-        document.getElementById("flag").style.visibility = 'visible'
-     }
-     if (result == 'Search by Coordinates') {
-        document.getElementById("dynamic").readonly = 'readonly'
-     }
+    var dynamic_input = document.getElementById("dynamic")
+    const flag = document.getElementById("flag")
+    var result = 'Search by {{ search_item.name }}'
+    
+
 </script>
+<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
 {% endblock  %}

@@ -25,6 +25,13 @@ class Family(models.Model):
         return self.tree_family
 
 
+class Authority(models.Model):
+    tree_authority = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.tree_authority
+
+
 class ConservationStatus(models.Model):
     tree_status = models.CharField(max_length=50)
 
@@ -53,7 +60,7 @@ class Tree(models.Model):
         validators=[MinLengthValidator(3, 'Must be greater than 3')],
         null=False
     )
-    authority = models.CharField(max_length=80, default='------')
+    authority = models.ForeignKey(Authority, on_delete=models.SET_NULL, null=True)
     common_name = models.CharField(max_length=50, default='------')
     local_name = models.CharField(max_length=50, default='------')
 
@@ -64,6 +71,7 @@ class Tree(models.Model):
     tree_order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     tree_family = models.ForeignKey(Family, on_delete=models.SET_NULL, null=True)
     tree_description = models.TextField()
+    reference = models.URLField(max_length=200, default='https://powo.science.kew.org')
     pharmacological_details = models.TextField(blank=True, null=True)
     last_updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -73,3 +81,4 @@ class Tree(models.Model):
 
     def __str__(self):
         return self.scientific_name
+

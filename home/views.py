@@ -2,8 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from django.db.models import Q
 from django.views.decorators.clickjacking import xframe_options_sameorigin
-
-import datetime
+from django.utils import timezone
 
 from django.views.generic import CreateView
 
@@ -31,25 +30,42 @@ class HomeView(View):
     template_name = 'home/home.html'
 
     def get(self, request):
-        # THIS FIRST UPDATE THE SESSION
-        time_update = Upload.objects.all().order_by('-time_now')[0].time_now
-        print(type(time_update))
-        count_update = Upload.objects.values()
-        cont = []
-        for val in count_update:
-            cont.append(val['tree_count'])
-        total = sum(cont)
-        request.session['time'] = str(time_update)
-        request.session['counter'] = str(total)
-        # THEN AFTER IT PROCESS THE NORMAL VIEWS FOR THE SEARCH AND ALL
+        try:
+            # THIS FIRST UPDATE THE SESSION
+            time_update = Upload.objects.all().order_by('-time_now')[0].time_now
+            str_date = time_update.strftime("%Y-%m-%d %H:%M:%S")
+            # local_dt = timezone.localtime(time_update)
+            # print(local_dt)
+            count_update = Upload.objects.values()
+            cont = []
+            for val in count_update:
+                cont.append(val['tree_count'])
+            total = sum(cont)
+            request.session['time'] = str(str_date)
+            request.session['counter'] = str(total)
+        except:
+            pass
+            # THEN AFTER IT PROCESS THE NORMAL VIEWS FOR THE SEARCH AND ALL
 
         # tree_list = Tree.objects.all()
         search = request.GET.get('search') if request.GET.get('search') is not None else ''
-        search_tree = Tree.objects.filter(
+
+        search_tree_tree = Tree.objects.filter(
             Q(scientific_name__icontains=search) |
             Q(local_name__icontains=search) |
             Q(common_name__icontains=search)
         )
+
+        search_tree_upload = Upload.objects.filter(
+            Q(tree_name__scientific_name__icontains=search) |
+            Q(tree_name__local_name__icontains=search) |
+            Q(tree_name__common_name__icontains=search)
+        )
+        search_tree = set()
+        for x in search_tree_tree:
+            for y in search_tree_upload:
+                if x.scientific_name == y.tree_name.scientific_name:
+                    search_tree.add(x)
 
         # THIS BELOW IS KIND OF MESSING EVERYTHING ON THE HOME SEARCH, I MIGHT REMOVE IT
         search_place = Upload.objects.filter(
@@ -94,19 +110,46 @@ class SpecificSearch(View):
                 # DEPENDING ON WHAT THE USER CLICKED
                 # AFTER THEN THE CONTEXT VARIABLE WILL BE UPDATED
                 if search_key == 'scientific_name':
-                    search_tree = Tree.objects.filter(
+                    search_tree_tree = Tree.objects.filter(
                         Q(scientific_name__icontains=search)
                     )
 
+                    search_tree_upload = Upload.objects.filter(
+                        Q(tree_name__scientific_name__icontains=search)
+                    )
+                    search_tree = set()
+                    for x in search_tree_tree:
+                        for y in search_tree_upload:
+                            if x.scientific_name == y.tree_name.scientific_name:
+                                search_tree.add(x)
+
                 elif search_key == 'local_name':
-                    search_tree = Tree.objects.filter(
+                    search_tree_tree = Tree.objects.filter(
                         Q(local_name__icontains=search)
                     )
 
+                    search_tree_upload = Upload.objects.filter(
+                        Q(tree_name__local_name__icontains=search)
+                    )
+                    search_tree = set()
+                    for x in search_tree_tree:
+                        for y in search_tree_upload:
+                            if x.scientific_name == y.tree_name.scientific_name:
+                                search_tree.add(x)
+
                 elif search_key == 'common_name':
-                    search_tree = Tree.objects.filter(
+                    search_tree_tree = Tree.objects.filter(
                         Q(common_name__icontains=search)
                     )
+
+                    search_tree_upload = Upload.objects.filter(
+                        Q(tree_name__common_name__icontains=search)
+                    )
+                    search_tree = set()
+                    for x in search_tree_tree:
+                        for y in search_tree_upload:
+                            if x.scientific_name == y.tree_name.scientific_name:
+                                search_tree.add(x)
 
                 # THIS WILL GET THE LOCATION SEARCHED BY THE SEARCH VARIABLE AND THE RUN IT THROUGH THE UPLOAD
                 # MODEL AND THEN RETURN THE TREES AROUND THAT AREA
@@ -210,4 +253,15 @@ class Pharmacological(View):
         context = {'tree_pharm_info': tree_pharm_info}
         return render(request, self.template_name, context)
 
+
+def how_to_use(request):
+    return render(request, 'home/how_to_use.html')
+
+
+def about(request):
+    return render(request, 'home/about.html')
+
+
+def acknowledgement(request):
+    return render(request, 'home/acknowledgement.html')
 

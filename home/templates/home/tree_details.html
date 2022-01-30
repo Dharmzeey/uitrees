@@ -1,5 +1,5 @@
 {% extends 'base/base.html' %}
-
+{% load static %}
 {% block content %}
 
 <div class="flex-container">
@@ -30,11 +30,16 @@
             
                 <p> Tree Description: {{ tree_info.tree_description }}</p>
             
-                <p> Pharmacological Details: 
+                <p> Pharmacological Uses: 
                     <span>
-                        {% if tree_info.pharmacological_details %}
-                        <a href="{% url 'home:pharmacology' tree_info.id%}" >Read Up</a>
-    <!--                    {{ tree_info.pharmacological_details }}-->
+                        <!-- {% if tree_info.pharmacological_details %} -->
+                        <!-- <a href="{% url 'home:pharmacology' tree_info.id%}" >Read Up</a> -->
+                        <!-- {% endif %} -->
+
+
+                        {% if tree_info.reference %}
+                        <a href="{{ tree_info.reference }}" >Read Up</a>
+                <!--    {{ tree_info.pharmacological_details }}-->
                         {% endif %}
                     </span>
                 </p>
@@ -66,23 +71,6 @@
     </footer>
 </div>
 
-
-
-
-
-
-<script>
-    
-    function displayIframe(val) {
-        var locationTitle = val.innerText
-        document.getElementById("pic_cont").style.display = 'block'
-        document.getElementById("picture_title").innerText = locationTitle
-        
-        if (window.innerWidth > 800) {
-            document.getElementById("detail-container").style.display = 'grid'
-        }
-    }
-
-</script>
+<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
 
 {% endblock %}

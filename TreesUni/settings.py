@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+# THIS IS THE ONLY SITE THAT WILL ALLOW CSRF ACCESS
+# I CREATED IT MYSELF
+CSRF_TRUSTED_ORIGINS = ['https://*.ngrok.io']
 
 # Application definition
 

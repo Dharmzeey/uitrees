@@ -34,8 +34,13 @@
     
     <p class="font"> Pharmacological Details:
         <span>
-            {% if tree_info.pharmacological_details %}
-            <a href="{% url 'home:pharmacology' tree_info.id%}" >Read Up</a>
+            <!-- {% if tree_info.pharmacological_details %} -->
+            <!-- <a href="{% url 'home:pharmacology' tree_info.id%}" >Read Up</a> -->
+            <!-- {% endif %} -->
+
+
+            {% if tree_info.reference %}
+            <a href="{{ tree_info.reference }}" >Read Up</a>
     <!--        {{ tree_info.pharmacological_details }}-->
             {% endif %}
         </span>
