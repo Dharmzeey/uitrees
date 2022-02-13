@@ -15,6 +15,19 @@
   var x = document.getElementById("id_coordinates");
   var y = document.getElementById("id_latitude");
   var z = document.getElementById("id_longitude");
+
+  if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(showPosition);
+} else {
+  x.value = "Geolocation is not supported by this browser.";
+}
+
+function showPosition(position) {
+x.value = position.coords.latitude +
+"," + position.coords.longitude;
+y.value = position.coords.latitude;
+z.value = position.coords.longitude;
+}
 </script>
 <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
 

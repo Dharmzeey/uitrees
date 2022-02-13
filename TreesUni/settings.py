@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'trees.apps.TreesConfig',
     'upload.apps.UploadConfig',
     'treerequest.apps.TreerequestConfig',
+    'specialplaces.apps.SpecialplacesConfig',
 
     'django_extensions',
 ]

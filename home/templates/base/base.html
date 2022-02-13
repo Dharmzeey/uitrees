@@ -5,6 +5,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Trees Documentation In University of Ibadan">
+    <meta name="description" content="This documentation is intended to give as many as possible trees in the University of Ibadan, Ibadan, Oyo State. The trees, its local name, scientific name, common names and where it is located in the university are available. Also the location and the coordinates of each trees are also available.">
+    <meta name="author" content="Adam Olanrewaju, Dharmzeey">
+    <meta name="keywords" content="Trees, Tree Species, University, University of Ibadan, U I, UI, Ibadan, Plants, Pharmacological, Pharmacological Importances, Pharmacological Uses, Tree uses">
+    <meta name="keywords" content="Class, Order, Family, Genus, Species, Authority, Tree Class, Tree Order, Tree Family, Tree Genus, Tree Species, Tree Authority">
+
+    <meta name="application-name" content="Trees in UI">
+    <meta name="apple-mobile-web-app-title" content="Trees in UI">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'styles/style.css' %}" />
     <link rel="stylesheet" href="{% static 'styles/hamburger.css' %}" media="only screen and (max-width: 800px)"/>
     <link rel="shortcut icon" href="{% static 'images/icons/icon_tree.png' %}" type="image/jpg"/>
@@ -14,6 +24,8 @@
     <aside id="aside">
         <ul>
             <li><a href="{% url 'home:acknowledgement' %}">Acknowledgement</a></li>
+            <li><a href="{% url 'home:contributors' %}">Contributors</a></li>
+            <li><a href="{% url 'special:special' %}">Special Places</a></li>
             <li><a href="{% url 'home:how-to-use' %}">How to use</a></li>
             <li><a href="">Request</a></li>
             <li><a href="{% url 'home:about' %}">About</a></li>
@@ -44,6 +56,8 @@
                     <span class="button button-toggle"></span>
                     <ul id="ham-item">
                         <li><a href="{% url 'home:acknowledgement' %}">Acknowledgement</a></li>
+                        <li><a href="{% url 'home:contributors' %}">Contributors</a></li>
+                        <li><a href="{% url 'special:special' %}">Special Places</a></li>   
                         <li><a href="{% url 'home:how-to-use' %}">How to use</a></li>
                         <li><a href="">Request</a></li>
                         <li><a href="{% url 'home:about' %}">About</a></li>
@@ -67,11 +81,25 @@
 
     <footer id="base-footer">
         <div>
-            <span class="center"> UNIVERSITY OF IBADAN</span>
-            <span class="center">RENEWABLE NATURAL RESOURCES</span>
-            <span class="center">TREE CLUB</span>
+            <div class="center"> UNIVERSITY OF IBADAN
+                <div>
+                    <img width="50" height="" src="{% static 'images/icons/UI_logo2.png' %}" alt="UI">
+                </div>
+            </div>
+            <div class="center">RENEWABLE NATURAL RESOURCES
+                <div>
+                    <img style="margin-top: -15px; " width="85" height="" src="{% static 'images/icons/RNR_logo2.png' %}" alt="UI">
+                </div>
+            </div>
+            <div class="center">TREE CLUB
+                <div>
+                    <img style="margin-top: -5px; "  width="" height="80" src="{% static 'images/icons/TREE_CLUB2.png' %}" alt="UI">
+                </div>
+            </div>
         </div>
     </footer>
+    <script type="text/javascript" src="{% static 'js/Dharmzeey.js' %}"></script>
+
 
 </body>
 </html>

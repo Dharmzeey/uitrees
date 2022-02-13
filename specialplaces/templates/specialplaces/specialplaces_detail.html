@@ -1,0 +1,42 @@
+{% extends 'base/base.html' %}
+
+
+{% block content %}
+
+<div class="detail-container">
+  <div>
+
+      {% if place.coordinates %}
+    <p>
+        <!-- Coord: {{ coordinate }} -->
+        <h2> {{ place }} </h2>
+    <span>Check Location on <a href="http://maps.google.com?q={{ place.coordinates }}" target="_blank">Google Maps</a> </span>
+    </p>
+    {% endif %}
+
+    
+    {% for picture in pictures %}
+    {% if picture %}
+    <div> <img height="250" src="{{ picture.url }}" alt="Tree"> </div>
+    {% endif %}
+    {% endfor %}
+
+    <p>The Name is: {{ place.special_place_name }} </p>
+    <p>It is located at: {{ place.location_name }} </p>
+    <p>Detailed description of the place: {{ place.location_description }} </p>
+</div>
+
+<div>
+  <h2> Here are the tree species present in {{ place }}</h2>
+  {% for specie in place.tree_specie_found.all %}
+
+
+  <a style="display:block;" href="{% url 'home:tree-details' specie.id %}" target="_blank"> <li>{{ specie }}</li></a>
+
+  {% endfor %}
+  <p>There are approximately {{ place.tree_count }} Trees found here. </p>
+</div>
+</div>
+
+
+{% endblock  %}

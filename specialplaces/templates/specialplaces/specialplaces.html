@@ -1,0 +1,20 @@
+{% extends 'base/base.html' %}
+
+
+{% block content %}
+
+<p>
+    This is where you can find some places, enclosures and boundaries with lots of trees.
+</p>
+
+<p>
+    Here are list of special places available
+</p>
+
+{% for place in places %}
+
+<a href="{% url 'special:details' place.id %}"> <li>{{ place }}</li></a>
+
+{% endfor %}
+
+{% endblock  %}

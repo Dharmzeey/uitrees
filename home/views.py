@@ -9,6 +9,7 @@ from django.views.generic import CreateView
 from trees.models import Tree
 from .models import Search
 from upload.models import Upload
+from .models import Contributors
 
 # Create your views here.
 
@@ -254,6 +255,17 @@ class Pharmacological(View):
         return render(request, self.template_name, context)
 
 
+class TreeContributors(View):
+    template_name = 'home/contributors.html'
+
+    def get(self, request):
+        contributors = Contributors.objects.all()
+        context = {
+            'contributors': contributors
+        }
+        return render(request, self.template_name, context)
+
+
 def how_to_use(request):
     return render(request, 'home/how_to_use.html')
 
@@ -264,4 +276,5 @@ def about(request):
 
 def acknowledgement(request):
     return render(request, 'home/acknowledgement.html')
+
 

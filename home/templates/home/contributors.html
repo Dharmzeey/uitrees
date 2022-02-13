@@ -1,0 +1,52 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h1 class="center">Contributors</h1>
+
+<div id="contributor-container">
+  {% for contributor in contributors %}
+
+  <div>
+    <div class="picture-container"> <img src="{{ contributor.picture.url }}" alt="Pic" height="150" width="150"> 
+      <h2> {{ contributor.name }} </h2>
+    </div>
+    <div> {{ contributor.profile }} </div>
+
+    <div class="social">
+      {% if contributor.mail %}
+      <a target="_blank" href="mailto:{{ contribitor.mail }}"><img width="" height="" src="{% static 'images/icons/email.svg' %}" alt="email"></a>
+      {% endif %}
+  
+      {% if contributor.tel %}
+      <a target="_blank" href="tel:{{ contributor.tel }}"><img width="" height="" src="{% static 'images/icons/phone.svg' %}" alt="tel"></a>
+      {% endif %}
+  
+      {% if contributor.website %}
+      <a target="_blank" href="{{ contributor.website }}"><img width="" height="" src="{% static 'images/icons/globe.svg' %}" alt="website"></a>
+      {% endif %}
+  
+      {% if contributor.git_link %}
+      <a target="_blank" href="{{ contributor.git_link }}"><img width="" height="" src="{% static 'images/icons/github.svg' %}" alt="github"></a>
+      {% endif %}
+  
+      {% if contributor.tw_link %}
+      <a target="_blank" href="{{ contributor.tw_link }}"><img width="" height="" src="{% static 'images/icons/twitter.svg' %}" alt="github"></a>
+      {% endif %}
+  
+      {% if contributor.ig_link %}
+      <a target="_blank" href="{{ contributor.ig_link }}"><img width="" height="" src="{% static 'images/icons/instagram.svg' %}" alt="github"></a>
+      {% endif %}
+  
+      {% if contributor.fb_link %}
+      <a target="_blank" href="{{ contributor.fb_link }}"><img width="" height="" src="{% static 'images/icons/facebook.svg' %}" alt="github"></a>
+      {% endif %}
+    </div>
+      </div>
+
+    {% endfor %}
+</div>
+
+
+{% endblock  %}

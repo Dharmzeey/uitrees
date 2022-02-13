@@ -22,9 +22,12 @@ urlpatterns = [
     path('azeezat/', admin.site.urls),
 
     path('', include('home.urls')),
-    # path('trees/', include('trees.urls')),
     path('upload/', include('upload.urls')),
+    path('special/', include('specialplaces.urls')),
+
+
     # path('treerequest', include('treerequest.urls')),
+    # path('trees/', include('trees.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

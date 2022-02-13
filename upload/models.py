@@ -12,9 +12,9 @@ class Upload(models.Model):
         default=0,
         validators=[MinValueValidator(1)]
     )
-    tree_picture = models.ImageField()
-    tree_picture2 = models.ImageField(null=True, blank=True)
-    tree_picture3 = models.ImageField(null=True, blank=True)
+    tree_picture = models.ImageField(upload_to='images/%Y/%m/%d/')
+    tree_picture2 = models.ImageField(upload_to='images/%Y/%m/%d/', null=True, blank=True)
+    tree_picture3 = models.ImageField(upload_to='images/%Y/%m/%d/', null=True, blank=True)
     location_name = models.CharField(max_length=80)
     location_description = models.TextField()
     coordinates = models.CharField(max_length=30, null=True, blank=True)
@@ -29,4 +29,6 @@ class Upload(models.Model):
         ret_val = self.tree_name.scientific_name + ' at ' + self.location_name
         return ret_val
 
+
+# class Special(models.Model):
 
