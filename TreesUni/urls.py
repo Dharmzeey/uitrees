@@ -18,10 +18,13 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+
 urlpatterns = [
     path('azeezat/', admin.site.urls),
+    # path('authority/', include('authority.urls')),
 
     path('', include('home.urls')),
+    path('', include('django.contrib.auth.urls')),
     path('upload/', include('upload.urls')),
     path('special/', include('specialplaces.urls')),
     path('treerequest', include('treerequest.urls')),

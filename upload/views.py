@@ -9,7 +9,7 @@ from .models import Upload
 # Create your views here.
 
 
-class CreateTree(CreateView):
+class CreateTree(LoginRequiredMixin, CreateView):
     model = Upload
     fields = '__all__'
     success_url = reverse_lazy('upload:upload')

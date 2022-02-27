@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'upload.apps.UploadConfig',
     'treerequest.apps.TreerequestConfig',
     'specialplaces.apps.SpecialplacesConfig',
+    'authority.apps.AuthorityConfig',
 
     'django_extensions',
     'django_cleanup.apps.CleanupConfig',
@@ -124,6 +125,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+LOGIN_URL = 'login'
 
 
 # Static files (CSS, JavaScript, Images)

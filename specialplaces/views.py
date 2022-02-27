@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import SpecialPlace
 
@@ -33,7 +34,7 @@ class SpecialDetails(View):
         return render(request, self.template_name, context)
 
 
-class CreateSpecial(CreateView):
+class CreateSpecial(LoginRequiredMixin, CreateView):
     model = SpecialPlace
     fields = '__all__'
     success_url = reverse_lazy('special:special')

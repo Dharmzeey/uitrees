@@ -5,6 +5,7 @@ app_name = 'home'
 
 urlpatterns = [
     # path('', views.BaseView.as_view(), name='base'),
+
     path('', views.HomeView.as_view(), name='home'),
     path('specific-search/<int:pk>/', views.SpecificSearch.as_view(), name='specific-search'),
     path('tree-details/<int:pk>/', views.TreeDetails.as_view(), name='tree-details'),
