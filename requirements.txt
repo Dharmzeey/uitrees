@@ -1,3 +1,11 @@
-django==4.0.1
+asgiref==3.4.1
+Django==4.0.1
+django-cleanup==6.0.0
 django-extensions==3.1.5
-pillow
+et-xmlfile==1.1.0
+openpyxl==3.0.9
+Pillow==9.0.0
+pytz==2021.3
+six==1.16.0
+sqlparse==0.4.2
+tzdata==2021.5

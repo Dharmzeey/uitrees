@@ -2,8 +2,9 @@ from django.db import models
 from django.core.validators import MinValueValidator
 
 from trees.models import Tree
-
-# Create your models here.
+# THIS BELOW IS A PACKAGE THAT CONTAINS A FUNCTION THAT
+# I MANUALLY CREATE TO COMPRESS Images
+from utilities.compressor import compress
 
 
 class Upload(models.Model):
@@ -12,9 +13,19 @@ class Upload(models.Model):
         default=0,
         validators=[MinValueValidator(1)]
     )
-    tree_picture = models.ImageField(upload_to='images/%Y/%m/%d/')
-    tree_picture2 = models.ImageField(upload_to='images/%Y/%m/%d/', null=True, blank=True)
-    tree_picture3 = models.ImageField(upload_to='images/%Y/%m/%d/', null=True, blank=True)
+    tree_picture = models.ImageField(upload_to='uploads/%Y/%m/%d/')
+    tree_picture2 = models.ImageField(upload_to='uploads/%Y/%m/%d/', null=True, blank=True)
+    tree_picture3 = models.ImageField(upload_to='uploads/%Y/%m/%d/', null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        new_image = compress(self.tree_picture)
+        self.tree_picture = new_image
+        new_image2 = compress(self.tree_picture2)
+        self.tree_picture2 = new_image2
+        new_image3 = compress(self.tree_picture3)
+        self.tree_picture3 = new_image3
+        super().save(*args, **kwargs)
+
     location_name = models.CharField(max_length=80)
     location_description = models.TextField()
     coordinates = models.CharField(max_length=30, null=True, blank=True)
@@ -29,6 +40,4 @@ class Upload(models.Model):
         ret_val = self.tree_name.scientific_name + ' at ' + self.location_name
         return ret_val
 
-
-# class Special(models.Model):
 

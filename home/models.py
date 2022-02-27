@@ -1,7 +1,5 @@
 from django.db import models
 
-# Create your models here.
-
 
 class Search(models.Model):
     name = models.CharField(max_length=25)
@@ -12,7 +10,7 @@ class Search(models.Model):
 
 
 class Contributors(models.Model):
-    picture = models.ImageField(upload_to='images/%Y/%m/%d/')
+    picture = models.ImageField(upload_to='contributors/%Y/%m/%d/')
     name = models.CharField(max_length=50)
     profile = models.TextField()
 

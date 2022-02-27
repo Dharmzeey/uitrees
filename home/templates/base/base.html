@@ -8,8 +8,9 @@
     <meta name="description" content="Trees Documentation In University of Ibadan">
     <meta name="description" content="This documentation is intended to give as many as possible trees in the University of Ibadan, Ibadan, Oyo State. The trees, its local name, scientific name, common names and where it is located in the university are available. Also the location and the coordinates of each trees are also available.">
     <meta name="author" content="Adam Olanrewaju, Dharmzeey">
-    <meta name="keywords" content="Trees, Tree Species, University, University of Ibadan, U I, UI, Ibadan, Plants, Pharmacological, Pharmacological Importances, Pharmacological Uses, Tree uses">
+    <meta name="keywords" content="Trees, Tree Species, Plants, Pharmacological, Pharmacological Importances, Pharmacological Uses, Tree uses">
     <meta name="keywords" content="Class, Order, Family, Genus, Species, Authority, Tree Class, Tree Order, Tree Family, Tree Genus, Tree Species, Tree Authority">
+    <meta name="keywords" content=" University, University of Ibadan, U I, UI, Ibadan, Tree Club, Club, RNR, RENARSA, Renewable Natural Resources">
 
     <meta name="application-name" content="Trees in UI">
     <meta name="apple-mobile-web-app-title" content="Trees in UI">
@@ -27,7 +28,7 @@
             <li><a href="{% url 'home:contributors' %}">Contributors</a></li>
             <li><a href="{% url 'special:special' %}">Special Places</a></li>
             <li><a href="{% url 'home:how-to-use' %}">How to use</a></li>
-            <li><a href="">Request</a></li>
+            <li><a href="{% url 'treerequest:treerequest' %}">Request</a></li>
             <li><a href="{% url 'home:about' %}">About</a></li>
         </ul>
     </aside>
@@ -59,7 +60,7 @@
                         <li><a href="{% url 'home:contributors' %}">Contributors</a></li>
                         <li><a href="{% url 'special:special' %}">Special Places</a></li>   
                         <li><a href="{% url 'home:how-to-use' %}">How to use</a></li>
-                        <li><a href="">Request</a></li>
+                        <li><a href="{% url 'treerequest:treerequest' %}">Request</a></li>
                         <li><a href="{% url 'home:about' %}">About</a></li>
                     </ul>
                 </div>
@@ -83,17 +84,17 @@
         <div>
             <div class="center"> UNIVERSITY OF IBADAN
                 <div>
-                    <img width="50" height="" src="{% static 'images/icons/UI_logo2.png' %}" alt="UI">
+                    <img width="50" height="" src="{% static 'images/icons/UI_logo.png' %}" alt="UI">
                 </div>
             </div>
             <div class="center">RENEWABLE NATURAL RESOURCES
                 <div>
-                    <img style="margin-top: -15px; " width="85" height="" src="{% static 'images/icons/RNR_logo2.png' %}" alt="UI">
+                    <img style="margin-top: -15px; " width="85" height="" src="{% static 'images/icons/RNR_logo.png' %}" alt="UI">
                 </div>
             </div>
             <div class="center">TREE CLUB
                 <div>
-                    <img style="margin-top: -5px; "  width="" height="80" src="{% static 'images/icons/TREE_CLUB2.png' %}" alt="UI">
+                    <img style="margin-top: -5px; "  width="" height="80" src="{% static 'images/icons/TREE_CLUB.png' %}" alt="UI">
                 </div>
             </div>
         </div>

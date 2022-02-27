@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'specialplaces.apps.SpecialplacesConfig',
 
     'django_extensions',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [

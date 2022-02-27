@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %}
+{% block content %}
+
+<form method="post" action="" enctype="multipart/form-data">
+  {% csrf_token %}
+    <table>
+    {{ form.as_table }}
+    </table>
+  <input type="submit" value="Submit">
+</form>
+
+<script>
+  var x = document.getElementById("id_coordinates");
+  var y = document.getElementById("id_latitude");
+  var z = document.getElementById("id_longitude");
+
+  if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(showPosition);
+} else {
+  x.value = "Geolocation is not supported by this browser.";
+}
+
+function showPosition(position) {
+x.value = position.coords.latitude +
+"," + position.coords.longitude;
+y.value = position.coords.latitude;
+z.value = position.coords.longitude;
+}
+
+x.readOnly = true;
+y.readOnly = true;
+z.readOnly = true;
+</script>
+
+{% endblock  %}
