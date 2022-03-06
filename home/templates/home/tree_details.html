@@ -30,19 +30,24 @@
             
                 <p> Tree Description: {{ tree_info.tree_description }}</p>
             
-                <p> Pharmacological Uses: 
-                    <span>
-                        <!-- {% if tree_info.pharmacological_details %} -->
-                        <!-- <a href="{% url 'home:pharmacology' tree_info.id%}" >Read Up</a> -->
-                        <!-- {% endif %} -->
+                   <p class="font"> Pharmacological Details:
+        <span>
+             {% if tree_info.pharmacological_details %}
+             <a href="{% url 'home:pharmacology' tree_info.id%}" >Read Up</a>
+             {% endif %}
 
+        </span>
+    </p>
 
-                        {% if tree_info.reference %}
-                        <a href="{{ tree_info.reference }}" >Read Up</a>
-                <!--    {{ tree_info.pharmacological_details }}-->
-                        {% endif %}
-                    </span>
-                </p>
+    <p>
+        <span>
+            {% if tree_info.reference %}
+            <p class="font"> More About {{ tree_info }} ??
+            <a href="{{ tree_info.reference }}" >Read Up</a>
+            {% endif %}
+
+        </span>
+    </p>
             </div>
         </div>
         

@@ -8,7 +8,7 @@
     <div class="font">
         <h2 class="heading">Location Information</h2>
     
-        <p><img src="{{ result.tree_picture.url }}" height="300" alt="Tree"></p>
+        <p><img src="{{ result.tree_picture.url }}" height="300" alt="{{ genus_specie }} Tree at University of Ibadan"></p>
         <p>The Tree Name:  {{ result.tree_name }}</p>
         <p>The Tree could be found at:  {{ result.location_name }}</p>
         <p>Detailed description of the location:  {{ result.location_description }}</p>
@@ -34,19 +34,25 @@
     
     <p class="font"> Pharmacological Details:
         <span>
-            <!-- {% if tree_info.pharmacological_details %} -->
-            <!-- <a href="{% url 'home:pharmacology' tree_info.id%}" >Read Up</a> -->
-            <!-- {% endif %} -->
+             {% if tree_info.pharmacological_details %}
+             <a href="{% url 'home:pharmacology' tree_info.id%}" >Read Up</a>
+             {% endif %}
 
-
-            {% if tree_info.reference %}
-            <a href="{{ tree_info.reference }}" >Read Up</a>
-    <!--        {{ tree_info.pharmacological_details }}-->
-            {% endif %}
         </span>
     </p>
-    </div>
 
+    <p>
+        <span>
+            {% if tree_info.reference %}
+            <p class="font"> More About {{ tree_info }} ??:
+            <a href="{{ tree_info.reference }}" >Read Up</a>
+            {% endif %}
+
+        </span>
+    </p>
+
+    </p>
+    </div>
     <footer style="position: relative">
         <div style="position: absolute; right: 10px">
             <p>This page was created on: {{ tree_info.created }}</p>

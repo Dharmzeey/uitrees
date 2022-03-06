@@ -67,16 +67,20 @@ class HomeView(View):
             for y in search_tree_upload:
                 if x.scientific_name == y.tree_name.scientific_name:
                     search_tree.add(x)
+        set_tree_count = len(search_tree)
 
         # THIS BELOW IS KIND OF MESSING EVERYTHING ON THE HOME SEARCH, I MIGHT REMOVE IT
         search_place = Upload.objects.filter(
             Q(location_name__icontains=search)
         )
+        search_place_count = search_place.count()
+        total_len = set_tree_count + search_place_count
 
         context = {
             'search_tree': search_tree,
             'search': search,
-            'search_place': search_place
+            'search_place': search_place,
+            'total_len': total_len
         }
 
         return render(request, self.template_name, context)
@@ -171,7 +175,7 @@ class SpecificSearch(View):
                                 try:
                                     item_lat = float(item.latitude)
                                     item_long = float(item.longitude)
-                                    if abs(lat - item_lat) <= 0.025 and abs(long - item_long) <= 0.015:
+                                    if abs(lat - item_lat) <= 0.0005 and abs(long - item_long) <= 0.0015:
                                         search_cont.append(item)
                                     context.update({'search_coord': search_cont})
                                 except:
@@ -218,10 +222,12 @@ class TreeLocationPicture(View):
         picture3 = result.tree_picture3
         coord = result.coordinates
         desc = result.location_description
+        genus_specie = result.tree_name.genus_specie
 
         context = {
             'pictures': [picture, picture2, picture3],
-            'description': desc
+            'description': desc,
+            'genus_specie': genus_specie
         }
         try:
             if type(float(coord[0:4])) == float:
@@ -240,8 +246,9 @@ class TreeLocationDetails(View):
         result = Upload.objects.get(id=pk)
         location_scientific_name = result.tree_name
         tree_info = Tree.objects.get(scientific_name=location_scientific_name)
+        genus_specie = result.tree_name.genus_specie
 
-        context = {'result': result, 'tree_info': tree_info}
+        context = {'result': result, 'tree_info': tree_info, 'genus_specie': genus_specie}
         return render(request, self.template_name, context)
 
 

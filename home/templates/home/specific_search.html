@@ -23,12 +23,16 @@
 
 
 {% if search %}
+{% if search_tree %}
+<div> <b>{{ search_tree|length }} Result{{ search_tree|length|pluralize }} Available</b> </div>
 {% for tree in search_tree %}
     <a href="{% url 'home:tree-details' tree.id %}" ><li>{{ tree }}</li></a>
 {% endfor %}
+{% endif %}
 
 
 {% if search_place %}
+<div> <b>{{ search_place|length }} Result{{ search_place|length|pluralize }} Available</b> </div>
 {% for tree in search_place %}
     <a href="{% url 'home:tree-location-details' tree.id %}" ><li>{{ tree }}</li></a>
 {% endfor %}
@@ -38,6 +42,7 @@
 <p>
     Here are the trees that are likely to be around your vicinity
 </p>
+<div> <b>{{ search_coord|length }} Result{{ search_coord|length|pluralize }} Available</b> </div>
 {% for tree in search_coord %}
     <a href="{% url 'home:tree-location-details' tree.id %}"><li>{{ tree }}</li></a>
 {% endfor %}

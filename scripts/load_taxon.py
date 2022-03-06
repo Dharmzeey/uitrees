@@ -13,7 +13,7 @@ def run():
     m_col = ws.max_column
     Tree.objects.all().delete()
 
-    for row in range(2, 127 + 1):
+    for row in range(2, 125 + 1):
         sn = ws.cell(row=row, column=1).value
         lk = ws.cell(row=row, column=2).value
         ln = ws.cell(row=row, column=3).value
