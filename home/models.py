@@ -1,5 +1,7 @@
 from django.db import models
 from utilities.compressor import compress
+from django.core.validators import RegexValidator
+from django.contrib.auth.models import User
 
 
 class Search(models.Model):
@@ -10,18 +12,21 @@ class Search(models.Model):
         return self.name
 
 
-class Contributors(models.Model):
+class Contributor(models.Model):
     picture = models.ImageField(upload_to='contributors/%Y/%m/%d/')
 
     def save(self, *args, **kwargs):
-        new_image = compress(self.picture)
-        self.picture = new_image
+        if 'contributors/' not in self.picture.url:
+            new_image = compress(self.picture)
+            self.picture = new_image
         super().save(*args, **kwargs)
 
-    name = models.CharField(max_length=50)
+    user = models.OneToOneField(User, on_delete=models.SET_NULL, null=True)
+    name = models.CharField(max_length=70)
     profile = models.TextField()
     mail = models.EmailField()
-    tel = models.IntegerField(default=234)
+    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Number Must be in +234 format")
+    tel = models.CharField(validators=[phone_regex], max_length=17)
     website = models.URLField(max_length=200, null=True, blank=True)
     git_link = models.URLField(max_length=200, null=True, blank=True)
     tw_link = models.URLField(max_length=200, null=True, blank=True)

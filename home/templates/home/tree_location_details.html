@@ -9,9 +9,10 @@
         <h2 class="heading">Location Information</h2>
     
         <p><img src="{{ result.tree_picture.url }}" height="300" alt="{{ genus_specie }} Tree at University of Ibadan"></p>
-        <p>The Tree Name:  {{ result.tree_name }}</p>
         <p>The Tree could be found at:  {{ result.location_name }}</p>
         <p>Detailed description of the location:  {{ result.location_description }}</p>
+        <P> Tree Health Status: {{ result.health_status }}</P>
+        <div> Uploaded by:<a href="{% url 'home:contributors' %}#{{ result.uploader }}" target="_blank">  {{ result.uploader }} </a>
     </div>
     <br>
     <hr>

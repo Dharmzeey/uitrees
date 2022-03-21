@@ -6,3 +6,4 @@ class CreateModelForm(ModelForm):
     class Meta:
         model = Upload
         fields = '__all__'
+        exclude = ('uploader',)

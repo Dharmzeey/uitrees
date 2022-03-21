@@ -1,3 +1,16 @@
+// THIS WILL CONTROL OPEN AND CLOSE OF HAMBURGER MENU
+const open = document.querySelector("#open-menu");
+const close = document.querySelector("#close-menu");
+const toggleMenu = document.querySelector("#menu-toggle-icon");
+
+function toggleFunction () {
+  toggleMenu.classList.toggle("activated")
+  console.log('ssss');
+}
+
+toggleMenu.addEventListener('click', toggleFunction)
+
+
 // THIS SCRIPT IS FOR (SPECIFIC SEARCH.HTML) THAT DYNAMICALLY EFFECT THE INPUT BEHAVIOR BASED ON THE 
 // "SEARCH TYPE ACTION" 
 
@@ -56,6 +69,4 @@ y.value = position.coords.latitude;
 z.value = position.coords.longitude;
 }
 
-console.log(`
-  sss
-`)
+

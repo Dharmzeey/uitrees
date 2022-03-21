@@ -14,8 +14,9 @@ urlpatterns = [
     path('tree-location-details/<int:pk>/', views.TreeLocationDetails.as_view(), name='tree-location-details'),
     path('pharmacological/<int:pk>/', views.Pharmacological.as_view(), name='pharmacology'),
 
+    path('profile/<int:pk>/', views.Profile.as_view(), name='profile'),
     path('acknowledgement/', views.acknowledgement, name='acknowledgement'),
-    path('contributors/', views.TreeContributors.as_view(), name='contributors'),
+    path('contributors/', views.TreeContributor.as_view(), name='contributors'),
     path('how-to-use/', views.how_to_use, name='how-to-use'),
     path('about/', views.about, name='about'),
 ]

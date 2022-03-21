@@ -8,8 +8,9 @@
 <div id="contributor-container">
   {% for contributor in contributors %}
 
-  <div>
-    <div class="picture-container"> <img src="{{ contributor.picture.url }}" alt="Pic" height="150" width="150"> 
+  <div id="{{ contributor.user.username }}">
+    <div class="picture-container"> <img src="{{ contributor.picture.url }}" alt="Pic" height="150" width="150">
+      <h2> {{ contributor.user.username }} </h2>
       <h2> {{ contributor.name }} </h2>
     </div>
     <div> {{ contributor.profile }} </div>

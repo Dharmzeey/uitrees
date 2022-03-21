@@ -19,12 +19,13 @@ class SpecialPlace(models.Model):
     tree_picture3 = models.ImageField(upload_to='specials/%Y/%m/%d/', null=True, blank=True)
 
     def save(self, *args, **kwargs):
-        new_image = compress(self.tree_picture)
-        self.tree_picture = new_image
-        new_image2 = compress(self.tree_picture2)
-        self.tree_picture2 = new_image2
-        new_image3 = compress(self.tree_picture3)
-        self.tree_picture3 = new_image3
+        if 'specials/' not in self.tree_picture.url:
+            new_image = compress(self.tree_picture)
+            self.tree_picture = new_image
+            new_image2 = compress(self.tree_picture2)
+            self.tree_picture2 = new_image2
+            new_image3 = compress(self.tree_picture3)
+            self.tree_picture3 = new_image3
         super().save(*args, **kwargs)
 
     special_place_name = models.CharField(max_length=100, null=True, blank=True)

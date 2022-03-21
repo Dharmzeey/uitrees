@@ -6,7 +6,7 @@ import time
 
 def run():
     start = time.perf_counter()
-    wb = load_workbook('excel/Exceldbd.xlsx')
+    wb = load_workbook('excel/Exceldb.xlsx')
     ws = wb.active
 
     m_row = ws.max_row

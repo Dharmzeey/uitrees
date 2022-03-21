@@ -1,5 +1,6 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap'); */
-@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@300&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@300&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
 :root {
   --color-main: #2517df;
@@ -17,7 +18,8 @@
 
 * {
   /* font-family: 'Bree Serif', serif; */
-  font-family: 'Hahmlet', serif;
+  /* font-family: 'Hahmlet', serif; */
+  font-family: 'Poppins', sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -121,6 +123,10 @@ aside > ul li {
   list-style-position: inside;
 }
 
+#menu-toggle-icon{
+  display: none;
+}
+
 #section-count {
   margin-top: -6rem !important;
   width: 100%;
@@ -158,6 +164,10 @@ nav div:nth-child(1) {
 
 #ham-item {
   display: none;
+  position: absolute;
+  right: 1px;
+  width: 200px;
+  background-color: red;
 }
 
 nav div:nth-child(2) {
@@ -272,14 +282,6 @@ li {
 
 .social {
   text-align: center;
-}
-
-.transist {
-  transition-property: all;
-  background-color: #2517df;
-  transition-duration: 4000ms;
-  transition-timing-function: ease-in;
-  transition-delay: 1s;
 }
 
 .flex-container {
@@ -426,9 +428,45 @@ nav div:nth-child(2) a {
     margin: auto;
   }
 
-#toggle {
-  width: 30px;
-  height: 30px;
+
+  .transist {
+    transition-property: all;
+    transition-duration: 4000ms;
+    transition-timing-function: ease-in;
+    transition-delay: 1s;
+  }
+
+#ham-container {
+  position: relative;
+}
+
+.toggle {
+display: block;
+font-size: 3rem;
+padding: 3px;
+}
+
+#menu-toggle-icon {
+  display: block;
+  z-index: 10;
+  position: absolute;
+  right: 1px;
+}
+
+.close-menu-icon {
+  display: none;
+}
+
+.menu-toggle-icon.activated .open-menu-icon{
+  display: none;
+}
+
+.menu-toggle-icon.activated .close-menu-icon{
+  display: block;
+}
+
+.menu-toggle-icon.activated ~ #ham-item {
+  display: block;
 }
 
   .detail-container{

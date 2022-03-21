@@ -5,14 +5,20 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Upload
+from .forms import CreateModelForm
 
 # Create your views here.
 
 
 class CreateTree(LoginRequiredMixin, CreateView):
-    model = Upload
-    fields = '__all__'
+    # model = Upload
+    form_class = CreateModelForm
     success_url = reverse_lazy('upload:upload')
+    template_name = 'upload/upload_form.html'
+
+    def form_valid(self, form):
+        form.instance.uploader = self.request.user
+        return super(CreateTree, self).form_valid(form)
 
 
 # class CreateFormTree(View):

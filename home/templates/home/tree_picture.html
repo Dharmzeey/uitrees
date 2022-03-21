@@ -26,7 +26,10 @@
     {% endif %}
     {% endfor %}
 </div>
-<small>Location Description: {{ description }}</small>
+<div>Tree Health Status: {{ health }}</div>
+<div>Location Description: {{ description }}</div>
+<div> Uploaded by:<a href="{% url 'home:contributors' %}#{{ uploader }}" target="_blank">  {{ uploader }} </a>
+</div>
 
 </body>
 </html>

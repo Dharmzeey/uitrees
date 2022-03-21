@@ -1,15 +1,19 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.db.models import Q
 from django.views.decorators.clickjacking import xframe_options_sameorigin
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from django.contrib.auth.models import User
 from django.utils import timezone
 
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 
 from trees.models import Tree
 from .models import Search
 from upload.models import Upload
-from .models import Contributors
+from .models import Contributor
+from .forms import ProfileFrom
 
 # Create your views here.
 
@@ -33,17 +37,14 @@ class HomeView(View):
     def get(self, request):
         try:
             # THIS FIRST UPDATE THE SESSION
+            total = Upload.objects.count()
+            request.session['counter'] = str(total)
+
             time_update = Upload.objects.all().order_by('-time_now')[0].time_now
             str_date = time_update.strftime("%Y-%m-%d %H:%M:%S")
             # local_dt = timezone.localtime(time_update)
             # print(local_dt)
-            count_update = Upload.objects.values()
-            cont = []
-            for val in count_update:
-                cont.append(val['tree_count'])
-            total = sum(cont)
             request.session['time'] = str(str_date)
-            request.session['counter'] = str(total)
         except:
             pass
             # THEN AFTER IT PROCESS THE NORMAL VIEWS FOR THE SEARCH AND ALL
@@ -223,11 +224,15 @@ class TreeLocationPicture(View):
         coord = result.coordinates
         desc = result.location_description
         genus_specie = result.tree_name.genus_specie
+        health = result.health_status
+        uploader = result.uploader
 
         context = {
             'pictures': [picture, picture2, picture3],
             'description': desc,
-            'genus_specie': genus_specie
+            'genus_specie': genus_specie,
+            'health': health,
+            'uploader': uploader
         }
         try:
             if type(float(coord[0:4])) == float:
@@ -262,15 +267,38 @@ class Pharmacological(View):
         return render(request, self.template_name, context)
 
 
-class TreeContributors(View):
+class TreeContributor(View):
     template_name = 'home/contributors.html'
 
     def get(self, request):
-        contributors = Contributors.objects.all()
+        contributors = Contributor.objects.all()
         context = {
             'contributors': contributors
         }
         return render(request, self.template_name, context)
+
+
+class Profile(LoginRequiredMixin, UpdateView):
+    model = Contributor
+    # fields = '__all__'
+    # form_class = UserForm
+    form_class = ProfileFrom
+    success_url = reverse_lazy('home:home')
+    template_name = 'home/contributor_form.html'
+
+    def form_valid(self, form):
+        current_user = User.objects.get(username=self.request.user.username)
+        form.instance.user = current_user
+        return super(Profile, self).form_valid(form)
+
+    # def get(self, request, pk):
+    #     user = get_object_or_404(User, pk=pk)
+    #     context = {
+    #         'user': user,
+    #         'form': self.form_class,
+    #         'form2': self.form_class2
+    #     }
+    #     return render(request, self.template_name, context)
 
 
 def how_to_use(request):
@@ -283,5 +311,3 @@ def about(request):
 
 def acknowledgement(request):
     return render(request, 'home/acknowledgement.html')
-
-
