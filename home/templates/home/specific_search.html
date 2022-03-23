@@ -13,7 +13,7 @@
 
 <div class="form-container">
     <form action="" method="">
-        <input name="specific_search" type="text" id="dynamic" placeholder="Input "/>   
+        <input name="q" type="text" id="dynamic" placeholder="Input "/>
         <input style="display: none;" id="inp_cord" type="submit" value="Search"> 
     </form>
 </div>
@@ -22,18 +22,18 @@
 
 
 
-{% if search %}
+
 {% if search_tree %}
-<div> <b>{{ search_tree|length }} Result{{ search_tree|length|pluralize }} Available</b> </div>
-{% for tree in search_tree %}
+<div> <b>{{ search_result.paginator.count }} Result{{ search_result.paginator.count|pluralize }} Available</b> </div>
+{% for tree in search_result %}
     <a href="{% url 'home:tree-details' tree.id %}" ><li>{{ tree }}</li></a>
 {% endfor %}
 {% endif %}
 
 
 {% if search_place %}
-<div> <b>{{ search_place|length }} Result{{ search_place|length|pluralize }} Available</b> </div>
-{% for tree in search_place %}
+<div> <b>{{ search_result.paginator.count }} Result{{ search_result.paginator.count|pluralize }} Available</b> </div>
+{% for tree in search_result %}
     <a href="{% url 'home:tree-location-details' tree.id %}" ><li>{{ tree }}</li></a>
 {% endfor %}
 {% endif %}
@@ -42,18 +42,56 @@
 <p>
     Here are the trees that are likely to be around your vicinity
 </p>
-<div> <b>{{ search_coord|length }} Result{{ search_coord|length|pluralize }} Available</b> </div>
-{% for tree in search_coord %}
+<div> <b>{{ search_result.paginator.count }} Result{{ search_result.paginator.count|pluralize }} Available</b> </div>
+{% for tree in search_result %}
     <a href="{% url 'home:tree-location-details' tree.id %}"><li>{{ tree }}</li></a>
 {% endfor %}
 {% endif %}
-
 
 {% if search_error %}
     <b style="color: red;">{{ search_error }}</b>
 {% endif %}
 
+
+
+<!--PAGINATOR CONTROL STARTS HERE-->
+{% if search_result.has_other_pages %}
+  <ul class="pagination">
+    {% if search_result.has_previous %}
+      <li class="page-item" >
+          <a class="page-link" href="?{% if search %}q={{ search }}&{% endif %}page={{ 1 }}">First &laquo;</a>
+      </li>
+      <li class="page-item" >
+          <a class="page-link" href="?{% if search %}q={{ search }}&{% endif %}page={{ search_result.previous_page_number }}">&laquo;</a>
+      </li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+
+{% for i in search_result.paginator.page_range %}
+      {% if search_result.number == i %}
+        <li class="page-item active-page"><a class="page-link">{{ i }}</a></li>
+      {% else %}
+    <li class="page-item" >
+        <a class="page-link" href="?{% if search %}q={{ search }}&{% endif %}page={{ i }}" >{{ i }}</a></li>
+      {% endif %}
+{% endfor %}
+
+
+{% if search_result.has_next %}
+      <li class="page-item" >
+          <a class="page-link" href="?{% if search %}q={{ search }}&{% endif %}page={{ search_result.next_page_number }}">&raquo;</a>
+      </li>
+      <li class="page-item" >
+          <a class="page-link" href="?{% if search %}q={{ search }}&{% endif %}page={{ search_result.paginator.num_pages }}">Last &raquo;</a>
+      </li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+
 {% endif %}
+<!--PAGINATOR CONTROL ENDS HERE-->
 
 <script>
     var dynamic_input = document.getElementById("dynamic");

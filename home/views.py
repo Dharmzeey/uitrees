@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.db.models import Q
@@ -14,6 +15,7 @@ from .models import Search
 from upload.models import Upload
 from .models import Contributor
 from .forms import ProfileFrom
+
 
 # Create your views here.
 
@@ -37,20 +39,28 @@ class HomeView(View):
     def get(self, request):
         try:
             # THIS FIRST UPDATE THE SESSION
-            total = Upload.objects.count()
-            request.session['counter'] = str(total)
+            # IT RETURNS THE NUMBER OF OBJECTS IN UPLOAD DATABASE
+            # total = Upload.objects.count()
+            # request.session['counter'] = str(total)
 
             time_update = Upload.objects.all().order_by('-time_now')[0].time_now
             str_date = time_update.strftime("%Y-%m-%d %H:%M:%S")
             # local_dt = timezone.localtime(time_update)
             # print(local_dt)
+
+            cont_update = Upload.objects.values()
+            cont = []
+            for val in cont_update:
+                cont.append(val['tree_count'])
+            total = sum(cont)
             request.session['time'] = str(str_date)
+            request.session['counter'] = str(total)
         except:
             pass
             # THEN AFTER IT PROCESS THE NORMAL VIEWS FOR THE SEARCH AND ALL
 
         # tree_list = Tree.objects.all()
-        search = request.GET.get('search') if request.GET.get('search') is not None else ''
+        search = request.GET.get('q', '')
 
         search_tree_tree = Tree.objects.filter(
             Q(scientific_name__icontains=search) |
@@ -68,20 +78,31 @@ class HomeView(View):
             for y in search_tree_upload:
                 if x.scientific_name == y.tree_name.scientific_name:
                     search_tree.add(x)
-        set_tree_count = len(search_tree)
+        # set_tree_count = len(search_tree)
 
         # THIS BELOW IS KIND OF MESSING EVERYTHING ON THE HOME SEARCH, I MIGHT REMOVE IT
         search_place = Upload.objects.filter(
             Q(location_name__icontains=search)
         )
-        search_place_count = search_place.count()
-        total_len = set_tree_count + search_place_count
+        # search_place_count = search_place.count()
+        # total_len = set_tree_count + search_place_count
+
+        # PAGINATORS
+        search_tree_place = list(search_tree) + list(search_place)
+        paginator = Paginator(search_tree_place, 3)
+        page_number = request.GET.get('page', 1)
+        try:
+            page_obj = paginator.page(page_number)
+        except PageNotAnInteger:
+            page_obj = paginator.page(1)
+        except EmptyPage:
+            page_obj = paginator.page(paginator.num_pages)
 
         context = {
-            'search_tree': search_tree,
-            'search': search,
-            'search_place': search_place,
-            'total_len': total_len
+            'search_result': page_obj,
+            'search': str(search),
+            # 'total_len': total_len,
+            # 'page_number': int(page_number)
         }
 
         return render(request, self.template_name, context)
@@ -101,7 +122,7 @@ class SpecificSearch(View):
         # HOLD THE VALUE WHICH WAS CLICKED BY THE USER FOR SEARCH
         for search_item in search_option:
             if pk == search_item.id:
-                search = request.GET.get('specific_search') if request.GET.get('specific_search') is not None else ''
+                search = request.GET.get('q', '')
 
                 context.update({'search': search})
 
@@ -112,7 +133,7 @@ class SpecificSearch(View):
                 search_cont = None
 
                 # THIS WILL CHECK THE PK VALUE WHICH TALLIES WITH WHAT THE USER CLICKED AND THEN USE CONDITIONAL
-                # STATEMENT TO KNOW THE SEARCH-BY VALUES SO AS TO KNOW WHERE TO QUERY IN THE TREE DATABASE
+                # STATEMENT TO KNOW THE SEARCH-BY VALUES TO KNOW WHERE TO QUERY IN THE TREE DATABASE
                 # DEPENDING ON WHAT THE USER CLICKED
                 # AFTER THEN THE CONTEXT VARIABLE WILL BE UPDATED
                 if search_key == 'scientific_name':
@@ -129,6 +150,23 @@ class SpecificSearch(View):
                             if x.scientific_name == y.tree_name.scientific_name:
                                 search_tree.add(x)
 
+                    # PAGINATORS
+                    search_tree = list(search_tree)
+                    paginator = Paginator(search_tree, 1)
+                    page_number = request.GET.get('page', 1)
+                    try:
+                        page_obj = paginator.page(page_number)
+                    except PageNotAnInteger:
+                        page_obj = paginator.page(1)
+                    except EmptyPage:
+                        page_obj = paginator.page(paginator.num_pages)
+
+                    context.update({
+                        'search_tree': True,
+                        'search_result': page_obj,
+                        'search': str(search)
+                    })
+
                 elif search_key == 'local_name':
                     search_tree_tree = Tree.objects.filter(
                         Q(local_name__icontains=search)
@@ -142,6 +180,23 @@ class SpecificSearch(View):
                         for y in search_tree_upload:
                             if x.scientific_name == y.tree_name.scientific_name:
                                 search_tree.add(x)
+
+                    # PAGINATORS
+                    paginator = Paginator(list(search_tree), 3)
+                    page_number = request.GET.get('page', 1)
+                    try:
+                        page_obj = paginator.page(page_number)
+                    except PageNotAnInteger:
+                        page_obj = paginator.page(1)
+                    except EmptyPage:
+                        page_obj = paginator.page(paginator.num_pages)
+
+                    context.update(
+                        {
+                            'search_tree': True,
+                            'search_result': page_obj,
+                            'search': str(search)
+                        })
 
                 elif search_key == 'common_name':
                     search_tree_tree = Tree.objects.filter(
@@ -157,12 +212,45 @@ class SpecificSearch(View):
                             if x.scientific_name == y.tree_name.scientific_name:
                                 search_tree.add(x)
 
+                    # PAGINATORS
+                    search_tree = list(search_tree)
+                    paginator = Paginator(search_tree, 1)
+                    page_number = request.GET.get('page', 1)
+                    try:
+                        page_obj = paginator.page(page_number)
+                    except PageNotAnInteger:
+                        page_obj = paginator.page(1)
+                    except EmptyPage:
+                        page_obj = paginator.page(paginator.num_pages)
+
+                    context.update({
+                        'search_tree': True,
+                        'search_result': page_obj,
+                        'search': str(search)
+                    })
+
                 # THIS WILL GET THE LOCATION SEARCHED BY THE SEARCH VARIABLE AND THE RUN IT THROUGH THE UPLOAD
                 # MODEL AND THEN RETURN THE TREES AROUND THAT AREA
                 elif search_key == 'location_name':
                     search_place = Upload.objects.filter(
                         Q(location_name__icontains=search)
                     )
+
+                    # PAGINATORS
+                    paginator = Paginator(search_place, 1)
+                    page_number = request.GET.get('page', 1)
+                    try:
+                        page_obj = paginator.page(page_number)
+                    except PageNotAnInteger:
+                        page_obj = paginator.page(1)
+                    except EmptyPage:
+                        page_obj = paginator.page(paginator.num_pages)
+
+                    context.update({
+                        'search_place': True,
+                        'search_result': page_obj,
+                        'search': str(search)
+                    })
 
                 elif search_key == 'coordinates':
                     try:
@@ -178,7 +266,22 @@ class SpecificSearch(View):
                                     item_long = float(item.longitude)
                                     if abs(lat - item_lat) <= 0.0005 and abs(long - item_long) <= 0.0015:
                                         search_cont.append(item)
-                                    context.update({'search_coord': search_cont})
+
+                                    # PAGINATORS
+                                    paginator = Paginator(search_cont, 1)
+                                    page_number = request.GET.get('page', 1)
+                                    try:
+                                        page_obj = paginator.page(page_number)
+                                    except PageNotAnInteger:
+                                        page_obj = paginator.page(1)
+                                    except EmptyPage:
+                                        page_obj = paginator.page(paginator.num_pages)
+
+                                    context.update({
+                                        'search_coord': True,
+                                        'search_result': page_obj,
+                                        'search': str(search)
+                                    })
                                 except:
                                     pass
                     except:
@@ -189,8 +292,7 @@ class SpecificSearch(View):
                 if not search_tree and not search_place and not search_cont:
                     context.update({'search_error': 'There are no suggestions'})
                 else:
-                    context.update({'search_tree': search_tree})
-                    context.update({'search_place': search_place})
+                    pass
 
         return render(request, self.template_name, context)
 
@@ -247,7 +349,6 @@ class TreeLocationDetails(View):
     template_name = 'home/tree_location_details.html'
 
     def get(self, request, pk):
-
         result = Upload.objects.get(id=pk)
         location_scientific_name = result.tree_name
         tree_info = Tree.objects.get(scientific_name=location_scientific_name)
