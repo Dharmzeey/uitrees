@@ -1,0 +1,296 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+/* I AM USING A MOBILE FIRST APPROACH */
+/* // starts the comment for styling another page */
+/* || starts the comments for sections of pages */
+
+:root {
+  --light-color: #fff;
+  --light-color-alt: #afb6cd;
+  --primary-background-color: #131417;
+  --secondary-background-color: #252830;
+  --hover-light-color: var(--light-color);
+  --hover-dark-color: var(--primary-background-color);
+  --gradient-color: linear-gradient(
+      115deg,#4fcf70,#fad648,#a767e5,#12bcfe,#44ce7b);
+  --transparent-light-color: rgba(255,255,255,.05);
+  --transparent-dark-color: rgba(0,0,0,.75);
+  --font-family: 'Poppins', sans-serif;
+  --font-size-xxsm: 1.0rem;
+  --font-size-xsm: 1.2rem;
+  --font-size-sm: 1.6rem;
+  --font-size-md: 2.4rem;
+  --font-size-lg: 3rem;
+  --font-size-xl: 4rem;
+  --gap: 1rem;
+  --margin-sm: 2rem;
+  --margin-md: 3rem;
+  --margin-lg: 5rem;
+  --item-min-height-sm: 20rem;
+  --item-min-height-md: 30rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* || BASE STYLES */
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  color: var(--light-color-alt);
+  background-color: var(--primary-background-color);
+  letter-spacing: 1px;
+  padding: 5px;
+  margin-left: 0.1rem;
+  transition: background-color .35s ease-in-out, color .3s ease-in-out;
+}
+
+/* || GENERAL STYLES */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+input, button {
+  font: inherit;
+  color: inherit;
+  padding: 1.5rem;
+  border: 1px solid var(--transparent-light-color);
+  background-color: transparent;
+}
+
+button {
+  width: 8rem;
+  background-color: var(--secondary-background-color);
+}
+
+input {
+  margin: 10px 0px;
+  width: 70%;
+}
+
+i {
+  font-size: var(--font-size-md);
+}
+
+li {
+  list-style-position: inside;
+  list-style-type: none;
+}
+
+/* Theme color change */
+body.light-theme{
+  --light-color: #3d3d3d;
+  --light-color-alt: rgba(0,0,0,.6);
+  --primary-background-color: #fff;
+  --secondary-background-color: #f1f1f1;
+  --hover-light-color: #fff;
+  --transparent-dark-color: var(--secondary-background-color);
+  --transparent-light-color: rgba(0,0,0,.1);
+}
+
+#theme-toggle-btn {
+  padding: 0.1rem;
+  border: none;
+}
+
+.moon-icon {
+  display: none;
+}
+
+.light-theme .sun-icon {
+  display: none;
+}
+
+.light-theme .moon-icon {
+  display: block;
+}
+
+
+
+/* || UTILITIES */
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.center {
+  text-align: center;
+}
+
+.container {
+  max-width: 160rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* || BASE PAGE */
+
+.header {
+  background-color: var(--secondary-background-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.heading {
+  width: 90%;
+  padding: 0.3rem;
+  margin-bottom: 1rem;
+  color: var(--light-color);
+}
+
+.menu {
+  background-color: var(--secondary-background-color);
+  position: absolute;
+  top: 7.5rem;
+  right: 1.5rem;
+  width: 23rem;
+  padding: 1.5rem;
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity .25s ease-in;
+}
+
+.menu > ul {
+  flex-direction: column;
+  align-items: center;
+  line-height: 4rem;
+}
+
+.menu.activated {
+  box-shadow: 1px 1px 1rem var(--transparent-light-color);
+  opacity: 1;
+  transform: scale(1);
+}
+
+#menu-toggle-icon {
+  display: block;
+  z-index: 10;
+  position: absolute;
+  right: 1px;
+  padding: 0.5rem;
+  width: 4rem;
+  border: none;
+}
+
+.close-menu-icon {
+  display: none;
+}
+
+.menu-toggle-icon.activated .open-menu-icon{
+  display: none;
+}
+
+.menu-toggle-icon.activated .close-menu-icon{
+  display: block;
+}
+
+#section-count {
+  font-size: var(--font-size-xsm);
+}
+
+/* || PAGE CONTENT FROM BASE PAGE */
+.page-content {
+  margin-top: 7.4rem;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.base-block-content {
+  margin-bottom: var(--margin-lg);
+  min-height: 85vh;
+}
+
+/* //  THIS IS WHERE THE HOME.HTML PAGE IS STYLED AND ALSO FOR SPECIFIC SEARCH.HTML*/
+.search-result {
+  min-height: 60vh;
+}
+
+.search-result ul {
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.result-counter {
+  font-size: var(--font-size-xsm);
+}
+
+.pagination {
+  border: 1px solid var(--transparent-light-color);
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.paginator li {
+  padding: 1rem 1.2rem;
+}
+
+.active-page {
+  background-color: var(--secondary-background-color);
+}
+
+/* // SPECIFIC SEARCH */
+.search-options {
+  flex-direction: column;
+  gap: var(--gap);
+  color: var(--light-color);
+}
+
+footer {
+  margin-top: 10rem;
+}
+
+/* // TREE DETAILS AND LOCATION DETAILS.HTML */
+.places-found {
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.caption {
+  font-size: var(--font-size-xxsm);
+}
+
+.tree-details {
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+button.read-more {
+  width: 10rem;
+  padding: 0.7rem;
+  margin: 10px 0;
+  border-radius: 4px;
+  box-shadow: 2px 2px 2px var(--secondary-background-color);
+  color: var(--light-color);
+  font-size: var(--font-size-xsm);
+}
+
+button.read-more:hover {
+  transform: translateY(-2px);
+  transition: transform .25s ease-in;
+}
+
+#time-created-updated {
+  font-size: var(--font-size-xxsm);
+  margin-top: var(--margin-lg);
+}
+
+/* // TREE PICTURE.HTML */
+.tree-picture-info {
+  font-size: var(--font-size-xsm);
+}

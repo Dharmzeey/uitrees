@@ -3,63 +3,71 @@
 {% block content %}
 
 <div class="form-container">
-        <form action="" method="">
-        <input name="q" type="text" placeholder="Input Your Search"/>
-    </form>
+  <form action="" method="">
+    <input name="q" type="text" placeholder="Input Your Search"/>
+  </form>
 
     
 </div>
+  <p class="font">Or do you want to <a href="{% url 'home:specific-search' 1 %}">Specify Search ?</a></p> <br> 
+<div>
+  {% if search_result.paginator.count %} 
+  <div class="result-counter">{{ search_result.paginator.count }} Result{{ search_result.paginator.count|pluralize }} Available</div> 
+  {% endif %}
+</div> 
 
-    <p class="font">Or do you want to <b><a href="{% url 'home:specific-search' 1 %}">Specify Search</a> </b> ? </p>
-
-
-<!--<div> <b>{{ total_len }} Result{{ total_len|pluralize }} Available</b> </div>-->
-<div> <b>{{ search_result.paginator.count }} Result{{ search_result.paginator.count|pluralize }} Available</b> </div>
-
-
-
-
-{% for tree in search_result %}
-    <a href="{% url 'home:tree-location-details' tree.id%}"><li>{{ tree }}</li></a>
-{% endfor %}
+<div class="search-result">
+  <ul class="flex">
+    {% for tree in search_result %}
+      {% if tree.scientific_name %}
+        <li><a href="{% url 'home:tree-details' tree.id%}">{{ tree }}</a></li>
+      {% else %}
+        <li><a href="{% url 'home:tree-location-details' tree.id%}">{{ tree }}</a></li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
 
 <!--PAGINATOR CONTROL STARTS HERE-->
-{% if search_result.has_other_pages %}
-  <ul class="pagination">
-    {% if search_result.has_previous %}
-      <li class="page-item" >
-          <a class="page-link" href="?{% if search %}q={{ search }}&{% endif %}page={{ 1 }}">First &laquo;</a>
-      </li>
-      <li class="page-item" >
+<div class="paginator">
+  {% if search_result.has_other_pages %}
+    <ul class="pagination flex">
+      {% if search_result.has_previous %}
+        <li class="page-item" >
+          <a class="page-link" href="?{% if search %}q={{ search }}&{% endif %}page={{ 1 }}">First</a>
+        </li>
+        <li class="page-item" >
           <a class="page-link" href="?{% if search %}q={{ search }}&{% endif %}page={{ search_result.previous_page_number }}">&laquo;</a>
-      </li>
-    {% else %}
-      <li class="disabled"><span>&laquo;</span></li>
-    {% endif %}
+        </li>
+      {% else %}
+        <li class="disabled"><span>&laquo;</span></li>
+      {% endif %}
 
-{% for i in search_result.paginator.page_range %}
+    {% for i in search_result.paginator.page_range %}
       {% if search_result.number == i %}
         <li class="page-item active-page"><a class="page-link">{{ i }}</a></li>
       {% else %}
-    <li class="page-item" >
-        <a class="page-link" href="?{% if search %}q={{ search }}&{% endif %}page={{ i }}" >{{ i }}</a></li>
+        <li class="page-item" >
+          <a class="page-link" href="?{% if search %}q={{ search }}&{% endif %}page={{ i }}" >{{ i }}</a></li>
       {% endif %}
-{% endfor %}
+    {% endfor %}
 
 
-{% if search_result.has_next %}
+    {% if search_result.has_next %}
       <li class="page-item" >
           <a class="page-link" href="?{% if search %}q={{ search }}&{% endif %}page={{ search_result.next_page_number }}">&raquo;</a>
       </li>
       <li class="page-item" >
-          <a class="page-link" href="?{% if search %}q={{ search }}&{% endif %}page={{ search_result.paginator.num_pages }}">Last &raquo;</a>
+          <a class="page-link" href="?{% if search %}q={{ search }}&{% endif %}page={{ search_result.paginator.num_pages }}">Last</a>
       </li>
-    {% else %}
+      {% else %}
       <li class="disabled"><span>&raquo;</span></li>
     {% endif %}
-  </ul>
+    </ul>
 
-{% endif %}
+  {% endif %}
+
+</div>
 <!--PAGINATOR CONTROL ENDS HERE-->
 
 {% endblock  %}

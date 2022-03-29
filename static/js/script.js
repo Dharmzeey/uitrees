@@ -1,22 +1,44 @@
 // THIS WILL CONTROL OPEN AND CLOSE OF HAMBURGER MENU
-const open = document.querySelector("#open-menu");
-const close = document.querySelector("#close-menu");
+// const open = document.querySelector("#open-menu");
+// const close = document.querySelector("#close-menu");
 const toggleMenu = document.querySelector("#menu-toggle-icon");
+const openAside = document.querySelector('#aside');
 
 function toggleFunction () {
-  toggleMenu.classList.toggle("activated")
-  console.log('ssss');
+  toggleMenu.classList.toggle("activated");
+  openAside.classList.toggle("activated");
 }
 
-toggleMenu.addEventListener('click', toggleFunction)
+toggleMenu.addEventListener('click', toggleFunction);
+
+// SWITCH THEME AND ADDING TO LOCAL STORAGE
+const body = document.body;
+const themeToggleBtn = document.querySelector("#theme-toggle-btn");
+const currentTheme = localStorage.getItem("currentTheme");
+
+if (currentTheme) {
+  body.classList.add("light-theme");
+}
+themeToggleBtn.addEventListener('click', () => {
+  body.classList.toggle("light-theme");
+
+  if (body.classList.contains("light-theme")) {
+    localStorage.setItem("currentTheme", "themeActive");
+  } else {
+    localStorage.removeItem("currentTheme")
+  }
+})
 
 
 // THIS SCRIPT IS FOR (SPECIFIC SEARCH.HTML) THAT DYNAMICALLY EFFECT THE INPUT BEHAVIOR BASED ON THE 
 // "SEARCH TYPE ACTION" 
+var dynamic_input = document.getElementById("dynamic");
+const flag = document.getElementById("flag");
+var result = 'Search by {{ search_item.name }}';
 
 dynamic_input.placeholder = result
 if (result == 'Search by Location Name') {
-    flag.style.visibility = 'visible'
+    flag.style.display = 'block'
 }
 
 if (result == 'Search by Coordinates') {
@@ -68,5 +90,4 @@ x.value = position.coords.latitude +
 y.value = position.coords.latitude;
 z.value = position.coords.longitude;
 }
-
 

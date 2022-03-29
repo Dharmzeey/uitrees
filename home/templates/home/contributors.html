@@ -15,34 +15,58 @@
     </div>
     <div> {{ contributor.profile }} </div>
 
+    <!-- <div class="social">
+      <ul class="list social-media">
+        <li class="list-item">
+            <a href="#" class="list-link"><i class="ri-pinterest-line"></i></a>
+        </li>
+    </ul>
+    </div> -->
+
     <div class="social">
-      {% if contributor.mail %}
-      <a target="_blank" href="mailto:{{ contribitor.mail }}"><img width="" height="" src="{% static 'images/icons/email.svg' %}" alt="email"></a>
-      {% endif %}
-  
-      {% if contributor.tel %}
-      <a target="_blank" href="tel:{{ contributor.tel }}"><img width="" height="" src="{% static 'images/icons/phone.svg' %}" alt="tel"></a>
-      {% endif %}
-  
-      {% if contributor.website %}
-      <a target="_blank" href="{{ contributor.website }}"><img width="" height="" src="{% static 'images/icons/globe.svg' %}" alt="website"></a>
-      {% endif %}
-  
-      {% if contributor.git_link %}
-      <a target="_blank" href="{{ contributor.git_link }}"><img width="" height="" src="{% static 'images/icons/github.svg' %}" alt="github"></a>
-      {% endif %}
-  
-      {% if contributor.tw_link %}
-      <a target="_blank" href="{{ contributor.tw_link }}"><img width="" height="" src="{% static 'images/icons/twitter.svg' %}" alt="github"></a>
-      {% endif %}
-  
-      {% if contributor.ig_link %}
-      <a target="_blank" href="{{ contributor.ig_link }}"><img width="" height="" src="{% static 'images/icons/instagram.svg' %}" alt="github"></a>
-      {% endif %}
-  
-      {% if contributor.fb_link %}
-      <a target="_blank" href="{{ contributor.fb_link }}"><img width="" height="" src="{% static 'images/icons/facebook.svg' %}" alt="github"></a>
-      {% endif %}
+      <ul>
+        {% if contributor.mail %}
+        <li class="list-item">
+          <a target="_blank" class="list-link" href="mailto:{{ contributor.mail }}"><i class="ri-mail-unread-line"></i></a>
+        </li>
+        {% endif %}
+
+        {% if contributor.tel %}
+        <li class="list-item">
+          <a target="_blank" class="list-link" href="tel:{{ contributor.tel }}"><i class="ri-cellphone-line"></i></a>
+        </li>
+        {% endif %}
+
+        {% if contributor.website %}
+        <li class="list-item">
+          <a target="_blank" class="list-link" href="{{ contributor.website }}"><i class="ri-globe-line"></i></a>
+        </li>
+        {% endif %}
+
+        {% if contributor.git_link %}
+        <li class="list-item">
+          <a target="_blank" class="list-link" href="{{ contributor.git_link }}"><i class="ri-github-line"></i></a>
+        </li>
+        {% endif %}
+
+        {% if contributor.tw_link %}
+        <li class="list-item">
+          <a target="_blank" class="list-link" href="{{ contributor.tw_link }}"><i class="ri-twitter-line"></i></a>
+        </li>
+        {% endif %}
+    
+        {% if contributor.ig_link %}
+        <li class="list-item">
+          <a target="_blank" class="list-link" href="{{ contributor.ig_link }}"><i class="ri-instagram-line"></i></a>
+        </li>
+        {% endif %}
+
+        {% if contributor.fblink %}
+        <li class="list-item">
+          <a target="_blank" class="list-link" href="{{ contributor.fb_link }}"><i class="ri-facebook-circle-line"></i></a>
+        </li>
+        {% endif %}
+      </ul>
     </div>
       </div>
 

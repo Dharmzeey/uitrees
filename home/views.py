@@ -16,6 +16,8 @@ from upload.models import Upload
 from .models import Contributor
 from .forms import ProfileFrom
 
+from utilities.sequence_sort import mysorttree, mysortplace
+
 
 # Create your views here.
 
@@ -60,7 +62,14 @@ class HomeView(View):
             # THEN AFTER IT PROCESS THE NORMAL VIEWS FOR THE SEARCH AND ALL
 
         # tree_list = Tree.objects.all()
+        context = {}
         search = request.GET.get('q', '')
+
+        # THIS CHECK IF THE SEARCH IS AN EMPTY STRING
+        # IF SO IT WILL RETURN THE PAGE LIKE THAT, BECAUSE WE DO NOT WANT TO RETURN ALL THE DATA IN THE DATABASE
+        # IF WE QUERY WITH AN EMPTY STRING
+        if search == '':
+            return render(request, self.template_name, context)
 
         search_tree_tree = Tree.objects.filter(
             Q(scientific_name__icontains=search) |
@@ -88,8 +97,16 @@ class HomeView(View):
         # total_len = set_tree_count + search_place_count
 
         # PAGINATORS
-        search_tree_place = list(search_tree) + list(search_place)
-        paginator = Paginator(search_tree_place, 3)
+        # THIS BELOW SORT THE DISORGANIZED SET PASSED FROM MODEL WITH A FUNCTION IN UTILITIES
+        # IT FIRST CONVERTS IT INTO LIST AND THEN PERFORM THE SORT FUNCTION AND THE PASS IT TO THE PAGINATOR
+        list_search_tree = list(search_tree)
+        list_search_tree.sort(key=mysorttree)
+        list_search_place = list(search_place)
+        list_search_place.sort(key=mysortplace)
+
+        search_tree_place = list_search_tree + list_search_place
+
+        paginator = Paginator(search_tree_place, 30)
         page_number = request.GET.get('page', 1)
         try:
             page_obj = paginator.page(page_number)
@@ -124,7 +141,14 @@ class SpecificSearch(View):
             if pk == search_item.id:
                 search = request.GET.get('q', '')
 
-                context.update({'search': search})
+                # context.update({'search': search})
+                context.update({'search_item': search_item})
+
+                # THIS CHECK IF THE SEARCH IS AN EMPTY STRING
+                # IF SO IT WILL RETURN THE PAGE LIKE THAT, BECAUSE WE DO NOT WANT TO RETURN ALL THE DATA IN THE DATABASE
+                # IF WE QUERY WITH AN EMPTY STRING
+                if search == '':
+                    return render(request, self.template_name, context)
 
                 search_key = Search.objects.get(id=pk).search_by
                 # THIS WILL SET TO NULL FIRST THEN RE-ASSIGN THEN LATER IF THE "IF CONDITION" IS MET
@@ -152,7 +176,9 @@ class SpecificSearch(View):
 
                     # PAGINATORS
                     search_tree = list(search_tree)
-                    paginator = Paginator(search_tree, 1)
+                    search_tree.sort(key=mysorttree)
+
+                    paginator = Paginator(search_tree, 30)
                     page_number = request.GET.get('page', 1)
                     try:
                         page_obj = paginator.page(page_number)
@@ -182,7 +208,10 @@ class SpecificSearch(View):
                                 search_tree.add(x)
 
                     # PAGINATORS
-                    paginator = Paginator(list(search_tree), 3)
+                    search_tree = list(search_tree)
+                    search_tree.sort(key=mysorttree)
+
+                    paginator = Paginator(search_tree, 30)
                     page_number = request.GET.get('page', 1)
                     try:
                         page_obj = paginator.page(page_number)
@@ -214,7 +243,9 @@ class SpecificSearch(View):
 
                     # PAGINATORS
                     search_tree = list(search_tree)
-                    paginator = Paginator(search_tree, 1)
+                    search_tree.sort(key=mysorttree)
+
+                    paginator = Paginator(search_tree, 30)
                     page_number = request.GET.get('page', 1)
                     try:
                         page_obj = paginator.page(page_number)
@@ -237,7 +268,7 @@ class SpecificSearch(View):
                     )
 
                     # PAGINATORS
-                    paginator = Paginator(search_place, 1)
+                    paginator = Paginator(search_place, 30)
                     page_number = request.GET.get('page', 1)
                     try:
                         page_obj = paginator.page(page_number)
@@ -268,7 +299,7 @@ class SpecificSearch(View):
                                         search_cont.append(item)
 
                                     # PAGINATORS
-                                    paginator = Paginator(search_cont, 1)
+                                    paginator = Paginator(search_cont, 3)
                                     page_number = request.GET.get('page', 1)
                                     try:
                                         page_obj = paginator.page(page_number)
@@ -286,7 +317,6 @@ class SpecificSearch(View):
                                     pass
                     except:
                         pass
-                context.update({'search_item': search_item})
 
                 # THIS CHECKS IF THE QUERYSET OF THE TREES IS EMPTY OR NOT SO AS TO KNOW WHAT TO TEMPLATE OUT
                 if not search_tree and not search_place and not search_cont:

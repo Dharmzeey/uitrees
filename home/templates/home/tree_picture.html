@@ -2,33 +2,33 @@
 {% load static %}
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="{% static 'styles/style.css' %}" />
-    <link rel="shortcut icon" href="{% static 'images/icons/icon.jpg' %}" type="image/jpg"/>
-    <title>TREES IN UI</title>
+  <meta charset="UTF-8">
+  <!-- <link rel="stylesheet" href="{% static 'styles/style.css' %}" /> -->
+  <link rel="stylesheet" href="{% static 'styles/style2.css' %}" />
+  <link rel="shortcut icon" href="{% static 'images/icons/icon.jpg' %}" type="image/jpg"/>
+  <title>TREES IN UI</title>
 </head>
 <body>
-<h1 style="text-align: center;">
-
-</h1>
-
 {% if coordinate %}
 <p>
-    <!-- Coord: {{ coordinate }} -->
+  <!-- Coord: {{ coordinate }} -->
 <span>Check Location on <a href="http://maps.google.com?q={{ coordinate }}" target="_blank">Google Maps</a> </span>
 </p>
 {% endif %}
 
 <div id="img-pic-container">
-    {% for picture in pictures %}
-    {% if picture %}
-    <div> <img height="400" src="{{ picture.url }}" alt="{{ genus_specie }} Tree at University of Ibadan"> </div>
-    {% endif %}
-    {% endfor %}
+  {% for picture in pictures %}
+  {% if picture %}
+  <div> <img height="400" src="{{ picture.url }}" alt="{{ genus_specie }} Tree at University of Ibadan"> </div>
+  {% endif %}
+  {% endfor %}
 </div>
-<div>Tree Health Status: {{ health }}</div>
-<div>Location Description: {{ description }}</div>
-<div> Uploaded by:<a href="{% url 'home:contributors' %}#{{ uploader }}" target="_blank">  {{ uploader }} </a>
+
+<div class="tree-picture-info">
+  <div>Tree Health Status: {{ health }}</div>
+  <div>Location Description: {{ description }}</div>
+  <div> Uploaded by:<a href="{% url 'home:contributors' %}#{{ uploader }}" target="_blank">  {{ uploader }} </a>
+  </div>
 </div>
 
 </body>

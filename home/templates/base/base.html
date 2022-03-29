@@ -1,128 +1,119 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Trees Documentation In University of Ibadan">
-    <meta name="description" content="This documentation is intended to give as many as possible trees in the University of Ibadan, Ibadan, Oyo State. The trees, its local name, scientific name, common names and where it is located in the university are available. Also the location and the coordinates of each trees are also available.">
-    <meta name="author" content="Adam Olanrewaju, Dharmzeey">
-    <meta name="keywords" content="Trees, Tree Species, Plants, Pharmacological, Pharmacological Importances, Pharmacological Uses, Tree uses">
-    <meta name="keywords" content="Class, Order, Family, Genus, Species, Authority, Tree Class, Tree Order, Tree Family, Tree Genus, Tree Species, Tree Authority">
-    <meta name="keywords" content=" University, University of Ibadan, U I, UI, Ibadan, Tree Club, Club, RNR, RENARSA, Renewable Natural Resources">
+  <!DOCTYPE html>
+  {% load static %}
+  <html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Trees Documentation In University of Ibadan">
+  <meta name="description" content="This documentation is intended to give as many as possible trees in the University of Ibadan, Ibadan, Oyo State. The trees, its local name, scientific name, common names and where it is located in the university are available. Also the location and the coordinates of each trees are also available.">
+  <meta name="author" content="Adam Olanrewaju, Dharmzeey">
+  <meta name="keywords" content="Trees, Tree Species, Plants, Pharmacological, Pharmacological Importances, Pharmacological Uses, Tree uses">
+  <meta name="keywords" content="Class, Order, Family, Genus, Species, Authority, Tree Class, Tree Order, Tree Family, Tree Genus, Tree Species, Tree Authority">
+  <meta name="keywords" content=" University, University of Ibadan, U I, UI, Ibadan, Tree Club, Club, RNR, RENARSA, Renewable Natural Resources">
 
-    <meta name="application-name" content="Trees in UI">
-    <meta name="apple-mobile-web-app-title" content="Trees in UI">
+  <meta name="application-name" content="Trees in UI">
+  <meta name="apple-mobile-web-app-title" content="Trees in UI">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet"> <!-- This is the second icon link -->
-    <link rel="stylesheet" href="{% static 'styles/style.css' %}" />
-    <link rel="stylesheet" href="{% static 'styles/hamburger.css' %}" media="only screen and (max-width: 800px)"/>
-    <link rel="shortcut icon" href="{% static 'images/icons/icon_tree.png' %}" type="image/jpg"/>
-    <title>TREES IN UI</title>
-</head>
-<body>
-    <aside id="aside">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous"> -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet"> <!-- This is the second icon link -->
+  <!-- <link rel="stylesheet" href="{% static 'styles/style.css' %}" /> -->
+  <link rel="stylesheet" href="{% static 'styles/style2.css' %}" />
+  <!-- <link rel="stylesheet" href="{% static 'styles/hamburger.css' %}" media="only screen and (max-width: 800px)"/> -->
+  <link rel="shortcut icon" href="{% static 'images/icons/icon_tree.png' %}" type="image/jpg"/>
+  <title>TREES IN UI</title>
+  </head>
+  <body>
+  <header class="header">
+    <div class="container">
+      <nav>
+        <div class="flex">
+          <b class="center heading" style="opacity: 1;">TREES DOCUMENTATION IN UI</b>
+          <button class="btn place-items-center screen-lg-hidden menu-toggle-icon" id="menu-toggle-icon">
+            <i class="ri-menu-3-line open-menu-icon toggle" id="open-menu"></i>
+            <i class="ri-close-line close-menu-icon toggle" id="close-menu"></i>
+          </button>
+        </div>
+          <div class="flex">
+            <a href="{{ request.META.HTTP_REFERER }}">BACK</a>
+            <a href="{% url 'home:home' %}">HOME</a>
+          </div>
+      </nav>
+
+      <aside id="aside" class="menu">
         {% if request.user.contributor.id %}
         <div>
-             <a href="{% url 'home:profile' request.user.contributor.id %}">
-                 <img src="{{ request.user.contributor.picture.url }}" alt="profile">
-             </a>
+              <a href="{% url 'home:profile' request.user.contributor.id %}">
+                  <img src="{{ request.user.contributor.picture.url }}" alt="profile">
+              </a>
                   <p>Profile</p>
         </div>
         {% endif %}
-        <ul>
-            <li><a href="{% url 'home:acknowledgement' %}">Acknowledgement</a></li>
-            <li><a href="{% url 'home:contributors' %}">Contributors</a></li>
-            <li><a href="{% url 'special:special' %}">Special Places</a></li>
-            <li><a href="{% url 'home:how-to-use' %}">How to use</a></li>
-            <li><a href="{% url 'treerequest:treerequest' %}">Request</a></li>
-            <li><a href="{% url 'home:about' %}">About</a></li>
+
+        <ul class="flex">
+          <button class="btn place-items-center" id="theme-toggle-btn">
+            <i class="ri-sun-line sun-icon"></i>
+            <i class="ri-moon-line moon-icon"></i>
+          </button>
+      
+          <li><a href="{% url 'home:acknowledgement' %}">Acknowledgement</a></li>
+          <li><a href="{% url 'home:contributors' %}">Contributors</a></li>
+          <li><a href="{% url 'special:special' %}">Special Places</a></li>
+          <li><a href="{% url 'home:how-to-use' %}">How to use</a></li>
+          <li><a href="{% url 'treerequest:treerequest' %}">Request</a></li>
+          <li><a href="{% url 'home:about' %}">About</a></li>
         </ul>
-    </aside>
-    <div>
-        <section id="section-count">
-            <!-- <span>Family</span>
-            <span>Specie</span> -->
-            <div>
-                <small>
-                <span>Total Inventory as at: </span>
-                <strong id="inventory">{{ request.session.time }}</strong>
-                <span>are:</span>
-                <strong>{{ request.session.counter }}</strong>
-                <span>Trees</span>
-                </small>
-            </div>
-            <div></div>
-        </section>
-        <nav>
-            <div id="doc-ham">
-                <!-- Trees Documentation in UI -->
-                <span style="opacity: 0;">TREES DOCUMENTATION IN UI</span>
-                <!-- THIS RIGHT HERE WILL BE REDERED AS A HAMBURGER MENU ON MOBILE(MAX-WIDTH:800PX) -->
-                <div id="ham-container">
-                    <button class="btn place-items-center screen-lg-hidden menu-toggle-icon" id="menu-toggle-icon">
-                    <i class="ri-menu-3-line open-menu-icon toggle" id="open-menu"></i>
-                    <i class="ri-close-line close-menu-icon toggle" id="close-menu"></i>
-                    </button>
-                    <div id="ham-item" class="transist">
-                        {% if request.user.contributor.id %}
-                    <div>
-                         <a href="{% url 'home:profile' request.user.contributor.id %}">
-                             <img src="{{ request.user.contributor.picture.url }}" alt="profile">
-                         </a>
-                              <p>Profile</p>
-                    </div>
-                        {% endif %}
-                        <ul>
-                        <li><a href="{% url 'home:acknowledgement' %}">Acknowledgement</a></li>
-                        <li><a href="{% url 'home:contributors' %}">Contributors</a></li>
-                        <li><a href="{% url 'special:special' %}">Special Places</a></li>   
-                        <li><a href="{% url 'home:how-to-use' %}">How to use</a></li>
-                        <li><a href="{% url 'treerequest:treerequest' %}">Request</a></li>
-                        <li><a href="{% url 'home:about' %}">About</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <a href="{{ request.META.HTTP_REFERER }}">BACK</a>
-                <a href="{% url 'home:home' %}">HOME</a>
-            </div>
-        </nav>
-
-
-
-    {% block content %}
-
-    {% endblock %}
+      </aside>
     </div>
+  </header>
 
+  <div class="flex page-content">
+    <div>
+      <div class="base-block-content">
+        {% block content %}
 
-
-    <footer id="base-footer">
-        <div>
-            <div class="center"> UNIVERSITY OF IBADAN
-                <div>
-                    <img width="50" height="" src="{% static 'images/icons/UI_logo.png' %}" alt="UI">
-                </div>
-            </div>
-            <div class="center">RENEWABLE NATURAL RESOURCES
-                <div>
-                    <img style="margin-top: -15px; " width="85" height="" src="{% static 'images/icons/RNR_logo.png' %}" alt="UI">
-                </div>
-            </div>
-            <div class="center">TREE CLUB
-                <div>
-                    <img style="margin-top: -5px; "  width="" height="80" src="{% static 'images/icons/TREE_CLUB.png' %}" alt="UI">
-                </div>
+        {% endblock %}
+    </div>
+  </div>
+  
+  
+  
+  <footer id="base-footer">
+    <div>
+        <div class="center"> UNIVERSITY OF IBADAN
+            <div>
+                <img width="50" height="" src="{% static 'images/icons/UI_logo.png' %}" alt="UI">
             </div>
         </div>
-    </footer>
-    <script type="text/javascript" src="{% static 'js/Dharmzeey.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+        <div class="center">RENEWABLE NATURAL RESOURCES
+            <div>
+                <img style="margin-top: -15px; " width="85" height="" src="{% static 'images/icons/RNR_logo.png' %}" alt="UI">
+            </div>
+        </div>
+        <div class="center">TREE CLUB
+            <div>
+                <img style="margin-top: -5px; "  width="" height="80" src="{% static 'images/icons/TREE_CLUB.png' %}" alt="UI">
+            </div>
+        </div>
+    </div>
+
+    <section id="section-count">
+      <div>
+          <small>
+          <span>Total Inventory as at: </span>
+          <span id="inventory">{{ request.session.time }}</span>
+          <span>are:</span>
+          <span>{{ request.session.counter }}</span>
+          <span>Trees</span>
+          </small>
+      </div>
+    </section>
+  </footer>
+    </div>
+  
+  <script type="text/javascript" src="{% static 'js/Dharmzeey.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
 
 
-</body>
-</html>
+  </body>
+  </html>

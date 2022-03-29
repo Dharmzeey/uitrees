@@ -3,77 +3,71 @@
 {% block content %}
 
 <div class="flex-container">
-    <div class="detail-container" id="detail-container" style="display: block;">
-        <div>
-            <div id="pic_cont" style="display: none;">
-                <p id="picture_title" style="font-size: 2rem;"></p>
-                <iframe width="450" height="550" name="my_frame" id="my_frame" frameborder="0"></iframe>
-            </div>
-            
-            
-            <div class="font">
-                <h1 class="heading">{{ tree_info.scientific_name }}</h1>
-            
-                <p> Common Name: {{ tree_info.common_name }}</p>
-            
-                <p> Local Name: {{ tree_info.local_name }}</p>
-            
-                <p> Authority: {{ tree_info.authority }}</p>
-            
-                <p> Order: {{ tree_info.tree_order }}</p>
-            
-                <p> Family: {{ tree_info.tree_family }}</p>
-            
-                <p> Conservation Status: {{ tree_info.conservation_status }}</p>
-            
-                <p> Specie Status: {{ tree_info.specie_status }}</p>
-            
-                <p> Tree Description: {{ tree_info.tree_description }}</p>
-            
-                   <p class="font"> Pharmacological Details:
-        <span>
-             {% if tree_info.pharmacological_details %}
-             <a href="{% url 'home:pharmacology' tree_info.id%}" >Read Up</a>
-             {% endif %}
-
-        </span>
-    </p>
-
-    <p>
-        <span>
-            {% if tree_info.reference %}
-            <p class="font"> More About {{ tree_info }} ??
-            <a href="{{ tree_info.reference }}" target="_blank" >Read Up</a>
-            {% endif %}
-
-        </span>
-    </p>
-            </div>
-        </div>
-        
-        <div class="places-found font">    
-            <h1 class="heading">Places Found</h1>
-        
-            <ul id="places-found">
-            {% for location in tree_location %}
-            
-                <!-- <li> -->
-                    <a class="block" href="{% url 'home:tree-picture' location.id %}" target="my_frame" onclick="displayIframe(this)" ><li>{{ location }}</li></a>
-                <!-- </li> -->
-                
-            
-            {% endfor %}
-            </ul>
-        </div>
-    </div>
-
+  <div class="detail-container" id="detail-container" style="display: block;">
+    <div>
+      <div id="pic_cont" style="display: none;">
+          <p id="picture_title" style="font-size: 2rem;"></p>
+          <iframe width="450" height="550" name="my_frame" id="my_frame" frameborder="0"></iframe>
+      </div>
+      
+      <div class="flex tree-details">
+        <p class="heading">{{ tree_info.scientific_name }}</p>
     
-    <footer style="position: relative;">
-        <div style="position: fixed; bottom: 1%; right: 10px;">
-            <p>This page was created on: {{ tree_info.created }}</p>
-            <p style="text-align:center;"> and last updated on: {{ tree_info.last_updated }}</p>
-        </div>
-    </footer>
+        <p> Common Name: {{ tree_info.common_name }}</p>
+    
+        <p> Local Name: {{ tree_info.local_name }}</p>
+    
+        <p> Authority: {{ tree_info.authority }}</p>
+    
+        <p> Order: {{ tree_info.tree_order }}</p>
+    
+        <p> Family: {{ tree_info.tree_family }}</p>
+    
+        <p> Conservation Status: {{ tree_info.conservation_status }}</p>
+    
+        <p> Specie Status: {{ tree_info.specie_status }}</p>
+    
+        <p> Tree Description: {{ tree_info.tree_description }}</p>
+
+        {% if tree_info.pharmacological_details %}
+        <p class="font"> Pharmacological Details:
+          <span>
+            <button class="read-more">
+              <a href="{% url 'home:pharmacology' tree_info.id %}" >Read Up</a>
+            </button>
+          </span>
+        </p>
+        {% endif %}
+  
+        <div>
+          <span>
+            {% if tree_info.reference %}
+            <div class="font"> More About {{ tree_info }} ??:
+            <button class="read-more">
+              <a href="{{ tree_info.reference }}" >Read Up</a> </p>
+            </button>
+            {% endif %}
+          </span>
+        </p>
+
+      </div>
+    </div>
+      
+    <div>    
+      <div class="heading">Places Found</div>
+      <ul class="places-found flex">
+      {% for location in tree_location %}
+        <li>
+          <a class="block" href="{% url 'home:tree-picture' location.id %}" target="my_frame" onclick="displayIframe(this)"> {{ location }} </a>
+        </li>
+      {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+    <div id="time-created-updated">
+        <p>This page was created on: {{ tree_info.created }} and last updated on: {{ tree_info.last_updated }}</p>
+    </div>
 </div>
 
 <script type="text/javascript" src="{% static 'js/script.js' %}"></script>

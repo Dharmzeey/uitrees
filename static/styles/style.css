@@ -59,7 +59,7 @@ body {
   display: grid;
   grid-template-columns: 2.3fr 10fr;
   overflow-x: hidden;
-  /* padding-right: 2rem; */
+
 }
 
 .card {
