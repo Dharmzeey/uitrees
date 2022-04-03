@@ -457,3 +457,9 @@ button.read-more:hover {
   }
 
 }
+
+@media screen and (max-width:1050px) {
+  .base-block-content {
+    margin-left: 22%;
+  }
+}
