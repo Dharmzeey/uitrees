@@ -7,7 +7,7 @@
     <div>
       <div id="pic_cont" style="display: none;">
           <p id="picture_title" style="font-size: 2rem;"></p>
-          <iframe width="450" height="550" name="my_frame" id="my_frame" frameborder="0"></iframe>
+          <iframe name="my_frame" id="my_frame" frameborder="0"></iframe>
       </div>
       
       <div class="flex tree-details">
@@ -52,57 +52,59 @@
       </div>
     </div>
       
-    <div class="search-result">
-      <div class="heading">Places Found</div>
-      <ul class="places-found flex">
-      {% for location in tree_location %}
-        <li>
-          <a class="block" href="{% url 'home:tree-picture' location.id %}" target="my_frame" onclick="displayIframe(this)"> {{ location }} </a>
-        </li>
-      {% endfor %}
-      </ul>
-    </div>
-        <!--PAGINATOR CONTROL STARTS HERE-->
-    <div class="paginator">
-      {% if tree_location.has_other_pages %}
-        <ul class="pagination flex">
-          {% if tree_location.has_previous %}
-            <li class="page-item" >
-              <a class="page-link" href="?page={{ 1 }}">First</a>
-            </li>
-            <li class="page-item" >
-              <a class="page-link" href="?page={{ tree_location.previous_page_number }}">&laquo;</a>
-            </li>
-          {% else %}
-            <li class="disabled"><span>&laquo;</span></li>
-          {% endif %}
-
-        {% for i in tree_location.paginator.page_range %}
-          {% if tree_location.number == i %}
-            <li class="page-item active-page"><a class="page-link">{{ i }}</a></li>
-          {% else %}
-            <li class="page-item" >
-              <a class="page-link" href="?page={{ i }}" >{{ i }}</a></li>
-          {% endif %}
+    <div>
+      <div class="search-result">
+        <div class="heading">Places Found</div>
+        <ul class="places-found flex">
+        {% for location in tree_location %}
+          <li>
+            <a class="block" href="{% url 'home:tree-picture' location.id %}" target="my_frame" onclick="displayIframe(this)"> {{ location }} </a>
+          </li>
         {% endfor %}
-
-
-        {% if tree_location.has_next %}
-          <li class="page-item" >
-              <a class="page-link" href="?page={{ tree_location.next_page_number }}">&raquo;</a>
-          </li>
-          <li class="page-item" >
-              <a class="page-link" href="?page={{ tree_location.paginator.num_pages }}">Last</a>
-          </li>
-          {% else %}
-          <li class="disabled"><span>&raquo;</span></li>
-        {% endif %}
         </ul>
-
-      {% endif %}
-
+      </div>
+          <!--PAGINATOR CONTROL STARTS HERE-->
+      <div class="paginator">
+        {% if tree_location.has_other_pages %}
+          <ul class="pagination flex">
+            {% if tree_location.has_previous %}
+              <li class="page-item" >
+                <a class="page-link" href="?page={{ 1 }}">First</a>
+              </li>
+              <li class="page-item" >
+                <a class="page-link" href="?page={{ tree_location.previous_page_number }}">&laquo;</a>
+              </li>
+            {% else %}
+              <li class="disabled"><span>&laquo;</span></li>
+            {% endif %}
+  
+          {% for i in tree_location.paginator.page_range %}
+            {% if tree_location.number == i %}
+              <li class="page-item active-page"><a class="page-link">{{ i }}</a></li>
+            {% else %}
+              <li class="page-item" >
+                <a class="page-link" href="?page={{ i }}" >{{ i }}</a></li>
+            {% endif %}
+          {% endfor %}
+  
+  
+          {% if tree_location.has_next %}
+            <li class="page-item" >
+                <a class="page-link" href="?page={{ tree_location.next_page_number }}">&raquo;</a>
+            </li>
+            <li class="page-item" >
+                <a class="page-link" href="?page={{ tree_location.paginator.num_pages }}">Last</a>
+            </li>
+            {% else %}
+            <li class="disabled"><span>&raquo;</span></li>
+          {% endif %}
+          </ul>
+  
+        {% endif %}
+  
+      </div>
+      <!--PAGINATOR CONTROL ENDS HERE-->
     </div>
-    <!--PAGINATOR CONTROL ENDS HERE-->
 
   </div>
 
