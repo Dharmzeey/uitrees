@@ -63,7 +63,7 @@ img {
   max-width: 100%;
 }
 
-input, button {
+input, button, textarea, select {
   font: inherit;
   color: inherit;
   padding: 1.5rem;
@@ -74,9 +74,10 @@ input, button {
 button {
   width: 8rem;
   background-color: var(--secondary-background-color);
+  border-radius: 4px;
 }
 
-input {
+.form-container input {
   margin: 10px 0px;
   width: 70%;
 }
@@ -92,8 +93,8 @@ li {
 
 /* Theme color change */
 body.light-theme{
-  --light-color: #3d3d3d;
-  --light-color-alt: rgba(0,0,0,.6);
+  --light-color: #000000;
+  --light-color-alt: rgba(0, 0, 0, 0.823);
   --primary-background-color: #fff;
   --secondary-background-color: #f1f1f1;
   --hover-light-color: #fff;
@@ -118,8 +119,6 @@ body.light-theme{
   display: block;
 }
 
-
-
 /* || UTILITIES */
 .flex {
   display: flex;
@@ -136,6 +135,39 @@ body.light-theme{
   padding: 0 1.5rem;
 }
 
+.card {
+  background-color: var(--secondary-background-color);
+  width: 85%;
+  padding: 1rem;
+  margin: var(--margin-sm) var(--margin-sm);
+  border-radius: 4px;
+}
+
+.light-color {
+  color: var(--light-color);
+}
+
+/* || FORM STYLING */
+form table {
+  width: 95%;
+  margin: auto;
+}
+
+form td, 
+form tr {
+  font-size: var(--font-size-xsm);
+}
+
+/* #id_latitude ,
+#id_longitude,
+#id_coordinates {
+  display: none;
+} */
+
+select, input, textarea {
+  width: 90%;
+}
+
 /* || BASE PAGE */
 
 .header {
@@ -150,7 +182,7 @@ body.light-theme{
 .heading {
   width: 90%;
   padding: 0.3rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   color: var(--light-color);
 }
 
@@ -183,7 +215,7 @@ body.light-theme{
   z-index: 10;
   position: absolute;
   right: 1px;
-  padding: 0.5rem;
+  padding: 0.1rem;
   width: 4rem;
   border: none;
 }
@@ -200,13 +232,39 @@ body.light-theme{
   display: block;
 }
 
+nav {
+  padding-bottom: 0.7rem;
+}
+
+.user-pic {
+  width: 7rem;
+  height: 7rem;
+  margin: auto;
+  margin-bottom: 3rem;
+}
+
+.user-pic p {
+  text-align: center;
+}
+
+.user-pic img {
+  border-radius: 50%;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.school-logo {
+  font-size: var(--font-size-xsm);
+}
+
 #section-count {
   font-size: var(--font-size-xsm);
 }
 
 /* || PAGE CONTENT FROM BASE PAGE */
 .page-content {
-  margin-top: 7.4rem;
+  margin-top: 8rem;
   flex-direction: column;
   min-height: 100vh;
 }
@@ -291,6 +349,94 @@ button.read-more:hover {
 }
 
 /* // TREE PICTURE.HTML */
-.tree-picture-info {
+.tree-picture-info, .special-place-info {
   font-size: var(--font-size-xsm);
+}
+
+
+/* // HOW TO USE.HTML */
+.how-to-use b {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+/* // SPECIAL PLACE */
+.special-place-info {
+  margin: 1rem 0;
+}
+
+/* //CONTRIBUTORS.HTML */
+.contributor-center-profile{
+  width: 80%;
+  margin: auto;
+  text-align: center;
+}
+
+.contributor-center-profile ul {
+  justify-content: center;
+}
+
+.picture-container {
+  height: 15rem;
+  width: 15rem;
+  margin: auto;
+}
+
+.contributor-center-profile img {
+  border-radius: 50%;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* MEDIA QUERY STARTS HERE */
+@media screen and (min-width: 800px) {
+  body {
+    padding: 1rem 5rem;
+  }
+
+  .card{
+    padding: 3rem;
+  }
+
+  nav{
+    font-size: var(--font-size-md);
+  }
+
+  #menu-toggle-icon{
+    display: none;
+  }
+
+  .menu {
+    background-color: var(--secondary-background-color);
+    position: absolute;
+    top: 8.8rem;
+    left: 0rem;
+    width: 22%;
+    padding: 1.5rem;
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity .25s ease-in;
+  }
+
+  .menu > ul {
+    flex-direction: column;
+    align-items: center;
+    line-height: 6rem;
+  }
+
+  .user-pic {
+    width: 12rem;
+    height: 12rem;
+    margin: auto;
+    margin-bottom: 3rem;
+  }
+  
+  .base-block-content {
+    margin-bottom: var(--margin-lg);
+    margin-left: 30%;
+    padding-top: 2rem;
+    min-height: 85vh;
+  }
+
 }

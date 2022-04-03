@@ -21,14 +21,16 @@
   <link rel="stylesheet" href="{% static 'styles/style2.css' %}" />
   <!-- <link rel="stylesheet" href="{% static 'styles/hamburger.css' %}" media="only screen and (max-width: 800px)"/> -->
   <link rel="shortcut icon" href="{% static 'images/icons/icon_tree.png' %}" type="image/jpg"/>
-  <title>TREES IN UI</title>
+  <title>Trees in UI</title>
   </head>
   <body>
   <header class="header">
     <div class="container">
       <nav>
         <div class="flex">
-          <b class="center heading" style="opacity: 1;">TREES DOCUMENTATION IN UI</b>
+          <a href="{% url 'home:home' %}" class="center heading">
+            <b class="center heading">TREES DOCUMENTATION IN UI</b>
+          </a>
           <button class="btn place-items-center screen-lg-hidden menu-toggle-icon" id="menu-toggle-icon">
             <i class="ri-menu-3-line open-menu-icon toggle" id="open-menu"></i>
             <i class="ri-close-line close-menu-icon toggle" id="close-menu"></i>
@@ -42,7 +44,7 @@
 
       <aside id="aside" class="menu">
         {% if request.user.contributor.id %}
-        <div>
+        <div class="user-pic">
               <a href="{% url 'home:profile' request.user.contributor.id %}">
                   <img src="{{ request.user.contributor.picture.url }}" alt="profile">
               </a>
@@ -79,21 +81,21 @@
   
   
   <footer id="base-footer">
-    <div>
+    <div class="school-logo flex">
         <div class="center"> UNIVERSITY OF IBADAN
-            <div>
-                <img width="50" height="" src="{% static 'images/icons/UI_logo.png' %}" alt="UI">
-            </div>
+          <div>
+              <img width="50" height="" src="{% static 'images/icons/UI_logo.png' %}" alt="UI">
+          </div>
         </div>
         <div class="center">RENEWABLE NATURAL RESOURCES
-            <div>
-                <img style="margin-top: -15px; " width="85" height="" src="{% static 'images/icons/RNR_logo.png' %}" alt="UI">
-            </div>
+          <div>
+            <img style="margin-top: -15px; " width="85" height="" src="{% static 'images/icons/RNR_logo.png' %}" alt="UI">
+          </div>
         </div>
-        <div class="center">TREE CLUB
-            <div>
-                <img style="margin-top: -5px; "  width="" height="80" src="{% static 'images/icons/TREE_CLUB.png' %}" alt="UI">
-            </div>
+        <div class="center">THE TREE CLUB
+          <div>
+            <img style="margin-top: -5px; "  width="" height="80" src="{% static 'images/icons/TREE_CLUB.png' %}" alt="UI">
+          </div>
         </div>
     </div>
 

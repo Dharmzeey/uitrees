@@ -4,17 +4,22 @@
 {% block content %}
 
 <p>
-    This is where you can find some places, enclosures and boundaries with lots of trees.
+  This is where you can find some places, enclosures and boundaries with lots of trees.
 </p>
 
 <p>
-    Here are list of special places available
+  Here are list of special places available:
 </p>
+<br>
 
-{% for place in places %}
-
-<a href="{% url 'special:details' place.id %}"> <li>{{ place }}</li></a>
-
-{% endfor %}
+<div class="search-result">
+  <ul class="flex">
+      {% for place in places %}
+      
+      <li><a href="{% url 'special:details' place.id %}"> {{ place }}</a></li>
+      
+      {% endfor %}
+      </ul>
+</div>
 
 {% endblock  %}

@@ -11,49 +11,48 @@
       </div>
       
       <div class="flex tree-details">
-        <p class="heading">{{ tree_info.scientific_name }}</p>
+        <ul class="heading">{{ tree_info.scientific_name }}</ul>
     
-        <p> Common Name: {{ tree_info.common_name }}</p>
+        <li> Common Name: {{ tree_info.common_name }}</li>
     
-        <p> Local Name: {{ tree_info.local_name }}</p>
+        <li> Local Name: {{ tree_info.local_name }}</li>
     
-        <p> Authority: {{ tree_info.authority }}</p>
+        <li> Authority: {{ tree_info.authority }}</li>
     
-        <p> Order: {{ tree_info.tree_order }}</p>
+        <li> Order: {{ tree_info.tree_order }}</li>
     
-        <p> Family: {{ tree_info.tree_family }}</p>
+        <li> Family: {{ tree_info.tree_family }}</li>
     
-        <p> Conservation Status: {{ tree_info.conservation_status }}</p>
+        <li> Conservation Status: {{ tree_info.conservation_status }}</li>
     
-        <p> Specie Status: {{ tree_info.specie_status }}</p>
+        <li> Specie Status: {{ tree_info.specie_status }}</li>
     
-        <p> Tree Description: {{ tree_info.tree_description }}</p>
+        <li> Tree Description: {{ tree_info.tree_description }}</li>
 
         {% if tree_info.pharmacological_details %}
-        <p class="font"> Pharmacological Details:
+        <li class="font"> Pharmacological Details:
           <span>
             <button class="read-more">
               <a href="{% url 'home:pharmacology' tree_info.id %}" >Read Up</a>
             </button>
           </span>
-        </p>
+        </li>
         {% endif %}
-  
-        <div>
+
+        {% if tree_info.reference %}
+        <li class="font"> More About {{ tree_info }} ??:
           <span>
-            {% if tree_info.reference %}
-            <div class="font"> More About {{ tree_info }} ??:
             <button class="read-more">
-              <a href="{{ tree_info.reference }}" >Read Up</a> </p>
+              <a href="{{ tree_info.reference }}" >Read Up</a>
             </button>
-            {% endif %}
           </span>
-        </p>
+        </li>
+        {% endif %}
 
       </div>
     </div>
       
-    <div>    
+    <div class="search-result">
       <div class="heading">Places Found</div>
       <ul class="places-found flex">
       {% for location in tree_location %}
@@ -63,6 +62,48 @@
       {% endfor %}
       </ul>
     </div>
+        <!--PAGINATOR CONTROL STARTS HERE-->
+    <div class="paginator">
+      {% if tree_location.has_other_pages %}
+        <ul class="pagination flex">
+          {% if tree_location.has_previous %}
+            <li class="page-item" >
+              <a class="page-link" href="?page={{ 1 }}">First</a>
+            </li>
+            <li class="page-item" >
+              <a class="page-link" href="?page={{ tree_location.previous_page_number }}">&laquo;</a>
+            </li>
+          {% else %}
+            <li class="disabled"><span>&laquo;</span></li>
+          {% endif %}
+
+        {% for i in tree_location.paginator.page_range %}
+          {% if tree_location.number == i %}
+            <li class="page-item active-page"><a class="page-link">{{ i }}</a></li>
+          {% else %}
+            <li class="page-item" >
+              <a class="page-link" href="?page={{ i }}" >{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+
+
+        {% if tree_location.has_next %}
+          <li class="page-item" >
+              <a class="page-link" href="?page={{ tree_location.next_page_number }}">&raquo;</a>
+          </li>
+          <li class="page-item" >
+              <a class="page-link" href="?page={{ tree_location.paginator.num_pages }}">Last</a>
+          </li>
+          {% else %}
+          <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+        </ul>
+
+      {% endif %}
+
+    </div>
+    <!--PAGINATOR CONTROL ENDS HERE-->
+
   </div>
 
     <div id="time-created-updated">

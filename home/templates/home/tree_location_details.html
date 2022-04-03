@@ -12,50 +12,50 @@
         <p>The Tree could be found at:  {{ result.location_name }}</p>
         <p>Detailed description of the location:  {{ result.location_description }}</p>
         <P> Tree Health Status: {{ result.health_status }}</P>
-        <div> Uploaded by:<a href="{% url 'home:contributors' %}#{{ result.uploader }}" target="_blank">  {{ result.uploader }} </a>
+        <div> Uploaded by:<a href="{% url 'home:contributors' %}#{{ result.uploader }}">  {{ result.uploader }} </a>
         </div>
     </div>
 
     <br>
     <hr>
 
-    <p class="heading">Tree Information</p>
-    <div class="flex tree-details">
-      <p> Common Name: {{ tree_info.common_name }}</p>
+    <div class="heading">Tree Information</div>
+    <ul class="flex tree-details">
+      <li> Common Name: {{ tree_info.common_name }}</li>
       
-      <p> Local Name: {{ tree_info.local_name }}</p>
+      <li> Local Name: {{ tree_info.local_name }}</li>
       
-      <p> Authority: {{ tree_info.authority }}</p>
+      <li> Authority: {{ tree_info.authority }}</li>
       
-      <p> Order: {{ tree_info.tree_order }}</p>
+      <li> Order: {{ tree_info.tree_order }}</li>
       
-      <p> Family: {{ tree_info.tree_family }}</p>
+      <li> Family: {{ tree_info.tree_family }}</li>
       
-      <p> Conservation Status: {{ tree_info.conservation_status }}</p>
+      <li> Conservation Status: {{ tree_info.conservation_status }}</li>
       
-      <p> Specie Status: {{ tree_info.specie_status }}</p>
+      <li> Specie Status: {{ tree_info.specie_status }}</li>
       
       {% if tree_info.pharmacological_details %}
-      <p class="font"> Pharmacological Details:
+      <li class="font"> Pharmacological Details:
         <span>
           <button class="read-more">
             <a href="{% url 'home:pharmacology' tree_info.id %}" >Read Up</a>
           </button>
         </span>
-      </p>
+      </li>
       {% endif %}
 
-      <p>
+      {% if tree_info.reference %}
+      <li class="font"> More About {{ tree_info }} ??:
         <span>
-          {% if tree_info.reference %}
-          <p class="font"> More About {{ tree_info }} ??:
           <button class="read-more">
-            <a href="{{ tree_info.reference }}" >Read Up</a> </p>
+            <a href="{{ tree_info.reference }}" >Read Up</a>
           </button>
-          {% endif %}
         </span>
-      </p>
-    </div>
+      </li>
+      {% endif %}
+      
+    </ul>
   </div>
   
   <div id="time-created-updated">

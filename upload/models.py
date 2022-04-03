@@ -44,7 +44,7 @@ class Upload(models.Model):
     uploader = models.CharField(max_length=50, null=True, blank=True)
 
     class Meta:
-        ordering = ['tree_name']
+        ordering = ['location_name']
 
     def __str__(self):
         ret_val = self.tree_name.scientific_name + ' at ' + self.location_name

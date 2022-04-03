@@ -3,7 +3,7 @@
 {% block content %}
 
   <form action="" method="post" enctype="multipart/form-data">
-    <h1 class="center"> Contributor's Page </h1>
+    <h2 class="center"> Contributor's Page </h2>
     {% csrf_token %}
     <table>
       <div>
@@ -12,8 +12,10 @@
     {{ form.as_table }}
     </table>
 
-    <input type="submit" value="Update">
-    <input type="submit" onclick="window.location='{% url 'home:home' %}' ; return false;" value="Cancel">
+    <button class="btn form-btn" type="submit"> Submit </button>
+    <button onclick="window.location='{% url 'home:home' %}' ; return false;"  class="btn form-btn" type="submit"> Cancel </button>
+    <!-- <input type="submit" value="Update">
+    <input type="submit" onclick="window.location='{% url 'home:home' %}' ; return false;" value="Cancel"> -->
   </form>
 
 {% endblock %}

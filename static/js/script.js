@@ -30,13 +30,18 @@ themeToggleBtn.addEventListener('click', () => {
 })
 
 
+// THIS IS USED ON EVERY FORM PAGE TO MAKE THE LATITUDE, LONGITUDE AND COORDINATE READONLY
+
+if (document.getElementById("id_coordinates")){
+  document.querySelector("#id_longitude").readOnly = true;
+  document.querySelector("#id_latitude").readOnly = true;
+  document.querySelector("#id_coordinates").readOnly = true;
+}
+
 // THIS SCRIPT IS FOR (SPECIFIC SEARCH.HTML) THAT DYNAMICALLY EFFECT THE INPUT BEHAVIOR BASED ON THE 
 // "SEARCH TYPE ACTION" 
-var dynamic_input = document.getElementById("dynamic");
-const flag = document.getElementById("flag");
-var result = 'Search by {{ search_item.name }}';
-
-dynamic_input.placeholder = result
+if (document.getElementById("dynamic")){
+  dynamic_input.placeholder = result
 if (result == 'Search by Location Name') {
     flag.style.display = 'block'
 }
@@ -57,6 +62,8 @@ if (result == 'Search by Coordinates') {
   dynamic_input.readOnly = true;
   document.getElementById("inp_cord").style.display = 'inline';
 }
+}
+
 
 
 

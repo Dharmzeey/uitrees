@@ -7,8 +7,11 @@
     <table>
     {{ form.as_table }}
     </table>
-    <input type="submit" value="Submit">
-    <input type="submit" onclick="window.location='{% url 'home:home' %}' ; return false;" value="Cancel">
+    <button class="btn form-btn" type="submit"> Submit </button>
+    <!-- <input type="submit" value="Submit"> -->
+    <button onclick="window.location='{% url 'home:home' %}' ; return false;"  class="btn form-btn" type="submit">
+      Cancel
+    </button>
   </form>
 
 <script>

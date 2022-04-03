@@ -35,6 +35,7 @@ class SpecialPlace(models.Model):
     latitude = models.CharField(max_length=30, null=True, blank=True)
     longitude = models.CharField(max_length=30, null=True, blank=True)
     time_now = models.DateTimeField(auto_now=True)
+    uploader = models.CharField(max_length=50, null=True, blank=True)
 
     # class Meta:
     #     ordering = ['tree_name']

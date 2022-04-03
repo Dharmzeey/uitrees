@@ -9,7 +9,7 @@
 
     
 </div>
-  <p class="font">Or do you want to <a href="{% url 'home:specific-search' 1 %}">Specify Search ?</a></p> <br> 
+  <p class="font">Or do you want to <a class="light-color" href="{% url 'home:specific-search' 1 %}">Specify Search ?</a></p> <br> 
 <div>
   {% if search_result.paginator.count %} 
   <div class="result-counter">{{ search_result.paginator.count }} Result{{ search_result.paginator.count|pluralize }} Available</div> 

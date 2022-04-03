@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import SpecialPlace
-
+from .forms import CreateSpecialForm
 # Create your views here.
 
 
@@ -35,6 +35,10 @@ class SpecialDetails(View):
 
 
 class CreateSpecial(LoginRequiredMixin, CreateView):
-    model = SpecialPlace
-    fields = '__all__'
+    form_class = CreateSpecialForm
     success_url = reverse_lazy('special:special')
+    template_name = 'specialplaces/specialplace_form.html'
+
+    def form_valid(self, form):
+        form.instance.uploader = self.request.user
+        return super(CreateSpecial, self).form_valid(form)

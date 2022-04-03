@@ -299,7 +299,7 @@ class SpecificSearch(View):
                                         search_cont.append(item)
 
                                     # PAGINATORS
-                                    paginator = Paginator(search_cont, 3)
+                                    paginator = Paginator(search_cont, 30)
                                     page_number = request.GET.get('page', 1)
                                     try:
                                         page_obj = paginator.page(page_number)
@@ -336,9 +336,20 @@ class TreeDetails(View):
         # THIS BELOW THE SEARCHED TREE AND RETURN LOCATIONS WHERE FOUND
         tree_locations = Upload.objects.filter(tree_name__scientific_name=tree_info.scientific_name)
 
+        # PAGINATORS
+        paginator = Paginator(tree_locations, 30)
+        page_number = request.GET.get('page', 1)
+        try:
+            page_obj = paginator.page(page_number)
+        except PageNotAnInteger:
+            page_obj = paginator.page(1)
+        except EmptyPage:
+            page_obj = paginator.page(paginator.num_pages)
+
         context = {
             'tree_info': tree_info,
-            'tree_location': tree_locations
+            'tree_location': page_obj
+            # 'tree_location': tree_locations
         }
         return render(request, self.template_name, context)
 
