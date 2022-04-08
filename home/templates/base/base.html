@@ -57,14 +57,25 @@
             <i class="ri-sun-line sun-icon"></i>
             <i class="ri-moon-line moon-icon"></i>
           </button>
-      
+
           <li><a href="{% url 'home:acknowledgement' %}">Acknowledgement</a></li>
           <li><a href="{% url 'home:contributors' %}">Contributors</a></li>
           <li><a href="{% url 'special:special' %}">Special Places</a></li>
           <li><a href="{% url 'home:how-to-use' %}">How to use</a></li>
           <li><a href="{% url 'treerequest:treerequest' %}">Request</a></li>
           <li><a href="{% url 'home:about' %}">About</a></li>
+
+          {% if request.user.is_authenticated %}
+            <li>
+              <a href="{% url 'upload:upload' %}"> Upload Tree </a> |
+              <a href="{% url 'special:upload' %}"> Upload Special </a>
+            </li>
+            <li><a href="{% url 'logout' %}">Logout</a>
+          {% else %}
+            <li><a href="{% url 'login' %}">Login</a></li>
+        {% endif %}
         </ul>
+
       </aside>
     </div>
   </header>
