@@ -8,8 +8,8 @@ from utilities.compressor import compress
 class RequestTree(models.Model):
     location_name = models.CharField(max_length=100)
     location_description = models.TextField()
-    tree_picture = models.ImageField(upload_to='request/%Y/%m/%d')
-    tree_picture2 = models.ImageField(upload_to='request/%Y/%m/%d/', null=True, blank=True)
+    tree_picture = models.ImageField(upload_to='images/request/%Y/%m/%d')
+    tree_picture2 = models.ImageField(upload_to='images/request/%Y/%m/%d/', null=True, blank=True)
 
     def save(self, *args, **kwargs):
         new_image = compress(self.tree_picture)

@@ -1,7 +1,6 @@
 from django.contrib import admin
-from .models import Search, Contributor
-# Register your models here.
+from .models import Search
 
 admin.site.register(Search)
-admin.site.register(Contributor)
+
 

@@ -43,10 +43,10 @@
       </nav>
 
       <aside id="aside" class="menu">
-        {% if request.user.contributor.id %}
+        {% if request.user.is_authenticated %}
         <div class="user-pic">
-              <a href="{% url 'home:profile' request.user.contributor.id %}">
-                  <img src="{{ request.user.contributor.picture.url }}" alt="profile">
+              <a href="{% url 'auth:update' request.user.id %}">
+                  <img src="{{ request.user.picture.url }}" alt="profile">
               </a>
                   <p>Profile</p>
         </div>
@@ -95,17 +95,17 @@
     <div class="school-logo flex">
         <div class="center"> UNIVERSITY OF IBADAN
           <div>
-              <img width="50" height="" src="{% static 'images/icons/UI_logo.png' %}" alt="UI">
+              <img width="50" height="" src="{% static 'icons/UI_logo.png' %}" alt="UI">
           </div>
         </div>
         <div class="center">RENEWABLE NATURAL RESOURCES
           <div>
-            <img style="margin-top: -15px; " width="85" height="" src="{% static 'images/icons/RNR_logo.png' %}" alt="UI">
+            <img style="margin-top: -15px; " width="85" height="" src="{% static 'icons/RNR_logo.png' %}" alt="UI">
           </div>
         </div>
         <div class="center">THE TREE CLUB
           <div>
-            <img style="margin-top: -5px; "  width="" height="80" src="{% static 'images/icons/TREE_CLUB.png' %}" alt="UI">
+            <img style="margin-top: -5px; "  width="" height="80" src="{% static 'icons/TREE_CLUB.png' %}" alt="UI">
           </div>
         </div>
     </div>

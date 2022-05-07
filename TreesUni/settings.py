@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
 ]
 
+AUTH_USER_MODEL = 'authority.MyUserCreationModel'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -155,5 +157,5 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_URL = '/images/'
-MEDIA_ROOT = BASE_DIR / 'static/images/'
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'static/media/'

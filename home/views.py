@@ -3,36 +3,14 @@ from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.db.models import Q
 from django.views.decorators.clickjacking import xframe_options_sameorigin
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
-from django.contrib.auth.models import User
-from django.utils import timezone
 
-from django.views.generic import CreateView, UpdateView
 
 from trees.models import Tree
 from .models import Search
 from upload.models import Upload
-from .models import Contributor
-from .forms import ProfileFrom
+from authority.models import MyUserCreationModel
 
 from utilities.sequence_sort import mysorttree, mysortplace
-
-
-# Create your views here.
-
-
-# class BaseView(View):
-#     template_name = 'base/base.html'
-#
-#     def get(self, request):
-#
-#         time_update = Upload.objects.all().order_by('-time_now')[0].time_now
-#         request.session['time'] = str(time_update)
-#         time_session = request.session.get('time')
-#
-#         context = {'time': time_update, 'time_session': time_session}
-#         return render(request, self.template_name, context)
 
 
 class HomeView(View):
@@ -48,7 +26,6 @@ class HomeView(View):
             time_update = Upload.objects.all().order_by('-time_now')[0].time_now
             str_date = time_update.strftime("%Y-%m-%d %H:%M:%S")
             # local_dt = timezone.localtime(time_update)
-            # print(local_dt)
 
             cont_update = Upload.objects.values()
             cont = []
@@ -413,34 +390,11 @@ class TreeContributor(View):
     template_name = 'home/contributors.html'
 
     def get(self, request):
-        contributors = Contributor.objects.all()
+        contributors = MyUserCreationModel.objects.all()
         context = {
             'contributors': contributors
         }
         return render(request, self.template_name, context)
-
-
-class Profile(LoginRequiredMixin, UpdateView):
-    model = Contributor
-    # fields = '__all__'
-    # form_class = UserForm
-    form_class = ProfileFrom
-    success_url = reverse_lazy('home:home')
-    template_name = 'home/contributor_form.html'
-
-    def form_valid(self, form):
-        current_user = User.objects.get(username=self.request.user.username)
-        form.instance.user = current_user
-        return super(Profile, self).form_valid(form)
-
-    # def get(self, request, pk):
-    #     user = get_object_or_404(User, pk=pk)
-    #     context = {
-    #         'user': user,
-    #         'form': self.form_class,
-    #         'form2': self.form_class2
-    #     }
-    #     return render(request, self.template_name, context)
 
 
 def how_to_use(request):

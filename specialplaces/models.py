@@ -14,9 +14,9 @@ class SpecialPlace(models.Model):
         default=0,
         validators=[MinValueValidator(1)]
     )
-    tree_picture = models.ImageField(upload_to='specials/%Y/%m/%d/')
-    tree_picture2 = models.ImageField(upload_to='specials/%Y/%m/%d/', null=True, blank=True)
-    tree_picture3 = models.ImageField(upload_to='specials/%Y/%m/%d/', null=True, blank=True)
+    tree_picture = models.ImageField(upload_to='images/specials/%Y/%m/%d/')
+    tree_picture2 = models.ImageField(upload_to='images/specials/%Y/%m/%d/', null=True, blank=True)
+    tree_picture3 = models.ImageField(upload_to='images/specials/%Y/%m/%d/', null=True, blank=True)
 
     def save(self, *args, **kwargs):
         if 'specials/' not in self.tree_picture.url:

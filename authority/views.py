@@ -1,12 +1,24 @@
-from django.shortcuts import render
-from django.shortcuts import redirect
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import CreateView, UpdateView
+from django.urls import reverse_lazy
+from .models import MyUserCreationModel
+from .forms import MyUserUpdateForm
+
+from .forms import MyUserCreationFrom
 
 
-class CustomLogin(LoginView):
-    template_name = 'registration/login.html'
-    fields = '__all__'
-    redirect_authenticated_user = True
+class MyUserCreationView(CreateView):
+    form_class = MyUserCreationFrom
+    template_name = 'registration/register.html'
+    success_url = reverse_lazy("auth:login")
 
-    def get_success_url(request):
-        return redirect(request.path)
+
+class MyUserUpdateView(LoginRequiredMixin, UpdateView):
+  model = MyUserCreationModel
+  form_class = MyUserUpdateForm
+  template_name = 'registration/register.html'
+
+  def get_queryset(self):
+    qs = super(MyUserUpdateView, self).get_queryset()
+    return qs.filter(username=self.request.user)
+  success_url = reverse_lazy("home:home")
