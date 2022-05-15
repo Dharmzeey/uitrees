@@ -254,6 +254,15 @@ nav {
   height: 100%;
 }
 
+li#upload_options {
+  display: flex;
+  flex-direction:column;
+}
+
+#demarcate{
+  display: none;
+}
+
 .school-logo {
   font-size: var(--font-size-xsm);
 }
@@ -441,6 +450,15 @@ button.read-more:hover {
     height: 12rem;
     margin: auto;
     margin-bottom: 3rem;
+  }
+
+  li#upload_options {
+  display: flex;
+  flex-direction: row;
+}
+
+  #demarcate{
+    display: inline;
   }
 
   .base-block-content {

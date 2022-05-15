@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="{% static 'styles/style2.css' %}" />
 <!--       <link rel="stylesheet" href="{% static 'styles/style.css' %}" />-->
 <!--   <link rel="stylesheet" href="{% static 'styles/hamburger.css' %}" media="only screen and (max-width: 800px)"/>-->
-  <link rel="shortcut icon" href="{% static 'images/icons/icon_tree.png' %}" type="image/jpg"/>
+  <link rel="shortcut icon" href="{% static 'media/icons/icon_tree.png' %}" type="image/jpg"/>
   <title>Trees in UI</title>
   </head>
   <body>
@@ -66,8 +66,8 @@
           <li><a href="{% url 'home:about' %}">About</a></li>
 
           {% if request.user.is_authenticated %}
-            <li>
-              <a href="{% url 'upload:upload' %}"> Upload Tree </a> |
+            <li id="upload_options">
+              <a href="{% url 'upload:upload' %}"> Upload Tree  <span id="demarcate"> &nbsp;|&nbsp;</span></a>
               <a href="{% url 'special:upload' %}"> Upload Special </a>
             </li>
             <li><a href="{% url 'logout' %}">Logout</a>
@@ -95,17 +95,17 @@
     <div class="school-logo flex">
         <div class="center"> UNIVERSITY OF IBADAN
           <div>
-              <img width="50" height="" src="{% static 'icons/UI_logo.png' %}" alt="UI">
+              <img width="50" height="" src="{% static 'media/icons/UI_logo.png' %}" alt="UI">
           </div>
         </div>
         <div class="center">RENEWABLE NATURAL RESOURCES
           <div>
-            <img style="margin-top: -15px; " width="85" height="" src="{% static 'icons/RNR_logo.png' %}" alt="UI">
+            <img style="margin-top: -15px; " width="85" height="" src="{% static 'media/icons/RNR_logo.png' %}" alt="UI">
           </div>
         </div>
         <div class="center">THE TREE CLUB
           <div>
-            <img style="margin-top: -5px; "  width="" height="80" src="{% static 'icons/TREE_CLUB.png' %}" alt="UI">
+            <img style="margin-top: -5px; "  width="" height="80" src="{% static 'media/icons/TREE_CLUB.png' %}" alt="UI">
           </div>
         </div>
     </div>
