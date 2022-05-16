@@ -1,15 +1,26 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
-from .models import MyUserCreationModel
+from django.contrib.auth.models import User
+
+from .models import Profile
 
 
-class MyUserCreationFrom(UserCreationForm):
+class ProfileCreateFrom(UserCreationForm):
   class Meta:
-    model = MyUserCreationModel
-    fields = ['username', 'email', 'password1', 'password2']
+    model = User
+    fields = ("username", "password1", "password2")
+  #
+  # def save(self, commit=True):
+  #   user = super(ProfileCreateFrom, self).save(commit=False)
+  #   user.email = self.cleaned_data['email']
+  #   if commit:
+  #     user.save()
+  #   return user
 
 
-class MyUserUpdateForm(ModelForm):
+class ProfileUpdateForm(ModelForm):
   class Meta:
-    model = MyUserCreationModel
-    fields = ["picture", "name", "profile", "mail", "tel", "website", "git_link", "tw_link", "ig_link", "fb_link"]
+    model = Profile
+    fields = "__all__"
+    exclude = ('user',)
+

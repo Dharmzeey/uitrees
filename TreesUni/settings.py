@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
 ]
 
-AUTH_USER_MODEL = 'authority.MyUserCreationModel'
+# AUTH_USER_MODEL = 'authority.MyUserCreationModel'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -89,18 +89,18 @@ WSGI_APPLICATION = 'TreesUni.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
     # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'TreesUni',
-    #     'USER': 'postgres',
-    #     'PASSWORD': 'Azeezat1@',
-    #     'HOST': '127.0.0.1',
-    #     'PORT': '',
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
     # }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'uitrees',
+        'USER': 'postgres',
+        'PASSWORD': 'Azeezat1@',
+        'HOST': '127.0.0.1',
+        'PORT': '',
+    }
 }
 
 

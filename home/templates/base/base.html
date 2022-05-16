@@ -46,7 +46,7 @@
         {% if request.user.is_authenticated %}
         <div class="user-pic">
               <a href="{% url 'auth:update' request.user.id %}">
-                  <img src="{{ request.user.picture.url }}" alt="profile">
+                  <img src="{{ request.user.profile.picture.url }}" alt="profile">
               </a>
                   <p>Profile</p>
         </div>
