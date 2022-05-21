@@ -45,7 +45,7 @@
       <aside id="aside" class="menu">
         {% if request.user.is_authenticated %}
         <div class="user-pic">
-              <a href="{% url 'auth:update' request.user.id %}">
+              <a href="{% url 'auth:update' %}">
                   <img src="{{ request.user.profile.picture.url }}" alt="profile">
               </a>
                   <p>Profile</p>

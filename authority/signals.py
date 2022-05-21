@@ -8,7 +8,7 @@ def createprofile(sender, instance, created, **kwargs):
     if created:
         user = instance
         Profile.objects.create(
-            user=user
+            owner=user
         )
 
 
