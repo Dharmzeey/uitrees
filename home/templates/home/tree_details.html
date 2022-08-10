@@ -2,16 +2,23 @@
 {% load static %}
 {% block content %}
 
+{% block title %}
+<title>
+  {{ tree_info.scientific_name }} | Trees in UI
+</title>
+{% endblock %}
+
 <div class="flex-container">
   <div class="detail-container" id="detail-container" style="display: block;">
     <div>
       <div id="pic_cont" style="display: none;">
-          <p id="picture_title" style="font-size: 2rem;"></p>
-          <iframe name="my_frame" id="my_frame" frameborder="0"></iframe>
+          <h2 id="picture_title" style="font-size: 2rem;"></h2>
+          <iframe name="my_frame" id="my_frame" frameborder="0" seamless ></iframe>
       </div>
       
       <div class="flex tree-details">
-        <ul class="heading">{{ tree_info.scientific_name }}</ul>
+         <h2 class="heading">{{ tree_info.scientific_name }} </h2>
+        <ul>
     
         <li> Common Name: {{ tree_info.common_name }}</li>
     
@@ -48,6 +55,7 @@
           </span>
         </li>
         {% endif %}
+        </ul>
 
       </div>
     </div>

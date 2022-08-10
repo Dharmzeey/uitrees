@@ -98,3 +98,12 @@ y.value = position.coords.latitude;
 z.value = position.coords.longitude;
 }
 
+// THIS IS FOR POP UP MESSAGE DISAPPEAR
+if (document.getElementById("pop-up")) {
+  window.onload = () => {
+    popUp = document.getElementById("pop-up");
+    setTimeout(() => {
+      popUp.style.display = "none"
+    }, 2000)
+  }
+}

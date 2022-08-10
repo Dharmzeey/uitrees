@@ -170,6 +170,17 @@ select, input, textarea {
 
 /* || BASE PAGE */
 
+.message {
+  width: 100%;
+  padding: 1rem;
+  text-align: center;
+  background-color: var(--light-color);
+  color: var(--primary-background-color);
+  position: absolute;
+  top: 8rem;
+  z-index: 20;
+}
+
 .header {
   background-color: var(--secondary-background-color);
   position: fixed;

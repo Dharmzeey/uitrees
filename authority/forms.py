@@ -1,12 +1,14 @@
+from tkinter import Widget
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
-from django.forms import ModelForm
+from django.forms import ModelForm, Textarea
+from django import forms
 from django.contrib.auth.models import User
 
 from .models import Profile
 
 
-class ProfileCreateFrom(UserCreationForm):
+class ProfileCreateForm(UserCreationForm):
   class Meta:
     model = User
     fields = ("username", "email", "password1", "password2")
@@ -24,4 +26,9 @@ class ProfileUpdateForm(ModelForm):
     model = Profile
     fields = "__all__"
     exclude = ('owner',)
+    
+    widgets = {
+    "about": forms.Textarea(attrs={'rows': '5'})
+  }
+
 

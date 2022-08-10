@@ -1,9 +1,15 @@
 {% extends 'base/base.html' %}
 {% block content %}
 
+{% block title %}
+<title>
+  {{ tree_info.scientific_name }} | Trees in UI
+</title>
+{% endblock %}
+
 <div class="flex-container">
   <div>
-    <p class="heading">{{ result }}</p>
+    <h2 class="heading">{{ result }}</h2>
     
     <div class="tree-brief-info">
         <p class="heading">Location Information</p>
