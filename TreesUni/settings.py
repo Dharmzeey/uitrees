@@ -25,11 +25,11 @@ SECRET_KEY = 'django-insecure-jmiw*3lkytx163wd01ix&qm+%2(27ho70dt4!*l)8!qh7om)e-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["localhost",'https://uitrees.herokuapp.com/']
 
 # THIS IS THE ONLY SITE THAT WILL ALLOW CSRF ACCESS
 # I CREATED IT MYSELF
-CSRF_TRUSTED_ORIGINS = ['https://*.ngrok.io']
+CSRF_TRUSTED_ORIGINS = ["https://uitrees.herokuapp.com/"]
 
 # Application definition
 
