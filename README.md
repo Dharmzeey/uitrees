@@ -6,7 +6,6 @@ Which Includes CRUD, User Auth, Restricted information for users
 
 
 You can visit the site here
-[https://uitrees.herokuapp.com](UI Trees Documentation)
-
+[UI Trees Documentation](https://uitrees.herokuapp.com)
 
 **MORE UPDATATES COMING SOON**
