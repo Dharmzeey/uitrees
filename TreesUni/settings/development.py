@@ -1,12 +1,14 @@
 from .base import *
+from decouple import config
 
+SECRET_KEY = config('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = ["localhost"]
 
 # THIS IS THE ONLY SITE THAT WILL ALLOW CSRF ACCESS
 # I CREATED IT MYSELF
-CSRF_TRUSTED_ORIGINS = ["localhost"]
+CSRF_TRUSTED_ORIGINS = ["https://127.0.0.1"]
 
 DATABASES = {
     # 'default': {
