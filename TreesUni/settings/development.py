@@ -6,7 +6,7 @@ ALLOWED_HOSTS = ["localhost"]
 
 # THIS IS THE ONLY SITE THAT WILL ALLOW CSRF ACCESS
 # I CREATED IT MYSELF
-CSRF_TRUSTED_ORIGINS = ["https://uitrees.herokuapp.com/"]
+CSRF_TRUSTED_ORIGINS = ["localhost"]
 
 DATABASES = {
     # 'default': {
