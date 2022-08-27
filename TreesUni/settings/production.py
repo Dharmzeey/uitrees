@@ -8,7 +8,6 @@ ALLOWED_HOSTS = ['https://uitrees.herokuapp.com/']
 # I CREATED IT MYSELF
 CSRF_TRUSTED_ORIGINS = ["https://uitrees.herokuapp.com/"]
 
-
 DATABASES = {
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
@@ -23,3 +22,6 @@ DATABASES = {
         'PORT': '',
     }
 }
+
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
