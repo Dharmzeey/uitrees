@@ -5,6 +5,6 @@ get_os = os.environ.get("SITE_STATUS", None)
 if get_os is None:
   from .development import * 
 # THIS WILL LOAD THE DEVELOPMENT SETTINGS IF THE SITE_STATUS KEY RETURNS A VALUE [(PROD) THAT IN SET ON THE WEB SERVER OS]
-elif get_os == "prroduction":
+elif get_os == "production":
   from .production import *
 
