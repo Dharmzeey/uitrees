@@ -1,12 +1,12 @@
 from .base import *
 
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['https://uitrees.herokuapp.com/']
+ALLOWED_HOSTS = ['uitrees.herokuapp.com']
 
 # THIS IS THE ONLY SITE THAT WILL ALLOW CSRF ACCESS
 # I CREATED IT MYSELF
-CSRF_TRUSTED_ORIGINS = ["https://uitrees.herokuapp.com/"]
+CSRF_TRUSTED_ORIGINS = ["uitrees.herokuapp.com"]
 
 DATABASES = {
     'default': {
