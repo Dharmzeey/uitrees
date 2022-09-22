@@ -100,8 +100,8 @@ li::before {
   height: 15px;
   width: 15px;
   background-size: 15px;
-  background-image: url('../media/images/icons/icon_tree.png');
-  /* background-image: url('{% static "images/icons/icon_tree.png" %}'); */
+  background-image: url('../media/icons/icon_tree.png');
+  /* background-image: url('{% static "media/icons/icon_tree.png" %}'); */
   background-repeat: no-repeat;
   margin-right: 5px;
 }
