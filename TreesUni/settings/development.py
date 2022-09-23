@@ -2,7 +2,7 @@ from .base import *
 from decouple import config
 
 SECRET_KEY = config('SECRET_KEY')
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["localhost"]
 
