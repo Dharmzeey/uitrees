@@ -1,0 +1,499 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+/* I AM USING A MOBILE FIRST APPROACH */
+/* // starts the comment for styling another page */
+/* || starts the comments for sections of pages */
+
+:root {
+  --light-color: #fff;
+  --light-color-alt: #afb6cd;
+  --primary-background-color: #131417;
+  --secondary-background-color: #252830;
+  --hover-light-color: var(--light-color);
+  --hover-dark-color: var(--primary-background-color);
+  --gradient-color: linear-gradient(
+      115deg,#4fcf70,#fad648,#a767e5,#12bcfe,#44ce7b);
+  --transparent-light-color: rgba(255,255,255,.05);
+  --transparent-dark-color: rgba(0,0,0,.75);
+  /* --font-family: 'Poppins', sans-serif; */
+  --font-family: 'Readex Pro', sans-serif;
+  --font-size-xxsm: 1.0rem;
+  --font-size-xsm: 1.2rem;
+  --font-size-sm: 1.6rem;
+  --font-size-md: 2.4rem;
+  --font-size-lg: 3rem;
+  --font-size-xl: 4rem;
+  --gap: 1rem;
+  --margin-sm: 2rem;
+  --margin-md: 3rem;
+  --margin-lg: 5rem;
+  --item-min-height-sm: 20rem;
+  --item-min-height-md: 30rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* || BASE STYLES */
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  color: var(--light-color-alt);
+  background-color: var(--primary-background-color);
+  letter-spacing: 1px;
+  padding: 5px;
+  margin-left: 0.1rem;
+  transition: background-color .35s ease-in-out, color .3s ease-in-out;
+}
+
+/* || GENERAL STYLES */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+  color: inherit;
+  padding: 1.5rem;
+  border: 1px solid var(--transparent-light-color);
+  background-color: transparent;
+}
+
+input[type=submit], .btn {
+ cursor: pointer; 
+}
+
+button {
+  width: 8rem;
+  background-color: var(--secondary-background-color);
+  border-radius: 4px;
+}
+
+.form-container input {
+  margin: 10px 0px;
+  width: 70%;
+}
+
+i {
+  font-size: var(--font-size-md);
+}
+
+li {
+  list-style-position: inside;
+  list-style-type: none;
+}
+
+/* Theme color change */
+body.light-theme{
+  --light-color: #000000;
+  --light-color-alt: rgba(0, 0, 0, 0.823);
+  --primary-background-color: #fff;
+  --secondary-background-color: #f1f1f1;
+  --hover-light-color: #fff;
+  --transparent-dark-color: var(--secondary-background-color);
+  --transparent-light-color: rgba(0,0,0,.1);
+}
+
+#theme-toggle-btn {
+  padding: 0.1rem;
+  border: none;
+}
+
+.moon-icon {
+  display: none;
+}
+
+.light-theme .sun-icon {
+  display: none;
+}
+
+.light-theme .moon-icon {
+  display: block;
+}
+
+/* || UTILITIES */
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.center {
+  text-align: center;
+}
+
+.container {
+  max-width: 160rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.card {
+  background-color: var(--secondary-background-color);
+  width: 85%;
+  padding: 1rem;
+  margin: var(--margin-sm) var(--margin-sm);
+  border-radius: 4px;
+}
+
+.light-color {
+  color: var(--light-color);
+}
+
+/* || FORM STYLING */
+form table {
+  width: 95%;
+  margin: auto;
+}
+
+form td,
+form tr {
+  font-size: var(--font-size-xsm);
+}
+
+/* #id_latitude ,
+#id_longitude,
+#id_coordinates {
+  display: none;
+} */
+
+select, input, textarea {
+  width: 90%;
+}
+
+/* || BASE PAGE */
+
+.message {
+  width: 100%;
+  padding: 1rem;
+  text-align: center;
+  background-color: var(--light-color);
+  color: var(--primary-background-color);
+  position: absolute;
+  top: 8rem;
+  z-index: 20;
+}
+
+.header {
+  background-color: var(--secondary-background-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.heading {
+  width: 90%;
+  padding: 0.3rem;
+  margin-bottom: 0.5rem;
+  color: var(--light-color);
+}
+
+.menu {
+  background-color: var(--secondary-background-color);
+  position: absolute;
+  top: 7.5rem;
+  right: 1.5rem;
+  width: 23rem;
+  padding: 1.5rem;
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity .25s ease-in;
+}
+
+.menu > ul {
+  flex-direction: column;
+  align-items: center;
+  line-height: 4rem;
+}
+
+.menu.activated {
+  box-shadow: 1px 1px 1rem var(--transparent-light-color);
+  opacity: 1;
+  transform: scale(1);
+}
+
+#menu-toggle-icon {
+  display: block;
+  z-index: 10;
+  position: absolute;
+  right: 1px;
+  padding: 0.1rem;
+  width: 4rem;
+  border: none;
+}
+
+.close-menu-icon {
+  display: none;
+}
+
+.menu-toggle-icon.activated .open-menu-icon{
+  display: none;
+}
+
+.menu-toggle-icon.activated .close-menu-icon{
+  display: block;
+}
+
+nav {
+  padding-bottom: 0.7rem;
+}
+
+.user-pic {
+  width: 7rem;
+  height: 7rem;
+  margin: auto;
+  margin-bottom: 3rem;
+}
+
+.user-pic p {
+  text-align: center;
+}
+
+.user-pic img {
+  border-radius: 50%;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+li#upload_options {
+  display: flex;
+  flex-direction:column;
+}
+
+#demarcate{
+  display: none;
+}
+
+.school-logo {
+  font-size: var(--font-size-xsm);
+}
+
+#section-count {
+  font-size: var(--font-size-xsm);
+}
+
+/* || PAGE CONTENT FROM BASE PAGE */
+.page-content {
+  margin-top: 8rem;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.base-block-content {
+  margin-bottom: var(--margin-lg);
+  min-height: 85vh;
+}
+
+/* //  THIS IS WHERE THE HOME.HTML PAGE IS STYLED AND ALSO FOR SPECIFIC SEARCH.HTML*/
+.search-result {
+  min-height: 60vh;
+}
+
+.search-result ul {
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.result-counter {
+  font-size: var(--font-size-xsm);
+}
+
+.pagination {
+  border: 1px solid var(--transparent-light-color);
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.paginator li {
+  padding: 1rem 1.2rem;
+}
+
+.active-page {
+  background-color: var(--secondary-background-color);
+}
+
+/* // SPECIFIC SEARCH */
+.search-options {
+  flex-direction: column;
+  gap: var(--gap);
+  color: var(--light-color);
+}
+
+footer {
+  margin-top: 10rem;
+}
+
+/* // TREE DETAILS AND LOCATION DETAILS.HTML */
+iframe {
+  width: 90%;
+  height: 40rem;
+
+}
+.places-found {
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.caption {
+  font-size: var(--font-size-xxsm);
+}
+
+.tree-details {
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+button.read-more {
+  width: 10rem;
+  padding: 0.7rem;
+  margin: 10px 0;
+  border-radius: 4px;
+  box-shadow: 2px 2px 2px var(--secondary-background-color);
+  color: var(--light-color);
+  font-size: var(--font-size-xsm);
+}
+
+button.read-more:hover {
+  transform: translateY(-2px);
+  transition: transform .25s ease-in;
+}
+
+#time-created-updated {
+  font-size: var(--font-size-xxsm);
+  margin-top: var(--margin-lg);
+}
+
+/* // TREE PICTURE.HTML */
+.tree-picture-info, .special-place-info {
+  font-size: var(--font-size-xsm);
+}
+
+#img-pic-container img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+
+/* // HOW TO USE.HTML */
+.how-to-use b {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+/* // SPECIAL PLACE */
+.special-place-info {
+  margin: 1rem 0;
+}
+
+/* //CONTRIBUTORS.HTML */
+.contributor-center-profile{
+  width: 80%;
+  margin: auto;
+  text-align: center;
+}
+
+.contributor-center-profile ul {
+  justify-content: center;
+}
+
+.picture-container {
+  height: 15rem;
+  width: 15rem;
+  margin: auto;
+}
+
+.contributor-center-profile img {
+  border-radius: 50%;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* MEDIA QUERY STARTS HERE */
+@media screen and (min-width: 800px) {
+  body {
+    padding: 1rem 5rem;
+  }
+
+  .card{
+    padding: 3rem;
+  }
+
+  nav{
+    font-size: var(--font-size-md);
+  }
+
+  #menu-toggle-icon{
+    display: none;
+  }
+
+  .menu {
+    background-color: var(--secondary-background-color);
+    position: absolute;
+    top: 8.8rem;
+    left: 0rem;
+    width: 22%;
+    padding: 1.5rem;
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity .25s ease-in;
+  }
+
+  .menu > ul {
+    flex-direction: column;
+    align-items: center;
+    line-height: 6rem;
+  }
+
+  .user-pic {
+    width: 12rem;
+    height: 12rem;
+    margin: auto;
+    margin-bottom: 3rem;
+  }
+
+  li#upload_options {
+  display: flex;
+  flex-direction: row;
+}
+
+  #demarcate{
+    display: inline;
+  }
+
+  .base-block-content {
+    margin-bottom: var(--margin-lg);
+    margin-left: 30%;
+    padding-top: 2rem;
+    min-height: 85vh;
+  }
+
+  /* THIS BELOW ACTIVATES THE GRID OF TREE DETAILS WHEN WE ARE ON 800PX AND ABOVE AND THE IFRAME IS ACTIVE
+  IT IS CONTROLLED BY JS*/
+  #detail-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+@media screen and (min-width:800px) and (max-width:1050px) {
+  .base-block-content {
+    margin-left: 22%;
+  }
+}
