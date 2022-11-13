@@ -3,6 +3,7 @@ from django.views import View
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 
 from .models import SpecialPlace
 from .forms import CreateSpecialForm
@@ -41,4 +42,5 @@ class CreateSpecial(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.uploader = self.request.user
+        messages.success(self.request, "Uploaded Successfully")
         return super(CreateSpecial, self).form_valid(form)

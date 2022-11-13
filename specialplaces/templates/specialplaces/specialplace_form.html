@@ -2,36 +2,23 @@
 {% load static %}
 
 {% block content %}
-  <form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <table>
+<form action="" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <table>
     {{ form.as_table }}
-    </table>
-    <button class="btn form-btn" type="submit"> Submit </button>
-    <button onclick="window.location='{% url 'home:home' %}' ; return false;"  class="btn form-btn" type="submit"> Cancel </button>
+  </table>
+  <button class="btn form-btn" type="submit"> Submit </button>
+  <button onclick="window.location='{% url 'home:home' %}' ; return false;" class="btn form-btn" type="submit"> Cancel </button>
 
-    <!-- <input type="submit" value="Submit">
+  <!-- <input type="submit" value="Submit">
     <input type="submit" onclick="window.location='{% url 'home:home' %}' ; return false;" value="Cancel"> -->
-  </form>
+</form>
 
 <script>
   var x = document.getElementById("id_coordinates");
   var y = document.getElementById("id_latitude");
   var z = document.getElementById("id_longitude");
-
-  if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(showPosition);
-} else {
-  x.value = "Geolocation is not supported by this browser.";
-}
-
-function showPosition(position) {
-x.value = position.coords.latitude +
-"," + position.coords.longitude;
-y.value = position.coords.latitude;
-z.value = position.coords.longitude;
-}
 </script>
-<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+
 
 {% endblock %}

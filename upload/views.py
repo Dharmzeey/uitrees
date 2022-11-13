@@ -3,6 +3,7 @@ from django.views.generic import CreateView
 from django.views import View
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 
 from .models import Upload
 from .forms import CreateModelForm
@@ -18,6 +19,7 @@ class CreateTree(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.uploader = self.request.user
+        messages.success(self.request, "Uploaded Successfully")
         return super(CreateTree, self).form_valid(form)
 
 
