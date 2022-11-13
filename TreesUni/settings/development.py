@@ -2,7 +2,7 @@ from .base import *
 from decouple import config
 
 SECRET_KEY = config('SECRET_KEY')
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["localhost"]
 
@@ -11,10 +11,6 @@ ALLOWED_HOSTS = ["localhost"]
 CSRF_TRUSTED_ORIGINS = ["https://127.0.0.1"]
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'uitrees',

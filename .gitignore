@@ -7,3 +7,5 @@ __pycache__
 SEO.txt
 images
 .env
+media
+development.py

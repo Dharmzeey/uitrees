@@ -72,6 +72,10 @@ input, button, textarea, select {
   background-color: transparent;
 }
 
+input[type=submit], .btn {
+ cursor: pointer; 
+}
+
 button {
   width: 8rem;
   background-color: var(--secondary-background-color);

@@ -4,6 +4,13 @@ A django project which contains trees in the University of Ibadan
 
 It is a documentation of the trees in the University of Ibadan Environment
 
+Quick Video:
+
+https://user-images.githubusercontent.com/68395177/192107002-ce2188bb-2c16-484d-84b4-df50bb439756.mp4
+
+You can watch detailed video here:
+
+[Video](https://www.youtube.com/embed/VGAk1o3rU2I)
 
 This project is a Django based web application which employs different django functionality.
 Which Includes CRUD, User Auth, Restricted information for users
