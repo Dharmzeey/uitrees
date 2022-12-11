@@ -53,7 +53,7 @@ These will return result strictly based on the search restriction
 ![Tree Request](https://github.com/Dharmzeey/dharmzeey/blob/master/public//images/uitrees/request-tree.png)
 ## **Request Tree Name**
 
-Check out the web page [HERE](https://uitrees.herokuapp.com)
+Check out the web page [HERE](https://uitrees.up.railway.app)
 
 ## Frameworks
 - Django

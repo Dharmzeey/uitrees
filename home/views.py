@@ -98,6 +98,10 @@ class HomeView(View):
             # 'total_len': total_len,
             # 'page_number': int(page_number)
         }
+        if not search_tree_place:
+            context.update({'search_error': 'There are no suggestions'})
+        else:
+            pass
 
         return render(request, self.template_name, context)
 
