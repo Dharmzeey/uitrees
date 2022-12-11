@@ -1,13 +1,14 @@
 from django.db import models
 from django.conf import settings
 from django.core.validators import RegexValidator
+from django_resized import ResizedImageField
 
 User = settings.AUTH_USER_MODEL
 
 
 class Profile(models.Model):
   owner = models.OneToOneField(User, on_delete=models.CASCADE)
-  picture = models.ImageField(default="icons/avatar.png", upload_to="images/contributors")
+  picture = ResizedImageField(size=[200, 200], default="icons/avatar.png", upload_to="images/contributors")
   name = models.CharField(max_length=70, null=True)
   about = models.TextField(null=True, blank=True)
   mail = models.EmailField(null=True, unique=True)
@@ -21,3 +22,6 @@ class Profile(models.Model):
 
   def __str__(self):
     return str(self.owner)
+  
+  class Meta:
+    ordering = ["owner"]

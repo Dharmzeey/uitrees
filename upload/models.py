@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator
+from django_resized import ResizedImageField
 
 from trees.models import Tree
 # THIS BELOW IS A PACKAGE THAT CONTAINS A FUNCTION THAT
@@ -20,19 +21,19 @@ class Upload(models.Model):
         default=0,
         validators=[MinValueValidator(1)]
     )
-    tree_picture = models.ImageField(upload_to='images/uploads/%Y/%m/%d/')
-    tree_picture2 = models.ImageField(upload_to='images/uploads/%Y/%m/%d/', null=True, blank=True)
-    tree_picture3 = models.ImageField(upload_to='images/uploads/%Y/%m/%d/', null=True, blank=True)
+    tree_picture = ResizedImageField(size=[400, None], upload_to='images/uploads/%Y/%m/%d/')
+    tree_picture2 = ResizedImageField(size=[500, None], upload_to='images/uploads/%Y/%m/%d/', null=True, blank=True)
+    tree_picture3 = ResizedImageField(size=[500, None], upload_to='images/uploads/%Y/%m/%d/', null=True, blank=True)
 
-    def save(self, *args, **kwargs):
-        if 'uploads/' not in self.tree_picture.url:
-            new_image = compress(self.tree_picture)
-            self.tree_picture = new_image
-            new_image2 = compress(self.tree_picture2)
-            self.tree_picture2 = new_image2
-            new_image3 = compress(self.tree_picture3)
-            self.tree_picture3 = new_image3
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     if 'uploads/' not in self.tree_picture.url:
+    #         new_image = compress(self.tree_picture)
+    #         self.tree_picture = new_image
+    #         new_image2 = compress(self.tree_picture2)
+    #         self.tree_picture2 = new_image2
+    #         new_image3 = compress(self.tree_picture3)
+    #         self.tree_picture3 = new_image3
+    #     super().save(*args, **kwargs)
     health_status = models.ForeignKey(TreeStatus, on_delete=models.SET_NULL, null=True)
 
     location_name = models.CharField(max_length=80)

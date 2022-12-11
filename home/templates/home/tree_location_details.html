@@ -1,4 +1,5 @@
 {% extends 'base/base.html' %}
+{% load social_share %}
 {% block content %}
 
 {% block title %}
@@ -10,63 +11,100 @@
 <div class="flex-container">
   <div>
     <h2 class="heading">{{ result }}</h2>
-    
+
     <div class="tree-brief-info">
-        <p class="heading">Location Information</p>
-        <div class="caption">
-            <p><img src="{{ result.tree_picture.url }}" height="300" alt="{{ genus_specie }} Tree at University of Ibadan"></p>
-        <p>The Tree could be found at:  {{ result.location_name }}</p>
-        <p>Detailed description of the location:  {{ result.location_description }}</p>
+      <p class="heading">Location Information</p>
+      <div class="caption flex">
+        <p><img src="{{ result.tree_picture.url }}" height="300" alt="{{ genus_specie }} Tree at University of Ibadan"></p>
+        <p>The Tree could be found at: {{ result.location_name }}</p>
+        <p>Detailed description of the location: {{ result.location_description }}</p>
         <P> Tree Health Status: {{ result.health_status }}</P>
-        <div> Uploaded by:<a href="{% url 'home:contributors' %}#{{ result.uploader }}">  {{ result.uploader }} </a>
+        <div> Uploaded by:<a href="{% url 'home:contributors' %}#{{ result.uploader }}"> {{ result.uploader }} </a>
         </div>
+      </div>
+
+      <br>
+      <hr>
+
+      <div class="heading">Tree Information</div>
+      <ul class="flex tree-details">
+        <li> Common Name: {{ tree_info.common_name }}</li>
+
+        <li> Local Name: {{ tree_info.local_name }}</li>
+
+        <li> Authority: {{ tree_info.authority }}</li>
+
+        <li> Order: {{ tree_info.tree_order }}</li>
+
+        <li> Family: {{ tree_info.tree_family }}</li>
+
+        <li> Conservation Status: {{ tree_info.conservation_status }}</li>
+
+        <li> Specie Status: {{ tree_info.specie_status }}</li>
+
+        {% if tree_info.pharmacological_details %}
+        <li class="font"> Pharmacological Details:
+          <span>
+            <button class="read-more">
+              <a href="{% url 'home:pharmacology' tree_info.id %}">Read Up</a>
+            </button>
+          </span>
+        </li>
+        {% endif %}
+
+        {% if tree_info.reference %}
+        <li class="font"> More About {{ tree_info }} ??:
+          <span>
+            <button class="read-more">
+              <a href="{{ tree_info.reference }}">Read Up</a>
+            </button>
+          </span>
+        </li>
+        {% endif %}
+
+      </ul>
+    </div>
+    <div>
+      SHARE PAGE
+      <div class="social-links flex">
+        <div class="social-link-item flex">
+          {% post_to_linkedin object_or_url %} 
+        </div>
+        <div class="social-link-item flex">
+          <i class="fa-brands fa-telegram"></i>
+          {% post_to_telegram "Tree: {{tree_info.scientific_name}} at {{result.location_name}} at University of Ibadan" object_or_url "Telegram" %}
+        </div>
+        <div class="social-link-item flex">
+          <i class="fa-brands fa-twitter"></i>
+          {% post_to_twitter "Tree: {{tree_info.scientific_name}} at {{result.location_name}} at University of Ibadan" object_or_url "Twitter" %}
+        </div>
+        <div class="social-link-item flex">
+          <i class="fa-brands fa-whatsapp"></i>
+          {% post_to_whatsapp object_or_url "WhatsApp" %}
+        </div>
+        <div class="social-link-item flex">
+          <i class="fa-solid fa-envelope"></i>
+          {% send_email "{{tree_info}} Tree" "Here is {{tree_info}} Tree found at {{result.location_name}} in University of Ibadan" object_or_url "Email" %}
+        </div>
+        <div class="social-link-item flex">
+          <i class="fa-brands fa-facebook"></i>
+          {% post_to_facebook object_or_url "Facebook" %}
+        </div>
+        <!-- <div class="social-link-item flex">
+          <i class="fa-brands fa-pinterest"></i>
+          {% save_to_pinterest object_or_url "Pinterest" %}
+        </div> -->
+        <!-- <div class="social-link-item flex">
+        <i class="fa-solid fa-clipboard"></i>
+        {% copy_to_clipboard object_or_url "Copy" %}
+        {% add_copy_script %}
+        </div> -->
+      </div>
     </div>
 
-    <br>
-    <hr>
-
-    <div class="heading">Tree Information</div>
-    <ul class="flex tree-details">
-      <li> Common Name: {{ tree_info.common_name }}</li>
-      
-      <li> Local Name: {{ tree_info.local_name }}</li>
-      
-      <li> Authority: {{ tree_info.authority }}</li>
-      
-      <li> Order: {{ tree_info.tree_order }}</li>
-      
-      <li> Family: {{ tree_info.tree_family }}</li>
-      
-      <li> Conservation Status: {{ tree_info.conservation_status }}</li>
-      
-      <li> Specie Status: {{ tree_info.specie_status }}</li>
-      
-      {% if tree_info.pharmacological_details %}
-      <li class="font"> Pharmacological Details:
-        <span>
-          <button class="read-more">
-            <a href="{% url 'home:pharmacology' tree_info.id %}" >Read Up</a>
-          </button>
-        </span>
-      </li>
-      {% endif %}
-
-      {% if tree_info.reference %}
-      <li class="font"> More About {{ tree_info }} ??:
-        <span>
-          <button class="read-more">
-            <a href="{{ tree_info.reference }}" >Read Up</a>
-          </button>
-        </span>
-      </li>
-      {% endif %}
-      
-    </ul>
+    <div id="time-created-updated">
+      <p>This page was created on: {{ tree_info.created }} and last updated on: {{ tree_info.last_updated }}</p>
+    </div>
   </div>
-  
-  <div id="time-created-updated">
-    <p>This page was created on: {{ tree_info.created }} and last updated on: {{ tree_info.last_updated }}</p>
-  </div>
-</div>
 
-{% endblock  %}
+  {% endblock %}

@@ -19,7 +19,7 @@ class CreateTree(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.uploader = self.request.user
-        messages.success(self.request, "Uploaded Successfully")
+        messages.success(self.request, "Tree Uploaded Successfully")
         return super(CreateTree, self).form_valid(form)
 
 

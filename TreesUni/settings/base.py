@@ -28,6 +28,7 @@ INSTALLED_APPS = [
 
     'django_extensions',
     'django_cleanup.apps.CleanupConfig',
+    'django_social_share',
 ]
 
 # AUTH_USER_MODEL = 'authority.MyUserCreationModel'

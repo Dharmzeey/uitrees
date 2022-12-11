@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 {% load static %}
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -24,7 +24,7 @@
   {% endfor %}
 </div>
 
-<div class="tree-picture-info">
+<div class="tree-picture-info flex">
   <div>Tree Health Status: {{ health }}</div>
   <div>Location Description: {{ description }}</div>
   <div> Uploaded by:<a href="{% url 'home:contributors' %}#{{ uploader }}" target="_blank">  {{ uploader }} </a>

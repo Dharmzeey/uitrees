@@ -50,7 +50,7 @@ body {
   letter-spacing: 1px;
   padding: 5px;
   margin-left: 0.1rem;
-  transition: background-color .35s ease-in-out, color .3s ease-in-out;
+  transition: background .35s ease-in-out;
 }
 
 /* || GENERAL STYLES */
@@ -72,8 +72,14 @@ input, button, textarea, select {
   background-color: transparent;
 }
 
-input[type=submit], .btn {
+input[type=submit] {
  cursor: pointer; 
+ transition: background .35s ease-in;
+}
+
+input[type=submit]:hover, .btn:hover {
+  background-color: var(--hover-light-color);
+  color: var(--primary-background-color);
 }
 
 button {
@@ -301,16 +307,19 @@ li#upload_options {
 
 /* //  THIS IS WHERE THE HOME.HTML PAGE IS STYLED AND ALSO FOR SPECIFIC SEARCH.HTML*/
 .search-result {
-  min-height: 60vh;
+  min-height: 10vh;
 }
 
 .search-result ul {
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .result-counter {
   font-size: var(--font-size-xsm);
+  padding-bottom: 1rem;
+  font-weight: bolder;
+  color: red;
 }
 
 .pagination {
@@ -351,11 +360,18 @@ iframe {
 
 .caption {
   font-size: var(--font-size-xxsm);
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .tree-details {
   flex-direction: column;
   gap: var(--gap);
+}
+
+.tree-details {
+  flex-direction: column;
+  gap: 2rem;
 }
 
 button.read-more {
@@ -378,9 +394,60 @@ button.read-more:hover {
   margin-top: var(--margin-lg);
 }
 
+/* SOCIAL LINKS */
+.social-links {
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.fa-telegram, .fa-facebook{
+  color: blue;
+}
+
+.fa-twitter {
+  color: rgb(72, 72, 200);
+}
+
+.fa-whatsapp {
+  color: green;
+}
+
+.fa-envelope {
+  color: red;
+}
+
+.social-link-item {
+  position: relative; /* I DID THIS COZ OF THE LINKS THAT I WANT TO MAKE ABSOLUTE */
+  padding: 1rem;
+  border: 1px solid var(--light-color);
+  width: 100%;
+  border-radius: 5px;
+  gap: 1rem;
+}
+
+div[class$="this"] > a {
+  position: absolute;
+  padding: 1.3rem 7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: background .35s ease-in;
+}
+
+div[class$="this"] > a:hover{
+  background-color: var(--light-color);
+  color: var(--primary-background-color);
+}
+
 /* // TREE PICTURE.HTML */
 .tree-picture-info, .special-place-info {
   font-size: var(--font-size-xsm);
+  flex-direction: column;
+  gap: 1rem;
 }
 
 #img-pic-container img {
@@ -482,6 +549,11 @@ button.read-more:hover {
     margin-left: 30%;
     padding-top: 2rem;
     min-height: 85vh;
+  }
+
+  /* SOCIAL LINKS */
+  .social-link-item {
+    width: 30%;
   }
 
   /* THIS BELOW ACTIVATES THE GRID OF TREE DETAILS WHEN WE ARE ON 800PX AND ABOVE AND THE IFRAME IS ACTIVE
