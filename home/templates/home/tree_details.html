@@ -72,10 +72,12 @@
           {% endfor %}
         </ul>
       </div>
+      
       <div>
         SHARE PAGE
         <div class="social-links flex">
           <div class="social-link-item flex">
+            <i class="fa-brands fa-linkedin"></i>
             {% post_to_linkedin object_or_url %}
           </div>
           <div class="social-link-item flex">
@@ -109,58 +111,57 @@
         </div> -->
         </div>
 
-
-        <!--PAGINATOR CONTROL STARTS HERE-->
-        <div class="paginator">
-          {% if tree_location.has_other_pages %}
-          <ul class="pagination flex">
-            {% if tree_location.has_previous %}
-            <li class="page-item">
-              <a class="page-link" href="?page={{ 1 }}">First</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="?page={{ tree_location.previous_page_number }}">&laquo;</a>
-            </li>
-            {% else %}
-            <li class="disabled"><span>&laquo;</span></li>
-            {% endif %}
-
-            {% for i in tree_location.paginator.page_range %}
-            {% if tree_location.number == i %}
-            <li class="page-item active-page"><a class="page-link">{{ i }}</a></li>
-            {% else %}
-            <li class="page-item">
-              <a class="page-link" href="?page={{ i }}">{{ i }}</a>
-            </li>
-            {% endif %}
-            {% endfor %}
-
-
-            {% if tree_location.has_next %}
-            <li class="page-item">
-              <a class="page-link" href="?page={{ tree_location.next_page_number }}">&raquo;</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="?page={{ tree_location.paginator.num_pages }}">Last</a>
-            </li>
-            {% else %}
-            <li class="disabled"><span>&raquo;</span></li>
-            {% endif %}
-          </ul>
-
+      <!--PAGINATOR CONTROL STARTS HERE-->
+      <div class="paginator">
+        {% if tree_location.has_other_pages %}
+        <ul class="pagination flex">
+          {% if tree_location.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ 1 }}">First</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="?page={{ tree_location.previous_page_number }}">&laquo;</a>
+          </li>
+          {% else %}
+          <li class="disabled"><span>&laquo;</span></li>
           {% endif %}
 
-        </div>
-        <!--PAGINATOR CONTROL ENDS HERE-->
+          {% for i in tree_location.paginator.page_range %}
+          {% if tree_location.number == i %}
+          <li class="page-item active-page"><a class="page-link">{{ i }}</a></li>
+          {% else %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+          </li>
+          {% endif %}
+          {% endfor %}
+
+
+          {% if tree_location.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ tree_location.next_page_number }}">&raquo;</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="?page={{ tree_location.paginator.num_pages }}">Last</a>
+          </li>
+          {% else %}
+          <li class="disabled"><span>&raquo;</span></li>
+          {% endif %}
+        </ul>
+
+        {% endif %}
+
       </div>
-
+      <!--PAGINATOR CONTROL ENDS HERE-->
     </div>
 
-    <div id="time-created-updated">
-      <p>This page was created on: {{ tree_info.created }} and last updated on: {{ tree_info.last_updated }}</p>
-    </div>
   </div>
 
+  <div id="time-created-updated">
+    <p>This page was created on: {{ tree_info.created }} and last updated on: {{ tree_info.last_updated }}</p>
+  </div>
+</div>
 
 
-  {% endblock %}
+
+{% endblock %}

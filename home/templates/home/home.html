@@ -20,9 +20,9 @@
   <ul class="flex">
     {% for tree in search_result %}
     {% if tree.scientific_name %}
-    <li><a href="{% url 'home:tree-details' tree.id%}">{{ tree }}</a></li>
+    <li><a href="{% url 'home:tree-details' tree.id %}">{{ tree }}</a></li>
     {% else %}
-    <li><a href="{% url 'home:tree-location-details' tree.id%}">{{ tree }}</a></li>
+    <li><a href="{% url 'home:tree-location-details' tree.id %}">{{ tree }}</a></li>
     {% endif %}
     {% endfor %}
   </ul>

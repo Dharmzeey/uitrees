@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 from django.core.validators import MinValueValidator
 from django_resized import ResizedImageField
@@ -16,6 +17,7 @@ class TreeStatus(models.Model):
 
 
 class Upload(models.Model):
+    id = models.UUIDField(editable=False, default=uuid.uuid4, unique=True, primary_key=True)
     tree_name = models.ForeignKey(Tree, on_delete=models.SET_NULL, null=True)
     tree_count = models.IntegerField(
         default=0,
