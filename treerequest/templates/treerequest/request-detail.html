@@ -1,0 +1,31 @@
+{% extends 'base/base.html' %}
+{% block title %}
+<title>
+  Tree Request Details | Trees in UI
+</title>
+{% endblock %}
+{% block content %}
+
+<div>
+  <div>Loaction Name: {{ tree.location_name }}</div>
+  <div>Location Description: {{ tree.location_description }}</div>
+  <div><img src="{{ tree.tree_picture.url }}" alt="Tree in UI"></div>
+  {% if tree.tree_picture2 %}
+  <div><img src="{{ tree.tree_picture2.url }}" alt="Tree in UI"></div>
+  {% endif %}
+
+  <div>
+    Coordinates
+    <div>
+      <div>Latitude: {{ tree.latitude }}</div>
+      <div>Longitude: {{ tree.longitude }}</div>
+      <span>Check Location on <a href="http://maps.google.com?q={{ tree.coordinates }}" target="_blank">Google Maps</a> </span>
+    </div>
+  </div>
+
+  <div>Do you want to name the tree and validate the request? <span>
+    <a href="">Yes</a>
+  </span></div>
+</div>
+
+{% endblock %}

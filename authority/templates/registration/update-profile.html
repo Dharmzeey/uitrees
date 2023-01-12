@@ -1,0 +1,18 @@
+{% extends 'base/base.html' %}
+{% block title %}
+<title>
+  Update Profile | Trees in UI
+</title>
+{% endblock %}
+
+{% block content %}
+
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+    {{ form.as_table}}
+    </table>
+    <input type="submit" value="Submit">
+</form>
+
+{% endblock  %}

@@ -7,7 +7,7 @@ urlpatterns = [
 
     path('', views.HomeView.as_view(), name='home'),
     path('specific-search/<int:pk>/', views.SpecificSearch.as_view(), name='specific-search'),
-    path('tree-details/<int:pk>/', views.TreeDetails.as_view(), name='tree-details'),
+    path('tree-details/<str:pk>/', views.TreeDetails.as_view(), name='tree-details'),
     path('tree-picture/<str:pk>/', views.TreeLocationPicture.as_view(), name='tree-picture'),
 
     path('tree-location-details/<str:pk>/', views.TreeLocationDetails.as_view(), name='tree-location-details'),

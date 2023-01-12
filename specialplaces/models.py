@@ -15,9 +15,9 @@ class SpecialPlace(models.Model):
         default=0,
         validators=[MinValueValidator(1)]
     )
-    tree_picture = ResizedImageField(size=[400, None], upload_to='images/specials/%Y/%m/%d/')
+    tree_picture = ResizedImageField(size=[800, None], upload_to='images/specials/%Y/%m/%d/')
     tree_picture2 =ResizedImageField(size=[500, None], upload_to='images/specials/%Y/%m/%d/', null=True, blank=True)
-    tree_picture3 = ResizedImageField(size=[500, None], upload_to='images/specials/%Y/%m/%d/', null=True, blank=True)
+    tree_picture3 = ResizedImageField(size=[400, None], upload_to='images/specials/%Y/%m/%d/', null=True, blank=True)
 
     # I COMMENTED THIS OUT COZ I ALREADY IT WITH DJANGO_RESIZED
     # def save(self, *args, **kwargs):

@@ -1,12 +1,15 @@
 {% extends 'base/base.html' %}
 {% block title %}
 <title>
-  Update Profile | Trees in UI
+  Register | Trees in UI
 </title>
 {% endblock %}
 
 {% block content %}
 
+<div class="register-heading">
+  <h2>Create a Profile</h2><span> <a href="{% url 'auth:login' %}">Login</a></span>
+</div>
 <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <table>

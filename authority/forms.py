@@ -4,10 +4,10 @@ from django.forms import ModelForm, Textarea
 from django import forms
 from django.contrib.auth.models import User
 
-from .models import Profile
+from .models import User
 
 
-class ProfileCreateForm(UserCreationForm):
+class UserCreateForm(UserCreationForm):
   class Meta:
     model = User
     fields = ("username", "email", "password1", "password2")
@@ -20,11 +20,10 @@ class ProfileCreateForm(UserCreationForm):
     return email
 
 
-class ProfileUpdateForm(ModelForm):
+class UserUpdateForm(ModelForm):
   class Meta:
-    model = Profile
-    fields = "__all__"
-    exclude = ('owner',)
+    model = User
+    fields = ["first_name", "last_name", "picture", "about", "tel", "website", "git_link", "tw_link", "ig_link", "fb_link"]
     
     widgets = {
     "about": forms.Textarea(attrs={'rows': '5'})

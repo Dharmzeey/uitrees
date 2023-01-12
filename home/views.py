@@ -8,7 +8,7 @@ from django.views.decorators.clickjacking import xframe_options_sameorigin
 from trees.models import Tree
 from .models import Search
 from upload.models import Upload
-from authority.models import Profile
+from authority.models import User
 
 from utilities.sequence_sort import mysorttree, mysortplace
 
@@ -394,7 +394,7 @@ class TreeContributor(View):
     template_name = 'home/contributors.html'
 
     def get(self, request):
-        contributors = Profile.objects.all()
+        contributors = User.objects.all()
         context = {
             'contributors': contributors
         }

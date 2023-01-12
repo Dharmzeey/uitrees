@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 from django.core.validators import MinLengthValidator
 
@@ -6,6 +7,8 @@ from django.core.validators import MinLengthValidator
 
 class Class(models.Model):
     tree_class = models.CharField(max_length=50)
+    class Meta:
+        verbose_name_plural = "class"
 
     def __str__(self):
         return self.tree_class
@@ -20,6 +23,8 @@ class Order(models.Model):
 
 class Family(models.Model):
     tree_family = models.CharField(max_length=50)
+    class Meta:
+        verbose_name_plural = "families"
 
     def __str__(self):
         return self.tree_family
@@ -47,6 +52,7 @@ class SpecieStatus(models.Model):
 
 
 class Tree(models.Model):
+    id = models.UUIDField(editable=False, default=uuid.uuid4, unique=True, primary_key=True)
     scientific_name = models.CharField(
         max_length=100,
         help_text='Enter Generic, Specific and Author',

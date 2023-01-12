@@ -32,7 +32,7 @@ urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path('upload/', include('upload.urls')),
     path('special/', include('specialplaces.urls')),
-    path('treerequest', include('treerequest.urls')),
+    path('treerequest/', include('treerequest.urls')),
 
 
 
