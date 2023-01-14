@@ -60,10 +60,6 @@ a {
   text-decoration: none;
 }
 
-p {
-  line-height: 3rem;
-}
-
 img {
   max-width: 100%;
 }
@@ -560,10 +556,6 @@ div[class$="this"] > a:hover{
   margin: 0;
   padding: 0;
   line-height: 0;
-}
-
-.total-request {
-  margin: 1.5rem 0;
 }
 
 /* MEDIA QUERY STARTS HERE */

@@ -3,8 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <!-- <link rel="stylesheet" href="{% static 'styles/style.css' %}" /> -->
-  <link rel="stylesheet" href="{% static 'styles/style2.css' %}" />
+  <link rel="stylesheet" href="{% static 'styles/style.css' %}" />
   <link rel="shortcut icon" href="{% static 'images/icons/icon.jpg' %}" type="image/jpg"/>
   <title> {{ tree_info.scientific_name }} | Trees in UI </title>
 </head>
@@ -27,10 +26,9 @@
 <div class="tree-picture-info flex">
   <div>Tree Health Status: {{ health }}</div>
   <div>Location Description: {{ description }}</div>
-  <div> Uploaded by:<a href="{% url 'home:contributors' %}#{{ uploader }}" target="_blank">  {{ uploader }} </a>
+  <div> Uploaded by:<a href="{% url 'home:contributors' %}#{{ uploaded_by }}" target="_blank">  {{ uploaded_by }} </a>
   </div>
 </div>
 
 </body>
 </html>
-

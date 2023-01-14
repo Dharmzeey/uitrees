@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     'upload.apps.UploadConfig',
     'treerequest.apps.TreerequestConfig',
     'specialplaces.apps.SpecialplacesConfig',
-    'authority.apps.AuthorityConfig',
+    'user.apps.UserConfig',
 
     'django_extensions',
     'django_cleanup.apps.CleanupConfig',
@@ -48,7 +48,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'TreesUni.urls'
-AUTH_USER_MODEL = 'authority.User'
+AUTH_USER_MODEL = 'user.User'
 
 TEMPLATES = [
     {
@@ -122,4 +122,3 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

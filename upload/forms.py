@@ -2,8 +2,8 @@ from django.forms import ModelForm
 from .models import Upload
 
 
-class CreateModelForm(ModelForm):
+class UploadTreeForm(ModelForm):
     class Meta:
         model = Upload
         fields = '__all__'
-        exclude = ('uploader',)
+        exclude = ('uploaded_by', 'requested_by')

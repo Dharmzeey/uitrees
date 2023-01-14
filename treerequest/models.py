@@ -12,11 +12,12 @@ from utilities.compressor import compress
 
 class RequestTree(models.Model):
     id = models.UUIDField(editable=False, default=uuid.uuid4, unique=True, primary_key=True)
-    requester = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    requester = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name="requester")
     location_name = models.CharField(max_length=100)
     location_description = models.TextField()
     tree_picture = ResizedImageField(size=[700, None], upload_to='images/request/%Y/%m/%d')
     tree_picture2 = ResizedImageField(size=[500, None], upload_to='images/request/%Y/%m/%d/', null=True, blank=True)
+    
 
     # def save(self, *args, **kwargs):
     #     new_image = compress(self.tree_picture)
@@ -28,8 +29,10 @@ class RequestTree(models.Model):
     coordinates = models.CharField(max_length=30, null=True, blank=True)
     latitude = models.CharField(max_length=30, null=True, blank=True)
     longitude = models.CharField(max_length=30, null=True, blank=True)
+    
+    validated = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'{self.requester} - {self.location_name}'
+        return f'{self.location_name}'
 
 

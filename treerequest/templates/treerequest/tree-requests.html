@@ -7,11 +7,16 @@
 {% block content %}
 
 <div>
+  {% if tree_requests %}
+  <h2>Here are the recent request for Tree Names</h2>
   <ul>
     {% for request in tree_requests %}
     <li><a href="{% url 'treerequest:request_details' request.id %}">{{ request }}</a></li>
     {% endfor %}
   </ul>
+  {% else %}
+  <p>There are not new Tree Name request</p>
+  {% endif %}
 </div>
 
 {% endblock %}

@@ -2,25 +2,47 @@ from django.shortcuts import render
 from django.views.generic import CreateView
 from django.views import View
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
+from django.conf import settings
+
+# User = settings.AUTH_USER_MODEL
+from user.models import User
+from treerequest.models import RequestTree
+
+from utilities.mixins import AdminRequiredMixin
 
 from .models import Upload
-from .forms import CreateModelForm
+from .forms import UploadTreeForm
 
 # Create your views here.
 
 
-class CreateTree(LoginRequiredMixin, CreateView):
+class CreateTree(AdminRequiredMixin, CreateView):
     # model = Upload
-    form_class = CreateModelForm
+    form_class = UploadTreeForm
     success_url = reverse_lazy('upload:upload')
     template_name = 'upload/upload_form.html'
 
     def form_valid(self, form):
-        form.instance.uploader = self.request.user
+        form.instance.uploaded_by = self.request.user
+        form.save()
         messages.success(self.request, "Tree Uploaded Successfully")
         return super(CreateTree, self).form_valid(form)
+    
+class UploadTreeRequest(AdminRequiredMixin, CreateView):
+    form_class = UploadTreeForm
+    success_url = reverse_lazy('upload:upload')
+    template_name = 'upload/upload_form.html'
+
+    def form_valid(self, form):
+        form.instance.uploaded_by = self.request.user
+        request_id = RequestTree.objects.get(id=self.kwargs['pk'])
+        form.instance.requested_by = request_id.requester
+        form.save()
+        request_id.validated = True
+        request_id.save()
+        messages.success(self.request, "Tree Request Uploaded Successfully")
+        return super(UploadTreeRequest, self).form_valid(form)
 
 
 # class CreateFormTree(View):

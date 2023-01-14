@@ -7,6 +7,7 @@
 {% block content %}
 
 <div>
+  <h2>Tree Name request by {{ tree.requester }}</h2>
   <div>Loaction Name: {{ tree.location_name }}</div>
   <div>Location Description: {{ tree.location_description }}</div>
   <div><img src="{{ tree.tree_picture.url }}" alt="Tree in UI"></div>
@@ -24,7 +25,7 @@
   </div>
 
   <div>Do you want to name the tree and validate the request? <span>
-    <a href="">Yes</a>
+    <a href="{% url 'upload:upload_request' tree.id %} ">YES</a>
   </span></div>
 </div>
 

@@ -5,7 +5,8 @@ app_name = 'upload'
 
 urlpatterns = [
     path('', views.CreateTree.as_view(), name='upload'),
-    path('success', views.Success.as_view(), name='success')
+    path('request/<str:pk>/', views.UploadTreeRequest.as_view(), name='upload_request'),
+    path('success', views.Success.as_view(), name='success'),
 ]
 
 

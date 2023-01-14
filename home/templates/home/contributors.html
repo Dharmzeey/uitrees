@@ -10,55 +10,55 @@
 <h2 class="center">Contributors</h2>
 
 <div id="contributor-container">
-  {% for contributor in contributors %}
+  {% for contributor in uploaders %}
 
   <div id="{{ contributor.user.username }}">
     <div class="contributor-center-profile">
       <div class="picture-container">
         <img src="{{ contributor.picture.url }}" alt=" {{ contributor.name }}'s Picture">
       </div>
-      <h5> {{ contributor.user.username }} </h5>
-      <h5> {{ contributor.name }} </h5>
+      <h5> {{ contributor.username }} </h5>
+      <p> {{ contributor.first_name }} {{ contributor.last_name }} </p>
 
       <!-- SOCIAL LINKS -->
       <div class="social">
         <ul class="flex">
-          {% if contributor.mail %}
+          {% if contributor.email %}
           <li class="list-item">
-            <a target="_blank" class="list-link" href="mailto:{{ contributor.mail }}"><i class="ri-mail-unread-line"></i></a>
+            <a target="_blank" class="list-link" href="mailto:{{ contributor.email }}"><i class="ri-mail-unread-line"></i></a>
           </li>
           {% endif %}
-  
+
           {% if contributor.tel %}
           <li class="list-item">
             <a target="_blank" class="list-link" href="tel:{{ contributor.tel }}"><i class="ri-cellphone-line"></i></a>
           </li>
           {% endif %}
-  
+
           {% if contributor.website %}
           <li class="list-item">
             <a target="_blank" class="list-link" href="{{ contributor.website }}"><i class="ri-globe-line"></i></a>
           </li>
           {% endif %}
-  
+
           {% if contributor.git_link %}
           <li class="list-item">
             <a target="_blank" class="list-link" href="{{ contributor.git_link }}"><i class="ri-github-line"></i></a>
           </li>
           {% endif %}
-  
+
           {% if contributor.tw_link %}
           <li class="list-item">
             <a target="_blank" class="list-link" href="{{ contributor.tw_link }}"><i class="ri-twitter-line"></i></a>
           </li>
           {% endif %}
-      
+
           {% if contributor.ig_link %}
           <li class="list-item">
             <a target="_blank" class="list-link" href="{{ contributor.ig_link }}"><i class="ri-instagram-line"></i></a>
           </li>
           {% endif %}
-  
+
           {% if contributor.fblink %}
           <li class="list-item">
             <a target="_blank" class="list-link" href="{{ contributor.fb_link }}"><i class="ri-facebook-circle-line"></i></a>
@@ -66,15 +66,30 @@
           {% endif %}
         </ul>
       </div>
-  
-
     </div>
-    
-    <div> {{ contributor.about }} </div>
+
+    {% if contributor.about %}
+    <p> {{ contributor.about }} </p>
+    {% endif %}
   </div>
   <br>
   {% endfor %}
 </div>
 
+<div>
+  <br><br>
+  <h2 class="center">Requesters</h2>
+  <div class="requester-container">
+    {% for contributor in requesters %}
+    <a href="{% url 'user:requester_details' contributor.id %}">
+      <div class="requester-info">
+        <div><img src="{{ contributor.picture.url }}" alt="{{ contributor }}"></div>
+        <p>{{ contributor }}</p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
 
-{% endblock  %}
+
+{% endblock %}

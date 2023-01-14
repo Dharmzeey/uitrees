@@ -2,11 +2,12 @@ from django.shortcuts import render
 from django.views import View
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 
+from utilities.mixins import AdminRequiredMixin
+
 from .models import SpecialPlace
-from .forms import CreateSpecialForm
+from .forms import UploadSpecialPlaceForm
 # Create your views here.
 
 
@@ -35,8 +36,8 @@ class SpecialDetails(View):
         return render(request, self.template_name, context)
 
 
-class CreateSpecial(LoginRequiredMixin, CreateView):
-    form_class = CreateSpecialForm
+class CreateSpecial(AdminRequiredMixin, CreateView):
+    form_class = UploadSpecialPlaceForm
     success_url = reverse_lazy('special:special')
     template_name = 'specialplaces/specialplace_form.html'
 

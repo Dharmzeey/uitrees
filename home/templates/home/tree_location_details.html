@@ -19,7 +19,7 @@
         <p>The Tree could be found at: {{ result.location_name }}</p>
         <p>Detailed description of the location: {{ result.location_description }}</p>
         <P> Tree Health Status: {{ result.health_status }}</P>
-        <div> Uploaded by:<a href="{% url 'home:contributors' %}#{{ result.uploader }}"> {{ result.uploader }} </a>
+        <div> Uploaded by:<a href="{% url 'home:contributors' %}#{{ result.uploaded_by }}"> {{ result.uploaded_by }} </a>
         </div>
       </div>
 

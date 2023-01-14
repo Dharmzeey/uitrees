@@ -8,7 +8,7 @@ from django.views.decorators.clickjacking import xframe_options_sameorigin
 from trees.models import Tree
 from .models import Search
 from upload.models import Upload
-from authority.models import User
+from user.models import User
 
 from utilities.sequence_sort import mysorttree, mysortplace
 
@@ -349,14 +349,14 @@ class TreeLocationPicture(View):
         desc = result.location_description
         genus_specie = result.tree_name.genus_specie
         health = result.health_status
-        uploader = result.uploader
+        uploaded_by = result.uploaded_by
 
         context = {
             'pictures': [picture, picture2, picture3],
             'description': desc,
             'genus_specie': genus_specie,
             'health': health,
-            'uploader': uploader
+            'uploaded_by': uploaded_by
         }
         try:
             if type(float(coord[0:4])) == float:
@@ -394,9 +394,11 @@ class TreeContributor(View):
     template_name = 'home/contributors.html'
 
     def get(self, request):
-        contributors = User.objects.all()
+        uploaders = User.objects.filter(is_superuser=True)
+        requesters = set(User.objects.filter(requester__isnull=False))
         context = {
-            'contributors': contributors
+            'uploaders': uploaders,
+            'requesters': requesters,
         }
         return render(request, self.template_name, context)
 

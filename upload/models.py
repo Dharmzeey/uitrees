@@ -2,12 +2,14 @@ import uuid
 from django.db import models
 from django.core.validators import MinValueValidator
 from django_resized import ResizedImageField
+from django.conf import settings
 
 from trees.models import Tree
 # THIS BELOW IS A PACKAGE THAT CONTAINS A FUNCTION THAT
 # I MANUALLY CREATE TO COMPRESS Images
 from utilities.compressor import compress
 
+User = settings.AUTH_USER_MODEL
 
 class TreeStatus(models.Model):
     status = models.CharField(max_length=10)
@@ -44,7 +46,8 @@ class Upload(models.Model):
     latitude = models.CharField(max_length=30, null=True, blank=True)
     longitude = models.CharField(max_length=30, null=True, blank=True)
     time_now = models.DateTimeField(auto_now=True)
-    uploader = models.CharField(max_length=50, null=True, blank=True)
+    uploaded_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="uploaded_by")
+    requested_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="requested_by")
 
     class Meta:
         ordering = ['location_name']

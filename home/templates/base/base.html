@@ -65,7 +65,7 @@
       <aside id="aside" class="menu ">
         {% if request.user.is_authenticated %}
         <div class="user-pic">
-          <a href="{% url 'auth:update' %}">
+          <a href="{% url 'user:update' %}">
             <img src="{{ request.user.picture.url }}" alt="profile">
           </a>
           <p>Profile</p>
@@ -97,7 +97,7 @@
           {% if request.user.is_authenticated %}
           <li><a href="{% url 'logout' %}">Logout</a>
             {% else %}
-          <li><a href="{% url 'login' %}">Login</a></li>
+          <li><a href="{% url 'user:login' %}">Login</a></li>
           {% endif %}
         </ul>
 

@@ -26,7 +26,7 @@ urlpatterns = [
     # path('logout', auth_views.LogoutView.as_view(), name='logout'),
 
     path('azeezat/', admin.site.urls),
-    path('auth/', include('authority.urls')),
+    path('user/', include('user.urls')),
 
     path('', include('home.urls')),
     path('', include('django.contrib.auth.urls')),
