@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 
 from utilities.mixins import AdminRequiredMixin
+from utilities.location_validator import validate_location
 
 from .models import SpecialPlace
 from .forms import UploadSpecialPlaceForm
@@ -43,5 +44,13 @@ class CreateSpecial(AdminRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.uploader = self.request.user
-        messages.success(self.request, "Uploaded Successfully")
-        return super(CreateSpecial, self).form_valid(form)
+        lat = form.instance.latitude
+        long = form.instance.longitude
+        check = validate_location(long, lat)
+        if check == False:
+            messages.error(self.request, "Sorry, You can not upload outside University of Ibadan")
+            return render(self.request, self.template_name, {'form': form})
+        else:
+            form.save()
+            messages.success(self.request, "Uploaded Successfully")
+            return super(CreateSpecial, self).form_valid(form)

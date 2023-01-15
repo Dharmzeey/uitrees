@@ -33,9 +33,9 @@ class SpecialPlace(models.Model):
     special_place_name = models.CharField(max_length=100, null=True, blank=True)
     location_name = models.CharField(max_length=80)
     location_description = models.TextField()
-    coordinates = models.CharField(max_length=30, null=True, blank=True)
-    latitude = models.CharField(max_length=30, null=True, blank=True)
-    longitude = models.CharField(max_length=30, null=True, blank=True)
+    coordinates = models.CharField(max_length=30)
+    latitude = models.CharField(max_length=30)
+    longitude = models.CharField(max_length=30)
     time_now = models.DateTimeField(auto_now=True)
     uploader = models.CharField(max_length=50, null=True, blank=True)
 

@@ -42,9 +42,9 @@ class Upload(models.Model):
 
     location_name = models.CharField(max_length=80)
     location_description = models.TextField()
-    coordinates = models.CharField(max_length=30, null=True, blank=True)
-    latitude = models.CharField(max_length=30, null=True, blank=True)
-    longitude = models.CharField(max_length=30, null=True, blank=True)
+    coordinates = models.CharField(max_length=30)
+    latitude = models.CharField(max_length=30)
+    longitude = models.CharField(max_length=30)
     time_now = models.DateTimeField(auto_now=True)
     uploaded_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="uploaded_by")
     requested_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="requested_by")

@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 
 from utilities.mixins import AdminRequiredMixin
+from utilities.location_validator import validate_location
 
 from .models import RequestTree
 
@@ -19,8 +20,16 @@ class RequestTreeView(LoginRequiredMixin, CreateView):
     
     def form_valid(self, form):
         form.instance.requester = self.request.user
-        messages.success(self.request, "Tree request submitted Successfully")
-        return super(RequestTreeView, self).form_valid(form)
+        lat = form.instance.latitude
+        long = form.instance.longitude
+        check = validate_location(long, lat)
+        if check == False:
+            messages.error(self.request, "Sorry, request declined as You are outside University of Ibadan")
+            return render(self.request, self.template_name, {'form': form})
+        else:
+            form.save()
+            messages.success(self.request, "Tree request submitted Successfully")
+            return super(RequestTreeView, self).form_valid(form)
 
 
 class ViewRequest(AdminRequiredMixin, View):

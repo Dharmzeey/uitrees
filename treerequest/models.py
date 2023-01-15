@@ -26,9 +26,9 @@ class RequestTree(models.Model):
     #     self.tree_picture2 = new_image2
     #     super().save(*args, **kwargs)
 
-    coordinates = models.CharField(max_length=30, null=True, blank=True)
-    latitude = models.CharField(max_length=30, null=True, blank=True)
-    longitude = models.CharField(max_length=30, null=True, blank=True)
+    coordinates = models.CharField(max_length=30)
+    latitude = models.CharField(max_length=30)
+    longitude = models.CharField(max_length=30)
     
     validated = models.BooleanField(default=False)
 

@@ -587,7 +587,7 @@ div[class$="this"] > a:hover{
   .menu {
     background-color: var(--secondary-background-color);
     position: absolute;
-    top: 8.8rem;
+    top: 8rem;
     left: 0rem;
     width: 22%;
     padding: 1.5rem;
