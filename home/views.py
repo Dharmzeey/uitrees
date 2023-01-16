@@ -276,26 +276,27 @@ class SpecificSearch(View):
                                 try:
                                     item_lat = float(item.latitude)
                                     item_long = float(item.longitude)
-                                    if abs(lat - item_lat) <= 0.0005 and abs(long - item_long) <= 0.0015:
+                                    if abs(lat - item_lat) <= 0.0005 and abs(long - item_long) <= 0.0005:
                                         search_cont.append(item)
-
-                                    # PAGINATORS
-                                    paginator = Paginator(search_cont, 30)
-                                    page_number = request.GET.get('page', 1)
-                                    try:
-                                        page_obj = paginator.page(page_number)
-                                    except PageNotAnInteger:
-                                        page_obj = paginator.page(1)
-                                    except EmptyPage:
-                                        page_obj = paginator.page(paginator.num_pages)
-
-                                    context.update({
-                                        'search_coord': True,
-                                        'search_result': page_obj,
-                                        'search': str(search)
-                                    })
                                 except:
                                     pass
+
+                            # PAGINATORS
+                            paginator = Paginator(search_cont, 30)
+                            page_number = request.GET.get('page', 1)
+                            try:
+                                page_obj = paginator.page(page_number)
+                            except PageNotAnInteger:
+                                page_obj = paginator.page(1)
+                            except EmptyPage:
+                                page_obj = paginator.page(paginator.num_pages)
+
+                            context.update({
+                                'search_coord': True,
+                                'search_result': page_obj,
+                                'search': str(search)
+                            })
+                                
                     except:
                         pass
 

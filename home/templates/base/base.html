@@ -87,7 +87,7 @@
           <li><a href="{% url 'home:about' %}">About</a></li>
 
 
-          {% if request.user.is_authenticated and request.user.is_superuser %}
+          {% if request.user.is_authenticated and request.user.is_staff %}
           <li><a href="{% url 'treerequest:requests' %}">View Requests</a></li>
           <li id="upload_options">
             <a href="{% url 'upload:upload' %}"> Upload Tree <span id="demarcate"> &nbsp;|&nbsp;</span></a>
