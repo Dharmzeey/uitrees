@@ -31,8 +31,10 @@ class RequestTree(models.Model):
     longitude = models.CharField(max_length=30)
     
     validated = models.BooleanField(default=False)
+    requested = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'{self.location_name}'
-
-
+    
+    class Meta:
+        ordering = ["requested"]

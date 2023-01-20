@@ -4,12 +4,16 @@
 {% block content %}
 
 <p>
-  This is where you can find some places, enclosures and boundaries with lots of trees.
+  This is where you can find some places, enclosures and boundaries with lots of trees therein.
 </p>
 
+{% if places %}
 <p>
   Here are list of special places available:
 </p>
+{% else %}
+<p>There are no special places yet </p>
+{% endif %}
 <br>
 
 <div class="search-result">

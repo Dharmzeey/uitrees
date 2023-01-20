@@ -104,11 +104,15 @@
     </div>
     <br>
   </div>
+  {% if trees_requested %}
   <P>Trees Upload request made by {{ contributor }}:</P>
-  {% for tree_request in trees_requested %}
-  <a href="{% url 'home:tree-location-details' tree_request.id %}">{{ tree_request }}</a>
-  {% endfor %}
+  <ul>
+    {% for tree_request in trees_requested %}
+    <li><a href="{% url 'home:tree-location-details' tree_request.id %}">{{ tree_request }}</a></li>
+    {% endfor %}
+  </ul>
   <p class="total-request">Total Tree names Requested: {{ contributor.requester.all.count }}</p>
+  {% endif %}
 </div>
 
 

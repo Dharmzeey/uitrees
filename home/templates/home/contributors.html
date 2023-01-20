@@ -76,8 +76,9 @@
   {% endfor %}
 </div>
 
+{% if requesters %}
+<br><br>
 <div>
-  <br><br>
   <h2 class="center">Requesters</h2>
   <div class="requester-container">
     {% for contributor in requesters %}
@@ -90,6 +91,7 @@
     {% endfor %}
   </div>
 </div>
+{% endif %}
 
 
 {% endblock %}
