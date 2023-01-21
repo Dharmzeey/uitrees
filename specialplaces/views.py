@@ -25,7 +25,7 @@ class Special(View):
 
 
 class SpecialDetails(View):
-    template_name = 'specialplaces/specialplaces_detail.html'
+    template_name = 'specialplaces/specialplaces-detail.html'
 
     def get(self, request, pk):
         place = SpecialPlace.objects.get(id=pk)
@@ -40,7 +40,7 @@ class SpecialDetails(View):
 class CreateSpecial(AdminRequiredMixin, CreateView):
     form_class = UploadSpecialPlaceForm
     success_url = reverse_lazy('special:special')
-    template_name = 'specialplaces/specialplace_form.html'
+    template_name = 'specialplaces/specialplace-form.html'
 
     def form_valid(self, form):
         form.instance.uploader = self.request.user

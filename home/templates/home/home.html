@@ -9,7 +9,7 @@
 
 
 </div>
-<p class="font">Or do you want to <a class="light-color" href="{% url 'home:specific-search' 1 %}">Specify Search ?</a></p> <br>
+<p class="font">Or do you want to <a class="light-color" href="{% url 'home:specific_search' 1 %}">Specify Search ?</a></p> <br>
 <div>
   {% if search_result.paginator.count %}
   <div class="result-counter">{{ search_result.paginator.count }} Result{{ search_result.paginator.count|pluralize }} Available</div>
@@ -20,9 +20,9 @@
   <ul class="flex">
     {% for tree in search_result %}
     {% if tree.scientific_name %}
-    <li><a href="{% url 'home:tree-details' tree.id %}">{{ tree }}</a></li>
+    <li><a href="{% url 'home:tree_details' tree.id %}">{{ tree }}</a></li>
     {% else %}
-    <li><a href="{% url 'home:tree-location-details' tree.id %}">{{ tree }}</a></li>
+    <li><a href="{% url 'home:tree_location_details' tree.id %}">{{ tree }}</a></li>
     {% endif %}
     {% endfor %}
   </ul>

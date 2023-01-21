@@ -107,7 +107,7 @@ class HomeView(View):
 
 
 class SpecificSearch(View):
-    template_name = 'home/specific_search.html'
+    template_name = 'home/specific-search.html'
 
     def get(self, request, pk):
 
@@ -310,7 +310,7 @@ class SpecificSearch(View):
 
 
 class TreeDetails(View):
-    template_name = 'home/tree_details.html'
+    template_name = 'home/tree-details.html'
 
     def get(self, request, pk):
         tree_info = Tree.objects.get(id=pk)
@@ -337,7 +337,7 @@ class TreeDetails(View):
 
 
 class TreeLocationPicture(View):
-    template_name = 'home/tree_picture.html'
+    template_name = 'home/tree-picture.html'
 
     # THIS SET THE X_FRAME_OPTIONS = 'SAMEORIGIN' BECAUSE DJANGO PREVENT CLICKJACKING
     @xframe_options_sameorigin
@@ -369,7 +369,7 @@ class TreeLocationPicture(View):
 
 
 class TreeLocationDetails(View):
-    template_name = 'home/tree_location_details.html'
+    template_name = 'home/tree-location-details.html'
 
     def get(self, request, pk):
         result = Upload.objects.get(id=pk)
@@ -403,9 +403,16 @@ class TreeContributor(View):
         }
         return render(request, self.template_name, context)
 
+class TreeAlbum(View):
+    template_name = 'home/tree-album.html'
+    def get(self, request):
+        uploads = Upload.objects.all().order_by("?")[:30]
+        context = {'uploads': uploads}
+        return render(request, self.template_name, context)
+    
 
 def how_to_use(request):
-    return render(request, 'home/how_to_use.html')
+    return render(request, 'home/how-to-use.html')
 
 
 def about(request):

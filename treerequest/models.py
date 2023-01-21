@@ -23,7 +23,7 @@ class RequestTree(models.Model):
     #     new_image = compress(self.tree_picture)
     #     self.tree_picture = new_image
     #     new_image2 = compress(self.tree_picture2)
-    #     self.tree_picture2 = new_image2
+    #     self.tree_picture2 = new_image2aa
     #     super().save(*args, **kwargs)
 
     coordinates = models.CharField(max_length=30)

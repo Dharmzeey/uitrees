@@ -67,7 +67,7 @@
         <ul class="places-found flex">
           {% for location in tree_location %}
           <li>
-            <a class="block" href="{% url 'home:tree-picture' location.id %}" target="my_frame" onclick="displayIframe(this)"> {{ location }} </a>
+            <a class="block" href="{% url 'home:tree_picture' location.id %}" target="my_frame" onclick="displayIframe(this)"> {{ location }} </a>
           </li>
           {% endfor %}
         </ul>

@@ -498,12 +498,11 @@ div[class$="this"] > a:hover{
 .album-container {
   flex-wrap: wrap;
   justify-content: flex-start;
-  gap: 5rem 2rem;
-  margin-top: 3rem;
+  gap: 2rem;
 }
 
 .album-container div {
-  width: 18rem;
+  width: 23rem;
 }
 
 .album-container img {

@@ -32,7 +32,7 @@
   <div class="result-counter">{{ search_result.paginator.count }} Result{{ search_result.paginator.count|pluralize }} Available </div>
   <ul class="flex">
     {% for tree in search_result %}
-    <li><a href="{% url 'home:tree-details' tree.id %}">{{ tree }}</a></li>
+    <li><a href="{% url 'home:tree_details' tree.id %}">{{ tree }}</a></li>
     {% endfor %}
   </ul>
   {% endif %}
@@ -42,7 +42,7 @@
   <div> <b>{{ search_result.paginator.count }} Result{{ search_result.paginator.count|pluralize }} Available</b> </div>
   <ul class="flex">
     {% for tree in search_result %}
-    <li><a href="{% url 'home:tree-location-details' tree.id %}">{{ tree }}</a></li>
+    <li><a href="{% url 'home:tree_location_details' tree.id %}">{{ tree }}</a></li>
     {% endfor %}
   </ul>
   {% endif %}
@@ -54,7 +54,7 @@
   <div> <b>{{ search_result.paginator.count }} Result{{ search_result.paginator.count|pluralize }} Available</b> </div>
   <ul class="flex">
     {% for tree in search_result %}
-    <li><a href="{% url 'home:tree-location-details' tree.id %}">{{ tree }}</a></li>
+    <li><a href="{% url 'home:tree_location_details' tree.id %}">{{ tree }}</a></li>
   </ul>
   {% endfor %}
   {% endif %}

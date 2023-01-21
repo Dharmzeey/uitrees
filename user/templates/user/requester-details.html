@@ -108,7 +108,7 @@
   <P>Trees Upload request made by {{ contributor }}:</P>
   <ul>
     {% for tree_request in trees_requested %}
-    <li><a href="{% url 'home:tree-location-details' tree_request.id %}">{{ tree_request }}</a></li>
+    <li><a href="{% url 'home:tree-location_details' tree_request.id %}">{{ tree_request }}</a></li>
     {% endfor %}
   </ul>
   <p class="total-request">Total Tree names Requested: {{ contributor.requester.all.count }}</p>

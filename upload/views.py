@@ -22,7 +22,7 @@ class CreateTree(AdminRequiredMixin, CreateView):
     # model = Upload
     form_class = UploadTreeForm
     success_url = reverse_lazy('upload:upload')
-    template_name = 'upload/upload_form.html'
+    template_name = 'upload/upload-form.html'
 
     def form_valid(self, form):
         form.instance.uploaded_by = self.request.user
@@ -40,7 +40,7 @@ class CreateTree(AdminRequiredMixin, CreateView):
 class UploadTreeRequest(AdminRequiredMixin, CreateView):
     form_class = UploadTreeForm
     success_url = reverse_lazy('upload:upload')
-    template_name = 'upload/upload_form.html'
+    template_name = 'upload/upload-form.html'
 
     def form_valid(self, form):
         form.instance.uploaded_by = self.request.user
@@ -62,7 +62,7 @@ class UploadTreeRequest(AdminRequiredMixin, CreateView):
 
 
 # class CreateFormTree(View):
-#     template_name = 'upload/upload_form.html'
+#     template_name = 'upload/upload-form.html'
 #     success_url = reverse_lazy('upload:success')
 #
 #     def get(self, request):
@@ -85,7 +85,7 @@ class UploadTreeRequest(AdminRequiredMixin, CreateView):
 
 
 class Success(View):
-    template_name = 'upload/success_page.html'
+    template_name = 'upload/success-page.html'
 
     def get(self, request):
 

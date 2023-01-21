@@ -494,6 +494,22 @@ div[class$="this"] > a:hover{
   height: 100%;
 }
 
+/* TREE ALBUM */
+.album-container {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 5rem 2rem;
+  margin-top: 3rem;
+}
+
+.album-container div {
+  width: 18rem;
+}
+
+.album-container img {
+  width: 100%;
+  height: 100%;
+}
 
 /* // HOW TO USE.HTML */
 .how-to-use b {
@@ -587,7 +603,7 @@ div[class$="this"] > a:hover{
   .menu {
     background-color: var(--secondary-background-color);
     position: absolute;
-    top: 8rem;
+    /* top: 8rem; */
     left: 0rem;
     width: 22%;
     padding: 1.5rem;
@@ -599,7 +615,7 @@ div[class$="this"] > a:hover{
   .menu > ul {
     flex-direction: column;
     align-items: center;
-    line-height: 6rem;
+    line-height: 5rem;
   }
 
   .user-pic {

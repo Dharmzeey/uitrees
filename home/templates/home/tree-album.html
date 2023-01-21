@@ -1,0 +1,26 @@
+{% extends 'base/base.html' %}
+{% block title %}
+<title>
+  Tree ALbum | Trees in UI
+</title>
+{% endblock %}
+
+
+{% block content %}
+
+<h2 class="center">Tree Album of some of our random Trees</h2>
+
+{% if uploads %}
+<div class="flex album-container">
+  {% for tree in uploads %}
+  <div>
+    <a href="{% url 'home:tree_details' tree.id %}">
+      <img src="{{ tree.tree_picture.url }}" alt="{{ tree.tree_name }}">
+      <small>{{ tree.tree_name }}</small>
+    </a>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+{% endblock %}
