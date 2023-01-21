@@ -14,7 +14,7 @@
 <div class="flex album-container">
   {% for tree in uploads %}
   <div>
-    <a href="{% url 'home:tree_details' tree.id %}">
+    <a href="{% url 'home:tree_details' tree.tree_name.id %}">
       <img src="{{ tree.tree_picture.url }}" alt="{{ tree.tree_name }}">
       <small>{{ tree.tree_name }}</small>
     </a>
