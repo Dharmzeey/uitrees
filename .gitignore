@@ -9,3 +9,4 @@ images
 .env
 media/images
 development.py
+migrations/
