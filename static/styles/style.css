@@ -309,7 +309,7 @@ li#upload_options {
   min-height: 85vh;
 }
 
-/* //  THIS IS WHERE THE HOME.HTML PAGE IS STYLED AND ALSO FOR SPECIFIC SEARCH.HTML*/
+  /* THIS IS WHERE THE HOME.HTML PAGE IS STYLED AND ALSO FOR SPECIFIC SEARCH.HTML */
 .search-result {
   min-height: 10vh;
 }
@@ -340,7 +340,7 @@ li#upload_options {
   background-color: var(--secondary-background-color);
 }
 
-/* // SPECIFIC SEARCH */
+ /* SPECIFIC SEARCH */
 .search-options {
   flex-direction: column;
   gap: var(--gap);
@@ -351,7 +351,11 @@ footer {
   margin-top: 10rem;
 }
 
-/* // TREE DETAILS AND LOCATION DETAILS.HTML */
+/** TREE DETAILS AND LOCATION DETAILS.HTML **/
+#leaf_image {
+  width: 35rem;
+}
+
 iframe {
   width: 90%;
   height: 40rem;

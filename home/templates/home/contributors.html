@@ -25,19 +25,19 @@
         <ul class="flex">
           {% if contributor.email %}
           <li class="list-item">
-            <a target="_blank" class="list-link" href="mailto:{{ contributor.email }}"><i class="ri-mail-unread-line"></i></a>
+            <a target="_blank" class="list-link" href="mailto:{{ contributor.email }}"><i class="ri-mail-line"></i></a>
           </li>
           {% endif %}
 
           {% if contributor.tel %}
           <li class="list-item">
-            <a target="_blank" class="list-link" href="tel:{{ contributor.tel }}"><i class="ri-cellphone-line"></i></a>
+            <a target="_blank" class="list-link" href="tel:{{ contributor.tel }}"><i class="ri-phone-line"></i></a>
           </li>
           {% endif %}
 
           {% if contributor.website %}
           <li class="list-item">
-            <a target="_blank" class="list-link" href="{{ contributor.website }}"><i class="ri-globe-line"></i></a>
+            <a target="_blank" class="list-link" href="{{ contributor.website }}"><i class="ri-links-line"></i></a>
           </li>
           {% endif %}
 
@@ -49,7 +49,7 @@
 
           {% if contributor.tw_link %}
           <li class="list-item">
-            <a target="_blank" class="list-link" href="{{ contributor.tw_link }}"><i class="ri-twitter-line"></i></a>
+            <a target="_blank" class="list-link" href="{{ contributor.tw_link }}"><i class="ri-twitter-x-line"></i></a>
           </li>
           {% endif %}
 

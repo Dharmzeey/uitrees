@@ -66,6 +66,7 @@ class Tree(models.Model):
         validators=[MinLengthValidator(3, 'Must be greater than 3')],
         null=False
     )
+    leaf_image = models.ImageField(upload_to='tree_leaf', null=True, blank=True)
     authority = models.ForeignKey(Authority, on_delete=models.SET_NULL, null=True)
     common_name = models.CharField(max_length=50, default='------')
     local_name = models.CharField(max_length=50, default='------')

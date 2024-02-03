@@ -24,11 +24,11 @@ class RequestTreeView(LoginRequiredMixin, CreateView):
         long = form.instance.longitude
         check = validate_location(long, lat)
         if check == False:
-            messages.error(self.request, "Sorry, request declined as You are outside University of Ibadan")
+            messages.error(self.request, "Sorry, request declined because you are outside University of Ibadan")
             return render(self.request, self.template_name, {'form': form})
         else:
             form.save()
-            messages.success(self.request, "Tree request submitted Successfully")
+            messages.success(self.request, "Tree request submitted successfully")
             return super(RequestTreeView, self).form_valid(form)
 
 

@@ -15,8 +15,8 @@ class RequestTree(models.Model):
     requester = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name="requester")
     location_name = models.CharField(max_length=100)
     location_description = models.TextField()
-    tree_picture = ResizedImageField(size=[700, None], upload_to='images/request/%Y/%m/%d')
-    tree_picture2 = ResizedImageField(size=[500, None], upload_to='images/request/%Y/%m/%d/', null=True, blank=True)
+    tree_picture = ResizedImageField(size=[800, None], upload_to='images/request/%Y/%m/%d')
+    tree_picture2 = ResizedImageField(size=[600, None], upload_to='images/request/%Y/%m/%d/', null=True, blank=True)
     
 
     # def save(self, *args, **kwargs):

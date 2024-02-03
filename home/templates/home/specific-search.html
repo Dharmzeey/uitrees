@@ -10,7 +10,7 @@
 <ul class="search-options flex">
   {% for search in search_options %}
   <li>
-    <a class="block" href="{% url 'home:specific-search' search.id %}">{{ search }}</a>
+    <a class="block" href="{% url 'home:specific_search' search.id %}">{{ search }}</a>
   </li>
   {% endfor %}
 </ul>

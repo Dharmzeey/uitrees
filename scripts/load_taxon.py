@@ -1,4 +1,5 @@
 from openpyxl import load_workbook
+from django.core.files.images import ImageFile
 
 from trees.models import Tree, Order, Family, Authority, ConservationStatus, SpecieStatus
 import time
@@ -46,7 +47,9 @@ def run():
             tree_description='',
             reference=lk,
         )
+        tr.leaf_image = ImageFile(open(f'photos/{gs}.jpg', "rb"))
         tr.save()
+        print(gs)
 
     end = time.perf_counter()
     print(end - start)
